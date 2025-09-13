@@ -16,9 +16,12 @@ function publicus_post_like()
         setcookie($cookie_key, $id, $expire, '/', $domain, false);
         if (!$like_num || !is_numeric($like_num)) {
             update_post_meta($id, 'puock_like', 1);
+            $new_count = 1;
         } else {
-            update_post_meta($id, 'puock_like', ($like_num + 1));
+            $new_count = $like_num + 1;
+            update_post_meta($id, 'puock_like', $new_count);
         }
+        echo json_encode(array('e' => 0, 't' => __('Beğenildi!', PUBLICUS), 'count' => $new_count));
     }
     die;
 }

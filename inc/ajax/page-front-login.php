@@ -204,12 +204,12 @@ function publicus_front_login_page_callback()
                     <div class="mb15">
                         <div class="row flex-row justify-content-end">
                             <div class="col-8 col-sm-7 text-end pl15">
-                                       class="form-control form-control-sm t-sm captcha-input" name="vd"
+                                <input type="text" class="form-control form-control-sm t-sm captcha-input" name="vd"
                                        autocomplete="off"
                                        id="_front_login_vd">
                             </div>
                             <div class="col-4 col-sm-5 pr15">
-                                <img class="captcha lazy" data-src="<?php echo publicus_captcha_url('login', 100, 28) ?>"
+                                <img class="captcha lazy" data-src="<?php echo publicus_captcha_url('login', 100, 28) ?>">
                             </div>
                         </div>
                     </div>
@@ -217,7 +217,7 @@ function publicus_front_login_page_callback()
                 <div class="mb15 form-check form-switch">
                     <input class="form-check-input" name="remember" type="checkbox" role="switch"
                            id="front-login-remember-me">
-                    <label class="form-check-label" for="front-login-remember-me"> 记住我</label>
+                    <label class="form-check-label" for="front-login-remember-me"> <?php _e('Beni Hatırla', PUBLICUS) ?></label>
                 </div>
                 <div class="mb15 d-flex justify-content-center wh100">
                     <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-right-to-bracket"></i>
@@ -253,20 +253,20 @@ function publicus_front_login_page_callback()
                     <div class="mb15">
                         <div class="row flex-row justify-content-end">
                             <div class="col-8 col-sm-7 text-end pl15">
-                                       class="form-control form-control-sm t-sm" name="vd"
+                                <input type="text" class="form-control form-control-sm t-sm" name="vd"
                                        autocomplete="off"
                                        id="_front_register_vd">
                             </div>
                             <div class="col-4 col-sm-5 pr15">
                                 <img class="captcha lazy"
-                                     data-src="<?php echo publicus_captcha_url('register', 100, 28) ?>"
+                                     data-src="<?php echo publicus_captcha_url('register', 100, 28) ?>">
                             </div>
                         </div>
                     </div>
                 <?php endif; ?>
                 <div class="mb15 d-flex justify-content-center wh100">
                     <button class="btn btn-ssm btn-primary mr5" type="submit"><i class="fa fa-right-to-bracket"></i>
-                        立即注册
+                        <?php _e('Kayıt Ol', PUBLICUS) ?>
                     </button>
                 </div>
                 <div class="mb15 d-flex justify-content-end fs12">

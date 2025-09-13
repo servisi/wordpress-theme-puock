@@ -10,24 +10,6 @@
         </div>
         <?php if (comments_open()): ?>
                 <div class="mt20 clearfix" id="comment-form-box">
-                    <form class="mt10" id="comment-form" method="post">
-                        <div class="form-group">
-                            <textarea placeholder="<?php _e('Düşüncelerinizi paylaşın...', PUBLICUS) ?>" id="comment" name="comment" class="form-control form-control-sm t-sm" rows="4"></textarea>
-                        </div>
-                    </form>
-                    <?php if (publicus_oauth_platform_count() > 0): ?>
-                        <div>
-                            <button class="btn btn-primary btn-ssm publicus-modal-toggle" type="button"
-                                    data-id="front-login"
-                                    data-once-load="true"
-                                    data-url="<?php echo publicus_ajax_url('publicus_font_login_page', ['redirect' => get_permalink()]) ?>">
-                                <i
-                            </button>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            <?php else: ?>
-                <div class="mt20 clearfix" id="comment-form-box">
                     <form class="mt10" id="comment-form" method="post"
                           action="<?php echo admin_url() . 'admin-ajax.php?action=comment_ajax' ?>">
                         <div class="form-group">
