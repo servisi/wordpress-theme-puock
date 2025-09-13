@@ -9,46 +9,38 @@ class OptionValidate extends BaseOptionItem
     {
         return [
             'key' => 'validate',
-            'label' => __('验证及防刷', PUBLICUS),
             'icon' => 'dashicons-shield',
             'fields' => [
                 [
                     'id' => 'vd_type',
-                    'label' => __('验证码类型', PUBLICUS),
                     'type' => 'radio',
                     'sdt' => 'img',
                     'radioType' => 'button',
                     'options' => [
                         [
                             'value' => 'img',
-                            'label' => __('图形验证码', PUBLICUS),
                         ],
                         [
                             'value' => 'gt',
-                            'label' => __('极验验证码', PUBLICUS),
                         ],
                     ],
                 ],
                 [
                     'id' => 'vd_comment',
-                    'label' => __('启用评论验证', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => false,
                 ],
                 [
                     'id' => '-',
                     'type' => 'panel',
-                    'label' => __('极验验证码', PUBLICUS),
                     'open' => true,
                     'children' => [
                         [
                             'id' => 'vd_gt_id',
-                            'label' => __('极验验证ID', PUBLICUS),
                             'sdt' => ''
                         ],
                         [
                             'id' => 'vd_gt_key',
-                            'label' => __('极验验证Key', PUBLICUS),
                             'sdt' => ''
                         ]
                     ]

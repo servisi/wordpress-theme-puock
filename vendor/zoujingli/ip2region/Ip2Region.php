@@ -58,7 +58,6 @@ class Ip2Region
     }
 
     /**
-     * 直接查询并返回名称
      * @param string $ip
      * @return string
      * @throws \Exception

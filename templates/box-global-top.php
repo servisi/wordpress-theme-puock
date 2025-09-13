@@ -1,10 +1,10 @@
 <?php
 
-if (!function_exists('pk_global_notice_html')){
-    function pk_global_notice_html()
+if (!function_exists('publicus_global_notice_html')){
+    function publicus_global_notice_html()
     {
-        if (pk_is_checked('global_notice')) {
-            $global_notice_list = pk_get_option('global_notice_list');
+        if (publicus_is_checked('global_notice')) {
+            $global_notice_list = publicus_get_option('global_notice_list');
             if (is_array($global_notice_list) && count($global_notice_list) > 0) {
                 $final_list = [];
                 foreach ($global_notice_list as $item) {
@@ -16,7 +16,7 @@ if (!function_exists('pk_global_notice_html')){
                         <div data-swiper="init" data-swiper-class="global-top-notice-swiper"
                              data-swiper-args='<?php echo json_encode([
                                  'direction' => 'vertical',
-                                 'autoplay' => ['delay' => pk_get_option('global_notice_autoplay_speed', 3000), 'disableOnInteraction' => false],
+                                 'autoplay' => ['delay' => publicus_get_option('global_notice_autoplay_speed', 3000), 'disableOnInteraction' => false],
                                  'loop' => true
                              ]) ?>'>
                             <div class="swiper global-top-notice-swiper">
@@ -47,6 +47,6 @@ if (!function_exists('pk_global_notice_html')){
 
 get_template_part('ad/global', 'top');
 
-pk_global_notice_html();
+publicus_global_notice_html();
 
 ?>

@@ -288,7 +288,6 @@ class Curl implements IHandler
     private function buildCurlHandlerBase(&$request, $handler, &$headers = null, &$saveFileFp = null)
     {
         $options = $request->getAttribute(Attributes::OPTIONS, []);
-        // 返回内容
         if (!isset($options[\CURLOPT_RETURNTRANSFER]))
         {
             $options[\CURLOPT_RETURNTRANSFER] = true;
@@ -411,7 +410,6 @@ class Curl implements IHandler
      */
     private function getResponse($request, $handler, $body, $receiveHeaders)
     {
-        // PHP 7.0.0开始substr()的 string 字符串长度与 start 相同时将返回一个空字符串。在之前的版本中，这种情况将返回 FALSE 。
         if (false === $body)
         {
             $body = '';
@@ -669,7 +667,6 @@ class Curl implements IHandler
      */
     private function parseNetwork(&$request, &$options)
     {
-        // 用户名密码处理
         $username = $request->getAttribute(Attributes::USERNAME);
         if (null != $username)
         {
@@ -687,7 +684,6 @@ class Curl implements IHandler
         $options[\CURLOPT_MAX_RECV_SPEED_LARGE] = $request->getAttribute(Attributes::DOWNLOAD_SPEED);
         // 上传限速
         $options[\CURLOPT_MAX_SEND_SPEED_LARGE] = $request->getAttribute(Attributes::UPLOAD_SPEED);
-        // 连接中用到的用户名和密码
         $options[\CURLOPT_USERPWD] = $userPwd;
     }
 

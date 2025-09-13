@@ -52,10 +52,8 @@ class OptionEmail extends BaseOptionItem{
                 ],
                 [
                     'id' => 'smtp_p',
-                    'label' => __('SMTP密码', PUBLICUS),
                     'sdt' => '',
                     'showRefId' => 'smtp_open',
-                    'tips'=>__('一般非邮箱账号直接密码，而是对应的平台的POP3/SMTP授权码', PUBLICUS),
                 ],
             ],
         ];

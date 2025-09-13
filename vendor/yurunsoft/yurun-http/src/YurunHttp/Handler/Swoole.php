@@ -732,7 +732,6 @@ class Swoole implements IHandler
     private function parseNetwork(&$request)
     {
         $settings = $request->getAttribute(Attributes::OPTIONS, []);
-        // 用户名密码认证处理
         $username = $request->getAttribute(Attributes::USERNAME);
         if (null === $username)
         {

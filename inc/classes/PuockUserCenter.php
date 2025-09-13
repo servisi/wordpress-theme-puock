@@ -9,7 +9,7 @@ class PuockUserCenter implements IPuockClassLoad
 
     public static function load()
     {
-        pk_ajax_register('pk_user_update_profile', array(__CLASS__, 'update_profile'));
+        publicus_ajax_register('publicus_user_update_profile', array(__CLASS__, 'update_profile'));
         self::register_basic_menus();
     }
 
@@ -24,7 +24,7 @@ class PuockUserCenter implements IPuockClassLoad
 
     public static function get_menus()
     {
-        return apply_filters('pk_user_center_menus', self::$menus);
+        return apply_filters('publicus_user_center_menus', self::$menus);
     }
 
     public static function register_menu($id, $title, $call, $subtitle = '', $args = array())
@@ -38,30 +38,27 @@ class PuockUserCenter implements IPuockClassLoad
 
     public static function update_profile()
     {
-        if (is_string($data = pk_get_req_data([
+        if (is_string($data = publicus_get_req_data([
                 'nickname' => ['name' => __('昵称', PUBLICUS), 'required' => true, 'remove_html' => true],
                 'user_url' => ['name' => __('网站地址', PUBLICUS), 'remove_html' => true, 'empty' => true],
                 'description' => ['name' => __('个人说明', PUBLICUS), 'remove_html' => true, 'empty' => true],
             ])) === true) {
-            echo pk_ajax_resp_error($data);
+            echo publicus_ajax_resp_error($data);
             wp_die();
         }
         $user = wp_get_current_user();
         if (!$user) {
-            echo pk_ajax_resp_error(__('请先登录', PUBLICUS));
             wp_die();
         }
         $data['ID'] = $user->ID;
         if ($data['nickname'] != $user->nickname) {
             $data['display_name'] = $data['nickname'];
         }
-        do_action('pk_update_user_profile_before', $data);
+        do_action('publicus_update_user_profile_before', $data);
         if (!wp_update_user($data)) {
-            echo pk_ajax_resp_error(__('保存失败', PUBLICUS));
             wp_die();
         }
-        echo pk_ajax_resp(null, __('保存成功', PUBLICUS));
-        do_action('pk_update_user_profile_after', $data);
+        do_action('publicus_update_user_profile_after', $data);
         wp_die();
     }
 
@@ -69,7 +66,7 @@ class PuockUserCenter implements IPuockClassLoad
     {
         $userinfo = get_userdata(get_current_user_id());
         ?>
-        <form action="<?php echo pk_ajax_url('pk_user_update_profile') ?>" class="ajax-form" data-no-reset>
+        <form action="<?php echo publicus_ajax_url('publicus_user_update_profile') ?>" class="ajax-form" data-no-reset>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">ID</label>
                 <div class="col-sm-10">
@@ -88,17 +85,14 @@ class PuockUserCenter implements IPuockClassLoad
                                     onclick="layer.confirm('<?php _e('确认注销登陆吗？', PUBLICUS) ?>',function (){window.Publicus.goUrl('<?php echo wp_logout_url('/'); ?>')})"
                                     class="btn btn-ssm btn-danger">
                                 <i class="fa fa-sign-out"></i>
-                                <span><?php _e('注销登录', PUBLICUS) ?></span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label"><?php _e('用户名', PUBLICUS) ?></label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="form-control" value="<?php echo $userinfo->user_nicename ?>">
-                    <small class="c-sub"><?php _e('用户名不可更改', PUBLICUS) ?></small>
                 </div>
             </div>
             <div class="mb-3 row">

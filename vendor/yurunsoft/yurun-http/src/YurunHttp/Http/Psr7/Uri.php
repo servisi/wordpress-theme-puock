@@ -28,8 +28,6 @@ class Uri implements UriInterface
     protected $port;
 
     /**
-     * 用户信息
-     * 格式：用户名:密码
      *
      * @var string
      */
@@ -111,7 +109,6 @@ class Uri implements UriInterface
         {
             $uri = $scheme . '://';
         }
-        // 用户信息
         if ('' !== $userInfo)
         {
             $uri .= $userInfo . '@';

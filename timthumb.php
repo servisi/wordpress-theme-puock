@@ -6,7 +6,7 @@ $ALLOWED_SITES = [];
 $allow_sites_filename = __DIR__ . '/.tas.php';
 if (!file_exists($allow_sites_filename)) {
     require_once dirname(__DIR__) . '/../../wp-load.php';
-    if (pk_generate_thumbnail_allow_sites_file()) {
+    if (publicus_generate_thumbnail_allow_sites_file()) {
         require_once $allow_sites_filename;
     }
 } else {

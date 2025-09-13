@@ -2,16 +2,14 @@
 /*短代码*/
 $shortCodeColors = array('primary', 'danger', 'warning', 'info', 'success', 'dark');
 
-function pk_shortcode_register()
+function publicus_shortcode_register()
 {
     global $shortCodeColors;
     $list = array(
         'music' => array('name' => '音乐播放', 'content' => '输入链接地址'),
         'pre' => array('name' => '代码嵌入', 'content' => '输入代码'),
         'reply' => array('name' => '回复可见', 'content' => '输入内容'),
-        'login' => array('name' => '登录可见', 'content' => '输入内容'),
         'github' => array('name' => 'Github仓库卡片', 'content' => 'Licoy/wordpress-theme-puock'),
-        'login_email' => array('name' => '登录并验证邮箱可见', 'content' => '输入内容'),
         'video' => array('name' => '视频播放', 'attr' => array(
             'url'=>'example.com/test.mp4',
             'autoplay' => false, 'type' => 'auto',
@@ -20,8 +18,6 @@ function pk_shortcode_register()
         'download' => array('name' => '文件下载', 'content' => '文件地址', 'attr' => array(
             'file' => 'xxx.zip', 'size' => '12MB'
         )),
-        'password' => array('name' => '输入密码可见', 'content' => '输入内容', 'attr' => array(
-            'pass' => '123456', 'desc' => '输入密码可见',
         )),
         'collapse' => array('name' => '折叠面板', 'content' => '输入内容', 'attr' => array(
             'title' => 'title'
@@ -39,11 +35,11 @@ function pk_shortcode_register()
     return $list;
 }
 // 解析pre标签 感谢阿云。小恐龙太好拉注。
-function pk_pre($atts, $content = null) {
+function publicus_pre($atts, $content = null) {
     $content = '<pre>' . htmlspecialchars($content) . '</pre>';
     return $content;
 }
-add_shortcode('pre', 'pk_pre');
+add_shortcode('pre', 'publicus_pre');
 
 //提示框部分
 function sc_tips($attr, $content, $tag)
@@ -75,10 +71,10 @@ function sc_btn($attr, $content, $tag)
 {
     $type = str_replace('btn-', '', $tag);
     $href = $attr['href'] ?? "javascript:void(0)";
-    if (pk_is_cur_site($href)) {
+    if (publicus_is_cur_site($href)) {
         return '<a href="' . $href . '" class="btn btn-sm sc-btn btn-' . $type . '">' . $content . '</a>';
     }
-    return '<a target="_blank" rel="nofollow" href="' . pk_go_link($href) . '" class="btn btn-sm sc-btn btn-' . $type . '">' . $content . '</a>';
+    return '<a target="_blank" rel="nofollow" href="' . publicus_go_link($href) . '" class="btn btn-sm sc-btn btn-' . $type . '">' . $content . '</a>';
 }
 
 foreach (array_merge($shortCodeColors, array('link')) as $sc_btn) {
@@ -86,7 +82,7 @@ foreach (array_merge($shortCodeColors, array('link')) as $sc_btn) {
 }
 
 //视频
-function pk_sc_video($attr, $content = null)
+function publicus_sc_video($attr, $content = null)
 {
     extract(shortcode_atts(array(
         'url' => '', 'href' => '',
@@ -104,7 +100,7 @@ function pk_sc_video($attr, $content = null)
         $url = ($ssl ? 'https://' : 'http://') . $url;
     }
     $auto = ($autoplay === 'true') ? 'true' : 'false';
-    if (pk_is_checked('dplayer')) {
+    if (publicus_is_checked('dplayer')) {
         $id = mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
         $out = "<div id='dplayer-{$id}' class='{$class}'></div>";
         $out .= "<script>jQuery(function() {
@@ -123,11 +119,11 @@ function pk_sc_video($attr, $content = null)
         return "<video $autoplay src=\"$url\" controls></video>";
     }
 }
-add_shortcode('video', 'pk_sc_video');
-add_shortcode('videos', 'pk_sc_video');
+add_shortcode('video', 'publicus_sc_video');
+add_shortcode('videos', 'publicus_sc_video');
 
 //解析音频链接
-function pk_music($attr, $content = null)
+function publicus_music($attr, $content = null)
 {
     if (empty($content)) {
         return sc_tips(array('outline' => true), '<span class="c-sub fs14">音频警告：播放链接不能为空</span>', 't-warning');
@@ -135,13 +131,13 @@ function pk_music($attr, $content = null)
     return '<div class="text-center"><audio class="mt-2" src="' . trim($content) . '" controls></audio></div>';
 }
 
-add_shortcode('music', 'pk_music');
+add_shortcode('music', 'publicus_music');
 //下载
-function pk_download($attr, $content = null)
+function publicus_download($attr, $content = null)
 {
     $filename = isset($attr['file']) ? $attr['file'] : '';
     $size = isset($attr['size']) ? $attr['size'] : '';
-    $down_tips = pk_get_option('down_tips');
+    $down_tips = publicus_get_option('down_tips');
     return "<div class=\"p-block p-down-box\">
         <div class='mb15'><i class='fa fa-file-zipper'></i>&nbsp;<span>文件名称：$filename</span></div>
         <div class='mb15'><i class='fa fa-download'></i>&nbsp;<span>文件大小：$size</span></div>
@@ -150,10 +146,10 @@ function pk_download($attr, $content = null)
     </div>";
 }
 
-add_shortcode('download', 'pk_download');
-add_shortcode('dltable', 'pk_download');
+add_shortcode('download', 'publicus_download');
+add_shortcode('dltable', 'publicus_download');
 //回复可见
-function pk_reply_read($attr, $content = null)
+function publicus_reply_read($attr, $content = null)
 {
     global $wpdb;
     $email = null;
@@ -181,33 +177,29 @@ function pk_reply_read($attr, $content = null)
     return $msg;
 }
 
-add_shortcode('reply', 'pk_reply_read');
-//登录可见
-function pk_login_read($attr, $content = null)
+add_shortcode('reply', 'publicus_reply_read');
+function publicus_login_read($attr, $content = null)
 {
-    $msg = sc_tips(array('outline' => true), "<span class='c-sub fs14'><i class='fa-regular fa-eye'></i>&nbsp;此处含有隐藏内容，登录后即可查看！</span>", 't-primary');
     return is_user_logged_in() ? do_shortcode($content) : $msg;
 }
 
-add_shortcode('login', 'pk_login_read');
-//登录并验证邮箱可见
-function pk_login_email_read($attr, $content = null)
+add_shortcode('login', 'publicus_login_read');
+function publicus_login_email_read($attr, $content = null)
 {
     if (is_user_logged_in()) {
         $user_id = (int)wp_get_current_user()->ID;
         if ($user_id > 0) {
             $email = get_userdata($user_id)->user_email;
-            if (!empty($email) && !pk_check_email_is_sysgen($email)) {
+            if (!empty($email) && !publicus_check_email_is_sysgen($email)) {
                 return do_shortcode($content);
             }
         }
     }
-    return sc_tips(array('outline' => true), "<span class='c-sub fs14'><i class='fa-regular fa-eye'></i>&nbsp;此处含有隐藏内容，需要登录并验证邮箱后即可查看！</span>", 't-primary');
 }
 
-add_shortcode('login_email', 'pk_login_email_read');
+add_shortcode('login_email', 'publicus_login_email_read');
 //加密内容
-function pk_password_read($attr, $content = null)
+function publicus_password_read($attr, $content = null)
 {
     global $wpdb;
     $email = null;
@@ -225,27 +217,24 @@ function pk_password_read($attr, $content = null)
     $out = '';
     $error = '';
     if (empty(trim($desc ?? ''))) {
-        $desc = "此处含有隐藏内容，需要正确输入密码后可见！";
     }
     $info = "<p class='fs14 c-sub'><i class='fa-regular fa-eye'></i>&nbsp;{$desc}</p>";
     if (isset($_REQUEST['pass'])) {
         if ($_REQUEST['pass'] == $pass) {
             return do_shortcode($content);
         } else {
-            $info .= "<p class='fs14 text-danger'><i class='fa-solid fa-triangle-exclamation'></i>&nbsp;您的密码输入错误，请核对后重新输入</p>";
         }
     }
     $out .= "<div class='alert alert-primary alert-outline'>{$info}"
         . "$error<form action=\"" . get_permalink() . "\" method=\"post\"><div class=\"row\"><div class=\"col-8 col-md-10\">"
-        . "<input type=\"password\" placeholder=\"请输入密码\" required class=\"form-control form-control-sm\" name=\"pass\"/>"
         . "</div><div class=\"col-4 col-md-2 pl-0\"><button class=\"btn btn-sm btn-primary w-100\">立即查看</button></div></div></form>"
         . "</div>";
     return $out;
 }
 
-add_shortcode('password', 'pk_password_read');
+add_shortcode('password', 'publicus_password_read');
 //隐藏收缩
-function pk_sc_collapse($attr, $content = null)
+function publicus_sc_collapse($attr, $content = null)
 {
     $index = @$GLOBALS['collapse-' . get_the_ID()];
     if (empty($index)) {
@@ -265,15 +254,15 @@ function pk_sc_collapse($attr, $content = null)
     return $out;
 }
 
-add_shortcode('collapse', 'pk_sc_collapse');
+add_shortcode('collapse', 'publicus_sc_collapse');
 
 //github项目展示
-function pk_sc_github($attr, $content = null)
+function publicus_sc_github($attr, $content = null)
 {
     return '<div class="github-card text-center" data-repo="' . $content . '"><div class="spinner-grow text-primary"></div></div>';
 }
 
-add_shortcode('github', 'pk_sc_github');
+add_shortcode('github', 'publicus_sc_github');
 
 
 function p_wpautop($content)

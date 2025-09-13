@@ -14,10 +14,10 @@ get_header();
 
 <div id="page" class="container mt20">
     <?php get_template_part('templates/box', 'global-top') ?>
-    <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
+    <?php echo publicus_breadcrumbs(); while (have_posts()):the_post();?>
         <div id="page-reads">
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
-                <div id="posts" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
+                <div id="posts" class="col-lg-<?php publicus_hide_sidebar_out('12','8') ?> col-md-12 <?php publicus_open_box_animated('animated fadeInLeft') ?> ">
                     <div class="p-block publicus-text">
                         <h2 class="t-lg"><?php the_title() ?></h2>
                         <?php if(!empty(get_the_content())): ?>
@@ -29,9 +29,9 @@ get_header();
                             <?php foreach ($reads as $read): ?>
                                 <div class="col col-6 col-md-4 col-lg-3 pl-0">
                                     <div class="p-2 text-truncate text-nowrap">
-                                        <a href="<?php echo $use_theme_link_forward ? pk_go_link($read->url) : $read->url; ?>"
+                                        <a href="<?php echo $use_theme_link_forward ? publicus_go_link($read->url) : $read->url; ?>"
                                             <?php echo empty($read->url) ? '':'target="_blank"' ?> rel="nofollow">
-                                            <img data-bs-toggle="tooltip" <?php echo pk_get_lazy_img_info(get_avatar_url($read->mail),'md-avatar') ?>
+                                            <img data-bs-toggle="tooltip" <?php echo publicus_get_lazy_img_info(get_avatar_url($read->mail),'md-avatar') ?>
                                                  title="<?php echo $read->name?>" alt="<?php echo $read->name?>">
                                             <span class="t-sm"><span class="c-sub">+(<?php echo $read->num?>)&nbsp;</span><?php echo $read->name?></span>
                                         </a>

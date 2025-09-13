@@ -26,10 +26,7 @@ class OAuth2 extends Base
     }
 
     /**
-     * 使用账号密码方式登录授权.
      *
-     * @param string $username 用户名
-     * @param string $password 密码
      *
      * @return void
      */
@@ -54,9 +51,7 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第一步:获取登录页面跳转url.
      *
-     * @param string $callbackUrl 登录回调地址
      * @param string $state       无用
      * @param array  $scope       无用
      *
@@ -80,7 +75,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第二步:处理回调并获取access_token。与getAccessToken不同的是会验证state值是否匹配，防止csrf攻击。
      *
      * @param string $storeState 存储的正确的state
      * @param string $code       第一步里$redirectUri地址中传过来的code，为null则通过get参数获取
@@ -109,7 +103,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 获取用户资料.
      *
      * @param string $accessToken
      *
@@ -147,7 +140,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 检验授权凭证AccessToken是否有效.
      *
      * @param string $accessToken
      *

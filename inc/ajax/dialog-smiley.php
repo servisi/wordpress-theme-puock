@@ -1,7 +1,7 @@
 <?php
 
-pk_ajax_register('pk_ajax_dialog_smiley', 'pk_ajax_dialog_smiley', true);
-function pk_ajax_dialog_smiley()
+publicus_ajax_register('publicus_ajax_dialog_smiley', 'publicus_ajax_dialog_smiley', true);
+function publicus_ajax_dialog_smiley()
 {
     ?>
     <div id="smiley" class="animate bounce" style="max-width: 290px">
@@ -11,7 +11,7 @@ function pk_ajax_dialog_smiley()
             ?>
             <div class="smiley-item">
                 <img data-id="<?php echo $key ?>"
-                     src="<?php echo pk_get_static_url() . '/assets/img/smiley/' . $imgKey . '.png'?>"
+                     src="<?php echo publicus_get_static_url() . '/assets/img/smiley/' . $imgKey . '.png'?>"
                      class="smiley-img"
                      alt="<?php echo $key . '-' . $val ?>" title="<?php echo $val ?>"/></div>
         <?php endforeach; ?>

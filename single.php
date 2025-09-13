@@ -3,22 +3,22 @@
 <?php while (have_posts()) : the_post(); ?>
     <div id="post" class="container mt20">
         <?php get_template_part('templates/box', 'global-top') ?>
-        <?php echo pk_breadcrumbs() ?>
+        <?php echo publicus_breadcrumbs() ?>
         <?php get_template_part('ad/page', 'top') ?>
         <div class="row row-cols-1 post-row">
             <div id="post-main"
-                 class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
+                 class="col-lg-<?php publicus_hide_sidebar_out('12', '8') ?> col-md-12 <?php publicus_open_box_animated('animated fadeInLeft') ?> ">
                 <div class="p-block">
                     <div><h1 id="post-title" class="mb-0 publicus-text t-xxl"><?php the_title() ?></h1></div>
                     <div class="options p-flex-sbc mt20">
                         <div>
-                            <?php if (!pk_is_checked('hide_post_views')): ?>
+                            <?php if (!publicus_is_checked('hide_post_views')): ?>
                                 <div class="option publicus-bg ta3 t-sm mr-1"><i
                                             class="fa-regular fa-eye mr-1"></i>
-                                    <span id="post-views"><?php pk_get_post_views(); ?></span><span><?php _e('次阅读', PUBLICUS) ?></span>
+                                    <span id="post-views"><?php publicus_get_post_views(); ?></span><span><?php _e('次阅读', PUBLICUS) ?></span>
                                 </div>
                             <?php endif; ?>
-                            <?php if (!pk_post_comment_is_closed()): ?>
+                            <?php if (!publicus_post_comment_is_closed()): ?>
                                 <a href="#comments">
                                     <div class="option publicus-bg ta3 t-sm mr-1"><i
                                                 class="fa-regular fa-comment mr-1"></i><?php comments_number() ?></div>
@@ -32,7 +32,7 @@
                                 </a>
                             <?php endif; ?>
                         </div>
-                        <?php if (!pk_is_checked("hide_global_sidebar")): ?>
+                        <?php if (!publicus_is_checked("hide_global_sidebar")): ?>
                             <div>
                                 <div class="option publicus-bg ta3 t-sm mr-1 d-none d-lg-inline-block post-main-size">
                                     <i class="fa fa-up-right-and-down-left-from-center"></i></div>
@@ -40,15 +40,15 @@
                         <?php endif; ?>
                     </div>
                     <div class="mt20 entry-content-box">
-                        <div class="<?php get_entry_content_class() ?> content-main publicus-text <?php pk_checked_out('post_content_indent', 'p-indent') ?>">
-                            <?php if (pk_is_checked('post_read_time')): ?>
+                        <div class="<?php get_entry_content_class() ?> content-main publicus-text <?php publicus_checked_out('post_content_indent', 'p-indent') ?>">
+                            <?php if (publicus_is_checked('post_read_time')): ?>
                                 <p class="fs12 c-sub no-indent">
                                     <i class="fa-regular fa-clock"></i>
-                                    <?php echo pk_read_time_tip() ?>
+                                    <?php echo publicus_read_time_tip() ?>
                                 </p>
                             <?php endif; ?>
                             <?php the_content(); ?>
-                            <?php do_action('pk_post_content_footer'); ?>
+                            <?php do_action('publicus_post_content_footer'); ?>
                         </div>
                         <?php
                         $link_pages = wp_link_pages(array(
@@ -68,10 +68,10 @@
                             </div>
                         <?php endif; ?>
                         <div class="t-separator c-sub t-sm mt30"><?php _e('正文完', PUBLICUS) ?></div>
-                        <?php if (pk_is_checked('post_foot_qrcode_open')): ?>
+                        <?php if (publicus_is_checked('post_foot_qrcode_open')): ?>
                             <div class="post-foot-qrcode">
-                                <div class="title"><?php echo pk_get_option('post_foot_qrcode_title', '无说明') ?></div>
-                                <img src="<?php echo pk_get_option('post_foot_qrcode_img', '') ?>"
+                                <div class="title"><?php echo publicus_get_option('post_foot_qrcode_title', '无说明') ?></div>
+                                <img src="<?php echo publicus_get_option('post_foot_qrcode_img', '') ?>"
                                      alt="post-qrcode">
                             </div>
                         <?php endif; ?>
@@ -82,7 +82,7 @@
                                     <span><?php _e('发表至：', PUBLICUS) ?></span><?php echo get_post_category_link_exec(true) ?>
                                 </div>
                                 <div>
-                                    <span class="c-sub"><i class="fa-regular fa-clock"></i> <?php pk_get_post_date() ?></span>
+                                    <span class="c-sub"><i class="fa-regular fa-clock"></i> <?php publicus_get_post_date() ?></span>
                                 </div>
                             </div>
                         </div>
@@ -90,11 +90,11 @@
                     <?php get_template_part('templates/post', 'actions') ?>
                 </div>
                 <?php dynamic_sidebar('post_content_author_top'); ?>
-                <?php if (pk_is_checked('page_copy_right')): ?>
+                <?php if (publicus_is_checked('page_copy_right')): ?>
                     <div class="p-block p-flex-sc">
                         <div class="mr-3 p-flex-sk-0">
                             <img class="md-avatar mt-1"
-                                 src="<?php echo pk_get_gravatar(get_the_author_meta('email')) ?>"
+                                 src="<?php echo publicus_get_gravatar(get_the_author_meta('email')) ?>"
                                  alt="<?php the_author_meta('display_name') ?>"
                                  title="<?php the_author_meta('display_name') ?>">
                         </div>
@@ -113,7 +113,7 @@
                                 </div>
                                 <div class="mt-2">
                                     <span class="font-weight-bold c-sub"><?php _e('转载说明：', PUBLICUS) ?></span><span
-                                            class="c-sub"><?php echo pk_get_option('post_reprint_note', pk_get_option('footer_copyright')) ?></span>
+                                            class="c-sub"><?php echo publicus_get_option('post_reprint_note', publicus_get_option('footer_copyright')) ?></span>
                                 </div>
                             <?php else: ?>
                                 <div>
@@ -125,7 +125,6 @@
                                 </div>
                                 <div class="mt-2">
                                     <span class="font-weight-bold c-sub"><?php _e('转载提示：', PUBLICUS) ?></span><span
-                                            class="c-sub"><?php _e('此文章非本站原创文章，若需转载请联系原作者获得转载授权。', PUBLICUS) ?></span>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -133,7 +132,7 @@
                 <?php endif; ?>
                 <?php dynamic_sidebar('post_content_author_bottom'); ?>
                 <?php get_template_part('ad/page', 'innerb') ?>
-                <?php if (pk_is_checked('page_b_recommend')): ?>
+                <?php if (publicus_is_checked('page_b_recommend')): ?>
                     <?php get_template_part('templates/post', 'relevant') ?>
                 <?php endif; ?>
                 <?php get_template_part('templates/module', 'andb') ?>

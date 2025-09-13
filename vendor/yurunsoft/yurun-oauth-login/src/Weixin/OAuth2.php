@@ -54,11 +54,7 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第一步:获取PC页登录所需的url，一般用于生成二维码
      *
-     * @param string $callbackUrl 登录回调地址
-     * @param string $state       状态值，不传则自动生成，随后可以通过->state获取。用于第三方应用防止CSRF攻击，成功授权后回调时会原样带回。一般为每个用户登录时随机生成state存在session中，登录回调中判断state是否和session中相同
-     * @param array  $scope       请求用户授权时向用户显示的可进行授权的列表。可空，默认snsapi_login
      *
      * @return string
      */
@@ -82,11 +78,7 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第一步:获取在微信中登录授权的url.
      *
-     * @param string $callbackUrl 登录回调地址
-     * @param string $state       状态值，不传则自动生成，随后可以通过->state获取。用于第三方应用防止CSRF攻击，成功授权后回调时会原样带回。一般为每个用户登录时随机生成state存在session中，登录回调中判断state是否和session中相同
-     * @param array  $scope       请求用户授权时向用户显示的可进行授权的列表。可空，默认snsapi_userinfo
      *
      * @return string
      */
@@ -112,7 +104,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第二步:处理回调并获取access_token。与getAccessToken不同的是会验证state值是否匹配，防止csrf攻击。
      *
      * @param string $storeState 存储的正确的state
      * @param string $code       第一步里$redirectUri地址中传过来的code，为null则通过get参数获取
@@ -152,7 +143,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 获取用户资料.
      *
      * @param string $accessToken
      *
@@ -194,7 +184,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 检验授权凭证AccessToken是否有效.
      *
      * @param string $accessToken
      *
@@ -211,8 +200,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 微信小程序登录凭证校验，获取session_key、openid、unionid
-     * 返回session_key
      * 调用后可以使用$this->result['openid']或$this->result['unionid']获取相应的值
      *
      * @param string $jsCode
@@ -277,7 +264,6 @@ class OAuth2 extends Base
         $dataObj = json_decode($result, true);
         if (!$dataObj)
         {
-            throw new \InvalidArgumentException('反序列化数据失败');
         }
 
         return $dataObj;

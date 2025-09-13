@@ -47,7 +47,7 @@ PuockAbsMeta::newPostMeta('pk-post-basic', [
     ]
 ]);
 
-function pk_page_meta_basic()
+function publicus_page_meta_basic()
 {
     $link_cats = get_all_category_id_row('link_category');
     PuockAbsMeta::newPostMeta('pk-page-basic', [
@@ -92,4 +92,4 @@ function pk_page_meta_basic()
     ]);
 }
 
-pk_page_meta_basic();
+publicus_page_meta_basic();

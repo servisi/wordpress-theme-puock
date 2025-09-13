@@ -6,13 +6,13 @@ get_header();
 
     <div id="content" class="mt20 container min-height-container">
 
-        <?php echo pk_breadcrumbs() ?>
+        <?php echo publicus_breadcrumbs() ?>
 
         <div class="text-center p-block publicus-text">
-            <h3 class="mt20"><?php _e('你访问的资源不存在！', PUBLICUS) ?></h3>
-            <h5 class="mt20"><span id="time-count-down">3</span><?php _e('秒后即将跳转至Ana Sayfa', PUBLICUS) ?></h5>
+            <h3 class="mt20"><?php _e('Aradığınız kaynak bulunamadı!', PUBLICUS) ?></h3>
+            <h5 class="mt20"><span id="time-count-down">3</span><?php _e('saniye sonra ana sayfaya yönlendirileceksiniz', PUBLICUS) ?></h5>
             <div class="text-center mt20">
-                <a class="a-link" href="<?php echo home_url() ?>"><i class="fa fa-home"></i>&nbsp;<?php _e('返回Ana Sayfa', PUBLICUS) ?></a>
+                <a href="<?php echo home_url(); ?>" class="btn btn-primary"><?php _e('Ana Sayfaya Dön', PUBLICUS) ?></a>
             </div>
         </div>
         <script>

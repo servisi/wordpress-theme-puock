@@ -3,13 +3,13 @@
 <div id="content" class="mt15 container">
     <?php get_template_part('templates/box', 'global-top') ?>
 
-    <?php echo pk_breadcrumbs() ?>
+    <?php echo publicus_breadcrumbs() ?>
 
     <div id="author">
         <div class="bg"
              style="background-image: url('<?php echo PUBLICUS_ABS_URI.'/assets/img/show/author-bg.jpg' ?>')">
             <div class="avatar">
-                <img <?php echo pk_get_lazy_img_info(get_avatar_url(get_the_author_meta('ID'),['size'=>200]),'avatar') ?>>
+                <img <?php echo publicus_get_lazy_img_info(get_avatar_url(get_the_author_meta('ID'),['size'=>200]),'avatar') ?>>
             </div>
         </div>
         <div class="info">
@@ -17,8 +17,8 @@
             <div class="fs12 c-sub mt10"><?php the_author_meta('description') ?></div>
         </div>
         <div class="row row-cols-1 mt15">
-            <div class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12
-            <?php pk_open_box_animated('animated fadeInLeft') ?> ">
+            <div class="col-lg-<?php publicus_hide_sidebar_out('12', '8') ?> col-md-12
+            <?php publicus_open_box_animated('animated fadeInLeft') ?> ">
                 <div class="author-tab-data">
                     <div class="data-header">
                         <div class="item cur">

@@ -163,7 +163,7 @@ abstract class puockWidgetBase extends WP_Widget{
     public function comment_post_output($instance, $posts){
         $out = "";
         $is_simple_style = isset($instance['simple']) && $instance['simple'];
-        $target = pk_link_target(false);
+        $target = publicus_link_target(false);
         foreach ($posts as $post){
             $title = get_the_title($post);
             $link = get_permalink($post);
@@ -176,7 +176,7 @@ abstract class puockWidgetBase extends WP_Widget{
                     </h2>
                 </div>';
             }else{
-                $img = pk_get_lazy_img_info(get_post_images($post), '', 120,80);
+                $img = publicus_get_lazy_img_info(get_post_images($post), '', 120,80);
                 $out .= '<div class="mt10">
                     <div class="widget-common-media-post">
                         <a class="img ww" title="'.$title.'" '.$target.' href="'.$link.'"><img '.$img.' alt="'.$title.'"/></a>
@@ -251,12 +251,12 @@ class puockHotPost extends puockWidgetBase {
     }
 
     public function update($cur,$old){
-        pk_cache_delete(PKC_WIDGET_HOT_POSTS);
+        publicus_cache_delete(PKC_WIDGET_HOT_POSTS);
         return $cur;
     }
 
     function widget( $args, $instance ){
-        $posts = pk_cache_get(PKC_WIDGET_HOT_POSTS);
+        $posts = publicus_cache_get(PKC_WIDGET_HOT_POSTS);
         if(!$posts){
             $days = $this->get_num_val($instance, 'days');
             $nums = $this->get_num_val($instance, 'nums');
@@ -283,7 +283,7 @@ class puockHotPost extends puockWidgetBase {
                 ),
             ));
             wp_reset_query();
-            pk_cache_set(PKC_WIDGET_HOT_POSTS, $posts);
+            publicus_cache_set(PKC_WIDGET_HOT_POSTS, $posts);
         }
         $this->comment_post_output($instance, $posts);
      }
@@ -309,12 +309,12 @@ class puockNewPost extends puockWidgetBase {
     }
 
     public function update($cur,$old){
-        pk_cache_delete(PKC_WIDGET_NEW_POSTS);
+        publicus_cache_delete(PKC_WIDGET_NEW_POSTS);
         return $cur;
     }
 
     function widget( $args, $instance ){
-        $posts = pk_cache_get(PKC_WIDGET_NEW_POSTS);
+        $posts = publicus_cache_get(PKC_WIDGET_NEW_POSTS);
         if(!$posts){
             $days = $this->get_num_val($instance, 'days');
             $nums = $this->get_num_val($instance, 'nums');
@@ -332,7 +332,7 @@ class puockNewPost extends puockWidgetBase {
                 ),
             ));
             wp_reset_query();
-            pk_cache_set(PKC_WIDGET_NEW_POSTS, $posts);
+            publicus_cache_set(PKC_WIDGET_NEW_POSTS, $posts);
         }
         $this->comment_post_output($instance, $posts);
      }
@@ -359,12 +359,12 @@ class puockHotCommentPost extends puockWidgetBase {
     }
 
     public function update($cur,$old){
-        pk_cache_delete(PKC_WIDGET_HOT_COMMENTS);
+        publicus_cache_delete(PKC_WIDGET_HOT_COMMENTS);
         return $cur;
     }
 
     function widget( $args, $instance ){
-        $posts = pk_cache_get(PKC_WIDGET_HOT_COMMENTS);
+        $posts = publicus_cache_get(PKC_WIDGET_HOT_COMMENTS);
         if(!$posts){
             $days = $this->get_num_val($instance, 'days');
             $nums = $this->get_num_val($instance, 'nums');
@@ -384,7 +384,7 @@ class puockHotCommentPost extends puockWidgetBase {
                 ),
             ));
             wp_reset_query();
-            pk_cache_set(PKC_WIDGET_HOT_COMMENTS, $posts);
+            publicus_cache_set(PKC_WIDGET_HOT_COMMENTS, $posts);
         }
         $this->comment_post_output($instance, $posts);
     }
@@ -420,13 +420,13 @@ class puockReadPerson extends puockWidgetBase {
     }
 
     public function update($cur,$old){
-        pk_cache_delete(PKC_WIDGET_READ_PERSONS);
+        publicus_cache_delete(PKC_WIDGET_READ_PERSONS);
         return $cur;
     }
 
     function widget( $args, $instance ){
         global $wpdb;
-        $authors = pk_cache_get(PKC_WIDGET_READ_PERSONS);
+        $authors = publicus_cache_get(PKC_WIDGET_READ_PERSONS);
         if(!$authors){
             $days = $this->get_num_val($instance, 'days',31);
             $nums = $this->get_num_val($instance, 'nums');
@@ -434,16 +434,16 @@ class puockReadPerson extends puockWidgetBase {
                     FROM $wpdb->comments WHERE user_id !=1 AND TO_DAYS(now()) - TO_DAYS(comment_date) < {$days}
                      group by comment_author_email order by num desc limit 0,{$nums}";
             $authors = $wpdb->get_results($sql);
-            pk_cache_set(PKC_WIDGET_READ_PERSONS, $authors);
+            publicus_cache_set(PKC_WIDGET_READ_PERSONS, $authors);
         }
         $this->get_common_widget_header($instance); ?>
         <div class="row publicus-text">
             <?php foreach ($authors as $author): ?>
              <div class="col col-12 col-lg-6 pl-0">
                  <div class="p-2 text-truncate text-nowrap">
-                    <a href="<?php echo empty($author->url) ? 'javascript:void(0)':pk_go_link($author->url) ?>" class="a-link"
+                    <a href="<?php echo empty($author->url) ? 'javascript:void(0)':publicus_go_link($author->url) ?>" class="a-link"
                         <?php echo empty($author->url) ? '':'target="_blank"' ?> rel="nofollow">
-                        <img <?php echo pk_get_lazy_img_info(get_avatar_url($author->mail),'md-avatar') ?> alt="<?php echo $author->name?>">
+                        <img <?php echo publicus_get_lazy_img_info(get_avatar_url($author->mail),'md-avatar') ?> alt="<?php echo $author->name?>">
                         <span class="t-sm"><?php echo $author->name?></span>
                     </a>
                 </div>
@@ -482,13 +482,13 @@ class puockNewComment extends puockWidgetBase {
     }
 
     public function update($cur,$old){
-        pk_cache_delete(PKC_WIDGET_NEW_COMMENTS);
+        publicus_cache_delete(PKC_WIDGET_NEW_COMMENTS);
         return $cur;
     }
 
     function widget( $args, $instance ){
         global $wpdb;
-        $comments = pk_cache_get(PKC_WIDGET_NEW_COMMENTS);
+        $comments = publicus_cache_get(PKC_WIDGET_NEW_COMMENTS);
         if(!$comments){
             // $sql = "SELECT comment_ID as id,comment_post_ID as pid,comment_author_email as mail,comment_author as `name`,comment_author_url as url,comment_content as text
             //         FROM $wpdb->comments WHERE user_id !=1 and comment_approved=1 order by comment_date desc limit 0,{$nums}";
@@ -502,14 +502,14 @@ class puockNewComment extends puockWidgetBase {
                 ),    
             );
             $comments = get_comments($args);
-            pk_cache_set(PKC_WIDGET_NEW_COMMENTS, $comments);
+            publicus_cache_set(PKC_WIDGET_NEW_COMMENTS, $comments);
         }
         $this->get_common_widget_header($instance); ?>
         <div class="min-comments t-md">
             <?php foreach ($comments as $comment): ?>
             <div class="comment t-md t-line-1">
-                <img <?php echo pk_get_lazy_img_info(get_avatar_url($comment->comment_author_email),'min-avatar') ?> alt="<?php echo $comment->comment_author ?>">
-                <a class="puock-link" <?php pk_link_target() ?> href="<?php echo get_permalink($comment->comment_post_ID).'#comment-'.$comment->comment_ID ?>">
+                <img <?php echo publicus_get_lazy_img_info(get_avatar_url($comment->comment_author_email),'min-avatar') ?> alt="<?php echo $comment->comment_author ?>">
+                <a class="puock-link" <?php publicus_link_target() ?> href="<?php echo get_permalink($comment->comment_post_ID).'#comment-'.$comment->comment_ID ?>">
                 <span class="ta3 link-hover"><?php echo $comment->comment_author ?></span></a>
                 <span class="c-sub t-w-400"><?php echo strip_tags(convert_smilies($comment->comment_content),['img']) ?></span>
             </div>
@@ -647,7 +647,7 @@ class puockAboutAuthor extends puockWidgetBase {
             array('id'=>'name', 'val'=>get_bloginfo('name')),
             array('id'=>'email', 'val'=>get_bloginfo('admin_email')),
             array('id'=>'des', 'val'=>get_bloginfo('description')),
-            array('id'=>'cover', 'val'=>pk_get_static_url().'/assets/img/show/head-cover.jpg'),
+            array('id'=>'cover', 'val'=>publicus_get_static_url().'/assets/img/show/head-cover.jpg'),
             array('id'=>'show_views', 'val'=>'on'),
             array('id'=>'show_comments', 'val'=>'on'), 
             array('id'=>'show_posts', 'val'=>'on'),
@@ -662,7 +662,6 @@ class puockAboutAuthor extends puockWidgetBase {
         $this->html_gen($instance, '介绍(支持html/js)', 'des','text');
         $this->html_gen($instance, '邮箱(用于获取头像)', 'email');
         $this->html_gen($instance, '顶部背景图url', 'cover');
-        $this->html_gen($instance, '显示用户数', 'show_users','checkbox',false);
         $this->html_gen($instance, '显示文章数', 'show_posts','checkbox',false);
         $this->html_gen($instance, '显示评论数', 'show_comments','checkbox',false);
         $this->html_gen($instance, '显示阅读量', 'show_views','checkbox',false);
@@ -686,16 +685,15 @@ class puockAboutAuthor extends puockWidgetBase {
         $show_users = isset($instance['show_users']) && $instance['show_users'] === 'on';
 
         // 获取评论数
-        $comment_num = pk_cache_get(PKC_TOTAL_COMMENTS);
+        $comment_num = publicus_cache_get(PKC_TOTAL_COMMENTS);
         if(!$comment_num){
             $comment_num = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_approved =1");
-            pk_cache_set(PKC_TOTAL_COMMENTS, $comment_num);
+            publicus_cache_set(PKC_TOTAL_COMMENTS, $comment_num);
         }
 
         // 获取文章数
         $posts_count = wp_count_posts()->publish;
 
-        // 获取用户数
         $users_count = count_users()['total_users'];
 
         // 计算要显示的统计项数量
@@ -710,7 +708,7 @@ class puockAboutAuthor extends puockWidgetBase {
         ?>
         <div class="widget-puock-author widget">
             <div class="header" style="background-image: url('<?php echo $cover ?>')">
-                <img <?php echo pk_get_lazy_img_info(pk_get_gravatar($email,false),'avatar') ?>
+                <img <?php echo publicus_get_lazy_img_info(publicus_get_gravatar($email,false),'avatar') ?>
                  alt="<?php echo $name ?>" title="<?php echo $name ?>">
             </div>
             <div class="content t-md publicus-text">
@@ -721,7 +719,6 @@ class puockAboutAuthor extends puockWidgetBase {
                 <div class="row mt10">
                     <?php if($show_users): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
-                        <div class="c-sub t-sm"><?php _e('用户数', PUBLICUS) ?></div>
                         <div><?php echo $users_count ?></div>
                     </div>
                     <?php endif; ?>
@@ -779,18 +776,18 @@ class puockCategory extends puockWidgetBase {
     }
 
     public function update($cur,$old){
-        pk_cache_delete(PKC_WIDGET_CATEGORIES);
+        publicus_cache_delete(PKC_WIDGET_CATEGORIES);
         return $cur;
     }
 
     function widget( $args, $instance ){
         $cat_ids= @$instance['categories'];
-        $cats = pk_cache_get(PKC_WIDGET_CATEGORIES);
+        $cats = publicus_cache_get(PKC_WIDGET_CATEGORIES);
         if(!$cats){
             $cats = get_categories(array(
                 'include'=>$cat_ids
             ));
-            pk_cache_set(PKC_WIDGET_CATEGORIES, $cats);
+            publicus_cache_set(PKC_WIDGET_CATEGORIES, $cats);
         }
         $this->get_common_widget_header($instance);
         echo '<div class="row t-md">';
@@ -834,17 +831,17 @@ class puockTagCloud extends puockWidgetBase {
     }
 
     public function update($cur,$old){
-        pk_cache_delete(PKC_WIDGET_TAGS);
+        publicus_cache_delete(PKC_WIDGET_TAGS);
         return $cur;
     }
 
     function widget( $args, $instance ){
         $this->get_common_widget_header($instance);
         echo '<div class="widget-puock-tag-cloud">';
-        $tags = pk_cache_get(PKC_WIDGET_TAGS);
+        $tags = publicus_cache_get(PKC_WIDGET_TAGS);
         if(!$tags){
             $tags = get_tags();
-            pk_cache_set(PKC_WIDGET_TAGS,$tags);
+            publicus_cache_set(PKC_WIDGET_TAGS,$tags);
         }
         $max_count = $this->get_num_val($instance, 'max_count');
         if(count($tags) > 0){
@@ -854,7 +851,7 @@ class puockTagCloud extends puockWidgetBase {
                     break;
                 }
                 $link = get_tag_link($tag);
-                echo "<a href='{$link}' class='badge d-none d-md-inline-block bg-".pk_get_color_tag()." ahfff'>{$tag->name}</a>";
+                echo "<a href='{$link}' class='badge d-none d-md-inline-block bg-".publicus_get_color_tag()." ahfff'>{$tag->name}</a>";
                 $count++;
             }
         }else{
@@ -899,7 +896,7 @@ class puockTagHitokoto extends puockWidgetBase {
         $this->get_common_widget_header($instance); ?>
         <div class="widget-puock-hitokoto" data-api="<?php echo $api; ?>">
             <div class="t publicus-text">
-                <?php echo pk_skeleton() ?>
+                <?php echo publicus_skeleton() ?>
             </div>
             <div class="fb d-none">-「<span class="f"></span>」</div>
         </div>

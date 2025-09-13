@@ -18,17 +18,17 @@ class OptionCarousel extends BaseOptionItem
                 'dynamicBullets' => true,
             ],
         ];
-        if (!empty(pk_get_option('index_carousel_switch_effect'))) {
-            $args['effect'] = pk_get_option('index_carousel_switch_effect');
+        if (!empty(publicus_get_option('index_carousel_switch_effect'))) {
+            $args['effect'] = publicus_get_option('index_carousel_switch_effect');
         }
-        if (pk_is_checked('index_carousel_mousewheel')) {
+        if (publicus_is_checked('index_carousel_mousewheel')) {
             $args['mousewheel'] = ['invert' => true];
         }
-        $speed = pk_get_option('index_carousel_autoplay_speed');
+        $speed = publicus_get_option('index_carousel_autoplay_speed');
         if ($speed && $speed > 0) {
             $args['autoplay'] = ['delay' => $speed, 'disableOnInteraction' => false];
         }
-        if (pk_is_checked('index_carousel_loop')) {
+        if (publicus_is_checked('index_carousel_loop')) {
             $args['loop'] = true;
         }
         return $encode ? json_encode($args) : $args;
@@ -45,7 +45,7 @@ class OptionCarousel extends BaseOptionItem
                     'id' => '-',
                     'type' => 'panel',
                     'label' => __('Ana Sayfa幻灯片', PUBLICUS),
-                    'open' => pk_is_checked('index_carousel'),
+                    'open' => publicus_is_checked('index_carousel'),
                     'children' => [
                         [
                             'id' => '-',
@@ -117,7 +117,7 @@ class OptionCarousel extends BaseOptionItem
                     'id' => '-',
                     'type' => 'panel',
                     'label' => __('全局公告', PUBLICUS),
-                    'open' => pk_is_checked('global_notice'),
+                    'open' => publicus_is_checked('global_notice'),
                     'children' => [
                         [
                             'id' => 'global_notice',

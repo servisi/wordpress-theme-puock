@@ -63,7 +63,7 @@ class OptionScript extends BaseOptionItem
                     'id' => '-',
                     'type' => 'panel',
                     'label' => __('底部关于我们', PUBLICUS),
-                    'open' => pk_is_checked('footer_about_me_open'),
+                    'open' => publicus_is_checked('footer_about_me_open'),
                     'children' => [
                         [
                             'id' => 'footer_about_me_open',
@@ -89,7 +89,7 @@ class OptionScript extends BaseOptionItem
                     'id' => '-',
                     'type' => 'panel',
                     'label' => __('底部版权说明', PUBLICUS),
-                    'open' => pk_is_checked('footer_copyright_open'),
+                    'open' => publicus_is_checked('footer_copyright_open'),
                     'children' => [
                         [
                             'id' => 'footer_copyright_open',

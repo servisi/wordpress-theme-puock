@@ -8,10 +8,10 @@ get_header();
 
 <div id="page" class="container mt15">
     <?php get_template_part('templates/box', 'global-top') ?>
-    <?php echo pk_breadcrumbs();?>
+    <?php echo publicus_breadcrumbs();?>
     <div id="page-random">
         <div id="page-<?php the_ID() ?>" class="row">
-            <div id="posts" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
+            <div id="posts" class="col-lg-<?php publicus_hide_sidebar_out('12','8') ?> col-md-12 <?php publicus_open_box_animated('animated fadeInLeft') ?> ">
                 <div class="row box-plr15">
                     <?php foreach($posts as $post): setup_postdata($post) ?>
                         <?php get_template_part('templates/module','post') ?>

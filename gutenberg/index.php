@@ -2,10 +2,10 @@
 
 function create_block_puock_block_init()
 {
-    pk_gutenberg_block_reg("alert");
+    publicus_gutenberg_block_reg("alert");
 }
 
-function pk_gutenberg_block_reg($name)
+function publicus_gutenberg_block_reg($name)
 {
     $prefix = 'puock-block-' . $name;
     $assets_prefix = '/gutenberg/components/' . $name;

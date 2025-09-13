@@ -6,7 +6,7 @@ Template Name: Arkadaş Bağlantıları
 $cats = get_post_meta($post->ID,'page_links_id',true);
 $use_theme_link_forward = get_post_meta($post->ID,'use_theme_link_forward',true);
 
-$links = pk_get_wp_links($cats);
+$links = publicus_get_wp_links($cats);
 
 $groups = array();
 
@@ -29,12 +29,12 @@ get_header();
 
 <div id="page" class="container mt20">
     <?php get_template_part('templates/box', 'global-top') ?>
-    <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
+    <?php echo publicus_breadcrumbs(); while (have_posts()):the_post();?>
         <?php
          ?>
         <div id="page-links">
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
-                <div id="posts" class="col-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
+                <div id="posts" class="col-12 <?php publicus_open_box_animated('animated fadeInLeft') ?> ">
                     <?php if(!empty(get_the_content())): ?>
                         <div class="mt20 p-block publicus-text <?php get_entry_content_class() ?>">
                             <?php the_content() ?>
@@ -46,12 +46,12 @@ get_header();
                             <h6><?php echo $group['name'] ?></h6>
                             <div class="links-main-box row t-sm">
                                 <?php foreach ($group['links'] as $link): ?>
-                                <a class="link-item a-link col-lg-3 col-md-4 col-sm-6 col-6" href="<?php echo $use_theme_link_forward ? pk_go_link($link->link_url,$link->link_name) : $link->link_url; ?>" target="<?php echo $link->link_target ?>"
+                                <a class="link-item a-link col-lg-3 col-md-4 col-sm-6 col-6" href="<?php echo $use_theme_link_forward ? publicus_go_link($link->link_url,$link->link_name) : $link->link_url; ?>" target="<?php echo $link->link_target ?>"
                                     rel="<?php echo $link->link_rel ?>" title="<?php echo empty($link->link_notes) ? $link->link_name : $link->link_notes ?>"
                                    data-bs-toggle="tooltip">
                                     <div class="clearfix publicus-bg">
                                         <?php if (empty($link->link_image)) : ?>
-                                            <img alt="<?php echo $link->link_name ?>" <?php echo pk_get_lazy_img_info(pk_get_favicon_url($link->link_url),'md-avatar') ?> alt="<?php echo $link->link_name ?>">
+                                            <img alt="<?php echo $link->link_name ?>" <?php echo publicus_get_lazy_img_info(publicus_get_favicon_url($link->link_url),'md-avatar') ?> alt="<?php echo $link->link_name ?>">
                                         <?php else :?>      
                                             <img src="<?php echo $link->link_image ;?>"  alt="<?php echo $link->link_name ;?>" class="md-avatar" />
                                         <?php endif;?>
