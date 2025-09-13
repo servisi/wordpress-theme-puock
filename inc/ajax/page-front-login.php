@@ -46,17 +46,20 @@ function publicus_front_login_exec()
         wp_set_auth_cookie($user->ID, true, is_ssl());
         echo publicus_ajax_resp([
             'action' => 'reload',
+        ]);
     } else {
         if ($try_open) {
             $try = get_transient('publicus_login_try_' . $ip) ?? 0;
             $try++;
             if ($try >= $try_num) {
                 set_transient('publicus_login_ban_' . $ip, 1, $try_ban_time * 60);
+                echo publicus_ajax_resp_error(__('Çok fazla başarısız giriş denemesi. Lütfen daha sonra tekrar deneyin.', PUBLICUS));
                 wp_die();
             } else {
                 set_transient('publicus_login_try_' . $ip, $try, $try_ban_time * 60);
             }
         }
+        echo publicus_ajax_resp_error(__('Kullanıcı adı veya şifre hatalı.', PUBLICUS));
     }
     wp_die();
 }
@@ -65,19 +68,21 @@ function publicus_front_login_exec()
 function publicus_front_register_exec()
 {
     if (is_string($data = publicus_get_req_data([
-            'email' => ['email' => '邮箱', 'required' => true],
+            'email' => ['email' => 'E-posta', 'required' => true],
         ])) === true) {
         echo publicus_ajax_resp_error($data);
         wp_die();
     }
     if (strlen($data['username']) < 5 || strlen($data['username']) > 10) {
+        echo publicus_ajax_resp_error(__('Kullanıcı adı 5-10 karakter arasında olmalıdır.', PUBLICUS));
         wp_die();
     }
     if (strlen($data['password']) < 6 || strlen($data['password']) > 18) {
+        echo publicus_ajax_resp_error(__('Şifre 6-18 karakter arasında olmalıdır.', PUBLICUS));
         wp_die();
     }
     if (!is_email($data['email'])) {
-        echo publicus_ajax_resp_error('邮箱不合法');
+        echo publicus_ajax_resp_error(__('Geçersiz e-posta adresi.', PUBLICUS));
         wp_die();
     }
     try {

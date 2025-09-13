@@ -1,5 +1,5 @@
 <?php
-// 点赞
+// Beğeni sistemi
 function publicus_post_like()
 {
     $id = $_POST["um_id"];
@@ -7,7 +7,7 @@ function publicus_post_like()
     if ($action == 'like') {
         $cookie_key = 'puock_like_' . $id;
         if (!empty($_COOKIE[$cookie_key])) {
-            echo json_encode(array('e' => 1, 't' => '你已经点过赞了'));
+            echo json_encode(array('e' => 1, 't' => __('Zaten beğendiniz', PUBLICUS)));
             die;
         }
         $like_num = get_post_meta($id, 'puock_like', true);
@@ -33,7 +33,7 @@ function publicus_post_is_like()
     return !empty($_COOKIE['puock_like_' . $post->ID]);
 }
 
-// 点赞数显示
+// Beğeni sayısını göster
 function publicus_post_like_num(int $id)
 {
     $number = get_post_meta($id, 'puock_like', true) ?: 0;
@@ -41,8 +41,11 @@ function publicus_post_like_num(int $id)
         $number = 0;
     }
     if ($number < 1000) {
+        return (string)$number;
     } elseif ($number < 1000000) {
+        return round($number / 1000, 0) . 'k';
     } else {
+        return round($number / 1000000, 0) . 'M';
     }
 }
 
