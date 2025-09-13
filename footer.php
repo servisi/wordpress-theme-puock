@@ -3,10 +3,10 @@
 <div id="rb-float-actions">
     <?php echo apply_filters('pk_rb_float_actions','') ?>
     <?php if (pk_is_checked('mobile_sidebar_enable')): ?>
-    <div id="mobile-sidebar-toggle" class="p-block d-md-none"><i class="fa-solid fa-bars-progress puock-text"></i></div>
+    <div id="mobile-sidebar-toggle" class="p-block d-md-none"><i class="fa-solid fa-bars-progress publicus-text"></i></div>
     <?php endif; ?>
-    <div data-to="top" class="p-block"><i class="fa fa-arrow-up puock-text"></i></div>
-    <div data-to="bottom" class="p-block"><i class="fa fa-arrow-down puock-text"></i></div>
+    <div data-to="top" class="p-block"><i class="fa fa-arrow-up publicus-text"></i></div>
+    <div data-to="bottom" class="p-block"><i class="fa fa-arrow-down publicus-text"></i></div>
 </div>
 <footer id="footer">
     <div class="container">
@@ -45,12 +45,12 @@
 <?php endif; ?>
 <?php pk_debug_print_sql_list(); ?>
 
-<!-- 移动端侧边栏 -->
+<!-- 移动端Kenar Çubuğu -->
 <div id="mobile-sidebar" class="mobile-sidebar">
     <div class="mobile-sidebar-content">
         <div class="mobile-sidebar-header">
             <h3 class="mobile-sidebar-title"><?php echo get_bloginfo('name'); ?></h3>
-            <div id="mobile-sidebar-close" class="mobile-sidebar-close"><i class="fa-solid fa-circle-xmark puock-text"></i></div>
+            <div id="mobile-sidebar-close" class="mobile-sidebar-close"><i class="fa-solid fa-circle-xmark publicus-text"></i></div>
         </div>
         <div class="mobile-sidebar-body">
             <?php
@@ -73,7 +73,7 @@
     <div id="mobile-sidebar-overlay" class="mobile-sidebar-overlay"></div>
 </div>
 
-<!-- 移动端侧边栏JS -->
+<!-- 移动端Kenar ÇubuğuJS -->
 <script src="<?php echo get_template_directory_uri(); ?>/assets/js/mobile-sidebar.js"></script>
 </body>
 </html>

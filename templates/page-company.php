@@ -1,6 +1,6 @@
-<div id="content" class="puock-text">
+<div id="content" class="publicus-text">
     <?php get_template_part('templates/module', 'banners') ?>
-    <div id="index-company" class="puock-bg pt20">
+    <div id="index-company" class="publicus-bg pt20">
 
         <div class="container mt50" id="prod-items">
             <h3 class="text-center"><?php echo pk_get_option('company_product_title', '产品概览') ?></h3>

@@ -1,4 +1,4 @@
-const puockGlobalData = {
+const publicusGlobalData = {
     loads: {}
 }
 
@@ -11,7 +11,7 @@ const TYPE_INFO = "info"
 class Puock {
 
     data = {
-        tag: 'puock',
+        tag: 'publicus',
         pc:true,
         params: {
             home: null,
@@ -91,7 +91,7 @@ class Puock {
         this.detectDevice()
         window.addEventListener('resize', ()=>this.detectDevice());
         layer.config({shade: 0.5})
-        console.log("\n %c Puock Theme %c https://github.com/Licoy/wordpress-theme-puock \n\n",
+        console.log("\n %c Puock Theme %c https://github.com/Licoy/wordpress-theme-publicus \n\n",
             "color:#f1ab0e;background:#030307;padding:5px 0;border-top-left-radius:8px;border-bottom-left-radius:8px",
             "background:#aa80ff;padding:5px 0;border-top-right-radius:8px;border-bottom-right-radius:8px");
     }
@@ -426,7 +426,7 @@ class Puock {
     }
 
     loadParams() {
-        this.data.params = puock_metas;
+        this.data.params = publicus_metas;
         this.data.commentVd = this.data.params.vd_comment === 'on';
     }
 
@@ -961,7 +961,7 @@ class Puock {
             lastSendTime = currentTime
             const vm = $(this.ct(e))
             let id = vm.attr("data-id");
-            $.post("/wp-admin/admin-ajax.php", {action: 'puock_like', um_id: id, um_action: 'like'}, (res) => {
+            $.post("/wp-admin/admin-ajax.php", {action: 'publicus_like', um_id: id, um_action: 'like'}, (res) => {
                 if (res.e === 0) {
                     vm.find("span").html(res.d);
                     vm.addClass("bg-primary text-light");
@@ -1163,7 +1163,7 @@ class Puock {
 
     loadHitokoto() {
         setTimeout(() => {
-            $(".widget-puock-hitokoto").each((_, v) => {
+            $(".widget-publicus-hitokoto").each((_, v) => {
                 const el = $(v);
                 const api = el.attr("data-api") || "https://v1.hitokoto.cn/"
                 $.get(api, (res) => {
@@ -1203,8 +1203,8 @@ jQuery(() => {
         if (window.$ === undefined) {
             window.$ = jQuery;
         }
-        window.Puock = new Puock()
-        window.Puock.onceInit()
+        window.Publicus = new Puock()
+        window.Publicus.onceInit()
     }
 )
 

@@ -1,5 +1,5 @@
 <div class="p-block">
-    <div class="t-lg puock-text text-center">暂未找到你想要的内容</div>
+    <div class="t-lg publicus-text text-center">暂未找到你想要的内容</div>
     <div class="mt20">
         <div>
             <div class="w-100">

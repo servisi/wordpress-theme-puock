@@ -23,26 +23,26 @@ function pk_cache_key_load($key){
 // 缓存获取
 function pk_cache_get($key, $force = false, &$found = null)
 {
-    return wp_cache_get($key, PUOCK, $force, $found);
+    return wp_cache_get($key, PUBLICUS, $force, $found);
 }
 
 // 缓存设置
 function pk_cache_set($key, $value, $expiration = null)
 {
     $expiration = $expiration == null ? pk_get_option('cache_expire_second', 0) : $expiration;
-    return wp_cache_set($key, $value, PUOCK, $expiration);
+    return wp_cache_set($key, $value, PUBLICUS, $expiration);
 }
 
 // 缓存删除
 function pk_cache_delete($key, $time = 0)
 {
-    return wp_cache_delete($key, PUOCK, $time);
+    return wp_cache_delete($key, PUBLICUS, $time);
 }
 
 // 缓存删除
 function pk_cache_delete_multiple($keys)
 {
-    return wp_cache_delete_multiple($keys, PUOCK);
+    return wp_cache_delete_multiple($keys, PUBLICUS);
 }
 
 // 缓存删除

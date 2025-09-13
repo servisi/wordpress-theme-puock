@@ -1,6 +1,6 @@
 <?php
 
-namespace Puock\Theme\setting\options;
+namespace Publicus\Theme\setting\options;
 
 class OptionCache extends BaseOptionItem{
 
@@ -8,15 +8,15 @@ class OptionCache extends BaseOptionItem{
     {
         return [
             'key' => 'cache',
-            'label' => __('缓存与性能', PUOCK),
+            'label' => __('缓存与性能', PUBLICUS),
             'icon'=>'dashicons-superhero',
             'fields' => [
                 [
                     'id' => 'cache_expire_second',
-                    'label' => __('缓存过期秒数', PUOCK),
+                    'label' => __('缓存过期秒数', PUBLICUS),
                     'type' => 'number',
                     'sdt' => 0,
-                    'tips'=>__('0为不过期', PUOCK),
+                    'tips'=>__('0为不过期', PUBLICUS),
                 ],
             ],
         ];

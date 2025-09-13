@@ -184,7 +184,7 @@ function pk_comment_ajax()
             <div class="info">
                 <div>' . get_avatar($comment, 64, '', '', array('class' => 'md-avatar')) . '</div>
                 <div class="ml-3 two-info">
-                    <div class="puock-text ta3b">
+                    <div class="publicus-text ta3b">
                         <span class="t-md puock-links">' . get_comment_author_link($comment_id) . '</span>
                         ' . (pk_is_checked('comment_level') ? pk_the_author_class(false, $comment) : '') . '
                     </div>
@@ -192,7 +192,7 @@ function pk_comment_ajax()
                 </div>
             </div>
             <div class="content">
-                <div class="content-text t-md mt10 puock-text">
+                <div class="content-text t-md mt10 publicus-text">
                     <p>' . get_comment_text($comment_id) . '</p>
                     ' . $comment_approved_str . '
                     <div class="comment-os c-sub">';

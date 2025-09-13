@@ -15,7 +15,7 @@ function pk_poster_page_callback()
     }
     setup_postdata($post);
     $title = get_the_title($post);
-    $qrcode_url = PUOCK_ABS_URI . pk_post_qrcode(get_permalink($post));
+    $qrcode_url = PUBLICUS_ABS_URI . pk_post_qrcode(get_permalink($post));
     $el_id = 'post-poster-main-' . $post->ID;
     ?>
 
@@ -44,7 +44,7 @@ function pk_poster_page_callback()
     <!--    </div>-->
     <script>
         $(function () {
-            const i = window.Puock.startLoading();
+            const i = window.Publicus.startLoading();
             // 等待图像加载完成后再生成海报
             setTimeout(() => {
                 // 确保所有图片都设置了crossOrigin属性
@@ -68,10 +68,10 @@ function pk_poster_page_callback()
                     const el = $("#<?php echo $el_id; ?>");
                     el.show();
                     el.html("<img class='result' src='" + canvas.toDataURL("image/png") + "' alt='<?php echo $title ?>'>");
-                    window.Puock.stopLoading(i);
+                    window.Publicus.stopLoading(i);
                 }).catch(err => {
                     console.error(err)
-                    window.Puock.toast("生成海报失败，请到Console查看错误信息", TYPE_DANGER);
+                    window.Publicus.toast("生成海报失败，请到Console查看错误信息", TYPE_DANGER);
                 });
             }, 500);
         })

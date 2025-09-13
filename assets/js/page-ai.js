@@ -336,7 +336,7 @@
 jQuery(function () {
     (function ($, $p) {
 
-        class PuockPageAi {
+        class PublicusPageAi {
 
             data = null
 
@@ -466,7 +466,7 @@ jQuery(function () {
                                             <div class="mr-1">
                                                 <i class="fa fa-${data.imgMode ? 'palette' : 'robot'} mr-1"></i>${data.imgMode ? 'AI绘画' : 'AI问答'}
                                             </div>
-                                            <div class="primary-text-hover pk-copy" data-cp-title="对话信息" data-cp-func="puockAiChatCopy" data-id="${id}">
+                                            <div class="primary-text-hover pk-copy" data-cp-title="对话信息" data-cp-func="publicusAiChatCopy" data-id="${id}">
                                                 <span><i class="fa-regular fa-copy mr-1"></i>复制</span>
                                             </div>
                                         </div>
@@ -492,7 +492,7 @@ jQuery(function () {
             }
 
             onCopyChat() {
-                window.puockAiChatCopy = (el) => {
+                window.publicusAiChatCopy = (el) => {
                     const id = el.data("id")
                     const chat = this.data.chatList.find((val) => {
                         if (val.id === id) {
@@ -515,6 +515,6 @@ jQuery(function () {
 
         }
 
-        new PuockPageAi();
-    })(window.jQuery, window.Puock)
+        new PublicusPageAi();
+    })(window.jQuery, window.Publicus)
 })

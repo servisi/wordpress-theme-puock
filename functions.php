@@ -1,11 +1,11 @@
 <?php
 
-define('PUOCK_ABS_DIR', get_template_directory());
-define('PUOCK_ABS_URI', get_template_directory_uri());
-define('PUOCK_CUR_VER_STR', wp_get_theme()->get('Version'));
-const PUOCK = 'puock';
-const PUOCK_OPT = 'puock_options';
-$puock_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
+define('PUBLICUS_ABS_DIR', get_template_directory());
+define('PUBLICUS_ABS_URI', get_template_directory_uri());
+define('PUBLICUS_CUR_VER_STR', wp_get_theme()->get('Version'));
+const PUBLICUS = 'publicus';
+const PUBLICUS_OPT = 'publicus_options';
+$publicus_colors_name = ['primary', 'danger', 'info', 'success', 'warning', 'dark', 'secondary'];
 
 include_once('vendor/autoload.php');
 include_once('inc/fun/core.php');
@@ -14,7 +14,7 @@ include_once('gutenberg/index.php');
 
 
 
-//去除感谢使用wordpress创作
+// WordPress teşekkür metnini kaldır
 if (pk_is_checked('hide_footer_wp_t')) {
     function my_admin_footer_text()
     {
@@ -37,7 +37,7 @@ if (pk_is_checked('hide_footer_wp_t')) {
     add_filter('update_footer', 'my_update_footer', 50);
 }
 
-//禁用5.0古登堡编辑器
+// Gutenberg editörünü devre dışı bırak
 if (pk_is_checked('stop5x_editor')) {
     add_filter('use_block_editor_for_post', '__return_false');
     remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
@@ -50,12 +50,12 @@ if (pk_is_checked('stop5x_editor')) {
     add_action('init', 'remove_global_styles_and_svg_filters');
 }
 
-//区块小工具
+// Blok widget'ları
 if (!pk_is_checked('use_widgets_block')) {
     pk_off_widgets_block();
 }
 
-//获取评论等级
+// Yorum seviyesini al
 function pk_the_author_class_out($count)
 {
     if ($count <= 0) {
@@ -86,7 +86,7 @@ function pk_the_author_class_out($count)
         default:
             return '';
     }
-    return '<span class="t-sm c-sub"><i class="fa-regular fa-gem mr-1"></i>' . __('评论达人', PUOCK) . ' LV.' . $level . '</span>';
+    return '<span class="t-sm c-sub"><i class="fa-regular fa-gem mr-1"></i>' . __('评论达人', PUBLICUS) . ' LV.' . $level . '</span>';
 }
 
 function pk_the_author_class($echo = true, $in_comment = null)
@@ -96,7 +96,7 @@ function pk_the_author_class($echo = true, $in_comment = null)
         $comment = $in_comment;
     }
     if ($comment->user_id == '1') {
-        $res = '<span class="t-sm text-danger"><i class="fa-regular fa-gem mr-1"></i>' . __('博主', PUOCK) . '</span>';
+        $res = '<span class="t-sm text-danger"><i class="fa-regular fa-gem mr-1"></i>' . __('博主', PUBLICUS) . '</span>';
     } else {
         $comment_author_email = $comment->comment_author_email;
         $cache_key = sprintf(PKC_AUTHOR_COMMENTS, md5($comment_author_email));
@@ -114,7 +114,7 @@ function pk_the_author_class($echo = true, $in_comment = null)
     echo $res;
 }
 
-//获取Gravatar头像
+// Gravatar avatarını al
 function pk_get_gravatar($email, $echo = true)
 {
     $link = get_avatar_url($email);
@@ -124,7 +124,7 @@ function pk_get_gravatar($email, $echo = true)
     echo $link;
 }
 
-//获取文章分类链接
+// Makale kategori bağlantısını al
 function get_post_category_link($class = '', $icon = '', $cid = null, $default = null, $index = 0)
 {
     return get_post_category_link_exec(false, $class, $icon, $cid, $default, $index);
@@ -134,7 +134,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
 {
     global $cat;
     if ($default == null) {
-        $default = __('无分类', PUOCK);
+        $default = __('无分类', PUBLICUS);
     }
     if ($cid != null) {
         $cate = get_category($cid);
@@ -160,16 +160,16 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
     return '<a class="' . $class . '" href="javascript:void(0)">' . $icon . $default . '</a>';
 }
 
-//获取文章标签
+// Makale etiketlerini al
 function get_post_tags($class = '', $item_class = '')
 {
-    global $puock_colors_name;
+    global $publicus_colors_name;
     $tags = get_the_tags();
     $out = '';
     if ($tags && count($tags) > 0) {
         $out .= '<div class="' . $class . '">';
         foreach ($tags as $tag) {
-            //            $color_index = mt_rand(0, count($puock_colors_name) - 1);
+            //            $color_index = mt_rand(0, count($publicus_colors_name) - 1);
             $out .= '<a href="' . get_tag_link($tag) . '" class="pk-badge pk-badge-sm mr5 ' . $item_class . '"><i class="fa-solid fa-tag"></i> ' . $tag->name . '</a>';
         }
         $out .= '</div>';
@@ -186,22 +186,22 @@ function pk_get_post_date()
     $day = 86400;
     switch ($c_time) {
         case $c_time < $day:
-            $res = __('近一天内',PUOCK);
+            $res = __('Bir gün içinde',PUBLICUS);
             break;
         case $c_time < ($day * 2):
-            $res = __('近两天内',PUOCK);
+            $res = __('İki gün içinde',PUBLICUS);
             break;
         case $c_time < ($day * 3):
-            $res = __('近三天内',PUOCK);
+            $res = __('Üç gün içinde',PUBLICUS);
             break;
         case $c_time < ($day * 4):
-            $res = __('四天前',PUOCK);
+            $res = __('Dört gün önce',PUBLICUS);
             break;
         case $c_time < ($day * 5):
-            $res = __('五天前',PUOCK);
+            $res = __('Beş gün önce',PUBLICUS);
             break;
         case $c_time < ($day * 6):
-            $res = __('六天前',PUOCK);
+            $res = __('Altı gün önce',PUBLICUS);
             break;
         default:
             $res = get_the_date(get_option('date_format'));
@@ -209,12 +209,12 @@ function pk_get_post_date()
     echo $res;
 }
 
-//获取随机的bootstrap的颜色表示
+// Rastgele bootstrap renk gösterimini al
 function pk_get_color_tag($ex = array())
 {
-    global $puock_colors_name;
+    global $publicus_colors_name;
     while (true) {
-        $c = $puock_colors_name[mt_rand(0, count($puock_colors_name) - 1)];
+        $c = $publicus_colors_name[mt_rand(0, count($publicus_colors_name) - 1)];
         if (!in_array($c, $ex)) {
             return $c;
         }
@@ -224,14 +224,13 @@ function pk_get_color_tag($ex = array())
 
 function get_smiley_codes()
 {
-    //todo 本地化翻译
     return array(
-        ":?:" => "疑问", ":razz:" => "调皮", ":sad:" => "难过", ":evil:" => "抠鼻", ":naughty:" => "顽皮",
-        ":!:" => "吓", ":smile:" => "微笑", ":oops:" => "憨笑", ":neutral:" => "亲亲", ":cry:" => "大哭", ":mrgreen:" => "呲牙",
-        ":grin:" => "坏笑", ":eek:" => "惊讶", ":shock:" => "发呆", ":???:" => "撇嘴", ":cool:" => "酷", ":lol:" => "偷笑",
-        ":mad:" => "咒骂", ":twisted:" => "发怒", ":roll:" => "白眼", ":wink:" => "鼓掌", ":idea:" => "想法", ":despise:" => "蔑视",
-        ":celebrate:" => "庆祝", ":watermelon:" => "西瓜", ":xmas:" => "圣诞", ":warn:" => "警告", ":rainbow:" => "彩虹",
-        ":loveyou:" => "爱你", ":love:" => "爱", ":beer:" => "啤酒",
+        ":?:" => "Soru", ":razz:" => "Yaramaz", ":sad:" => "Üzgün", ":evil:" => "Şeytan", ":naughty:" => "Afacan",
+        ":!:" => "Şaşkın", ":smile:" => "Gülümseme", ":oops:" => "Utangaç", ":neutral:" => "Öpücük", ":cry:" => "Ağlama", ":mrgreen:" => "Sırıtma",
+        ":grin:" => "Kötü Gülüş", ":eek:" => "Şaşırma", ":shock:" => "Şok", ":???:" => "Dudak Büzme", ":cool:" => "Havalı", ":lol:" => "Gizli Gülüş",
+        ":mad:" => "Kızgın", ":twisted:" => "Öfkeli", ":roll:" => "Göz Devirme", ":wink:" => "Alkış", ":idea:" => "Fikir", ":despise:" => "Küçümseme",
+        ":celebrate:" => "Kutlama", ":watermelon:" => "Karpuz", ":xmas:" => "Noel", ":warn:" => "Uyarı", ":rainbow:" => "Gökkuşağı",
+        ":loveyou:" => "Seni Seviyorum", ":love:" => "Aşk", ":beer:" => "Bira",
     );
 }
 
@@ -257,7 +256,7 @@ function custom_smilies_src($old, $img)
 
 add_filter('smilies_src', 'custom_smilies_src', 10, 2);
 
-function puock_twemoji_smiley()
+function publicus_twemoji_smiley()
 {
     global $wpsmiliestrans;
     if (!get_option('use_smilies'))
@@ -269,7 +268,7 @@ function puock_twemoji_smiley()
     return $wpsmiliestrans;
 }
 
-add_action('init', 'puock_twemoji_smiley', 3);
+add_action('init', 'publicus_twemoji_smiley', 3);
 
 function get_wpsmiliestrans()
 {
@@ -288,21 +287,21 @@ add_action('media_buttons', 'smilies_custom_button');
 function smilies_custom_button($context)
 {
     echo '<a id="insert-smiley-button" style="position:relative" class="button" 
-        title="' . __('添加表情', PUOCK) . '" data-editor="content" href="javascript:;">  
-        <span>' . __('添加表情', PUOCK) . '</span> 
+        title="' . __('添加表情', PUBLICUS) . '" data-editor="content" href="javascript:;">  
+        <span>' . __('添加表情', PUBLICUS) . '</span> 
         </a><div id="insert-smiley-wrap" class="pk-media-wrap" style="display: none">' . get_wpsmiliestrans() . '</div>';
 }
 /**
- * 获取文章封面图：优先级 = 特色图 > 内容第一张图（支持 Markdown）> 随机默认图
+ * Makale kapak resmini al: Öncelik = Öne çıkan resim > İçerikteki ilk resim (Markdown desteği) > Rastgele varsayılan resim
  *
- * @param int|WP_Post|null $_post 文章 ID 或对象，null 则使用全局 $post
- * @return string 图片 URL
+ * @param int|WP_Post|null $_post Makale ID'si veya nesnesi, null ise global $post kullanılır
+ * @return string Resim URL'si
  */
 function get_post_images($_post = null): string
 {
     global $post;
 
-    // 1. 获取文章对象
+    // 1. Makale nesnesini al
     $post_obj = $_post ? get_post($_post) : $post;
     if (!$post_obj) {
         return get_random_default_image();
@@ -311,7 +310,7 @@ function get_post_images($_post = null): string
     $post_id = $post_obj->ID;
     $content = $post_obj->post_content;
 
-    // 2. 优先：特色图（支持 attachment 和 外部链接）
+    // 2. Öncelik: Öne çıkan görsel (attachment ve harici bağlantı desteği)
     if (has_post_thumbnail($post_id)) {
         $featured_url = get_the_post_thumbnail_url($post_id, 'large');
         if ($featured_url) {
@@ -325,14 +324,14 @@ function get_post_images($_post = null): string
         return esc_url($external_thumb);
     }
 
-    // 3. 次选：从内容提取第一张图（支持 Markdown 和 HTML）
+    // 3. İkinci seçenek: İçerikten ilk resmi çıkar (Markdown ve HTML desteği)
     $first_image = null;
 
-    // 匹配 Markdown 图片：![alt](url)
+    // Markdown resim eşleştirme: ![alt](url)
     if (preg_match('/!\[[^\]]*\]\(\s*([^\s\)]+?)\s*([\'"][^\'"]*?[\'"])?\s*\)/i', $content, $matches)) {
         $first_image = trim($matches[1]);
     }
-    // 如果没找到 Markdown 图片，再匹配 HTML 图片
+    // Markdown resim bulunamazsa, HTML resim eşleştir
     elseif (preg_match('/<img[^>]+src=[\'"]([^\'"]+)[\'"]/i', $content, $matches)) {
         $first_image = $matches[1];
     }
@@ -341,14 +340,14 @@ function get_post_images($_post = null): string
         return esc_url($first_image);
     }
 
-    // 4. 最后：返回随机默认图
+    // 4. Son: Rastgele varsayılan resim döndür
     return get_random_default_image();
 }
 
 /**
- * 获取随机默认图片
+ * Rastgele varsayılan resim al
  *
- * @return string 默认图 URL
+ * @return string Varsayılan resim URL'si
  */
 function get_random_default_image(): string
 {
@@ -356,7 +355,7 @@ function get_random_default_image(): string
     return esc_url($img_dir . mt_rand(1, 8) . '.jpg');
 }
 
-//分页功能
+// Sayfalama işlevi
 if (!function_exists('pk_paging')) {
     function pk_paging($pnum = 2)
     {
@@ -368,7 +367,7 @@ if (!function_exists('pk_paging')) {
         if ($max_page == 1) return;
         echo '<div class="mt20 p-flex-s-right"><ul class="pagination">';
         if (empty($paged)) $paged = 1;
-        echo '<li class="prev-page puock-bg">';
+        echo '<li class="prev-page publicus-bg">';
         previous_posts_link('&laquo;');
         echo '</li>';
         if ($paged > $pnum + 1) page_link(1);
@@ -398,7 +397,7 @@ if (!function_exists('pk_paging')) {
     }
 }
 
-//获取面包屑导航
+// Breadcrumb navigasyonunu al
 function pk_breadcrumbs()
 {
     global $cat;
@@ -406,7 +405,7 @@ function pk_breadcrumbs()
     $out = '<div id="breadcrumb" class="' . (pk_open_box_animated('animated fadeInUp', false)) . '">';
     $out .= '<nav aria-label="breadcrumb">';
     $out .= '<ol class="breadcrumb">';
-    $out .= '<li class="breadcrumb-item"><a class="a-link" href="' . home_url() . '">' . __('首页', PUOCK) . '</a></li>';
+    $out .= '<li class="breadcrumb-item"><a class="a-link" href="' . home_url() . '">' . __('Ana Sayfa', PUBLICUS) . '</a></li>';
     if (is_single() || is_category()) {
         $categorys = get_the_category();
         if (count($categorys) <= 0 && is_single()) {
@@ -425,13 +424,13 @@ function pk_breadcrumbs()
         $cats = str_replace("</a>", '</a></li>', $cats);
         $out .= $cats;
         if (is_single()) {
-            $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('正文', PUOCK) . '</li>';
+            $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('正文', PUBLICUS) . '</li>';
         } else if (is_category()) {
-            $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('文章列表', PUOCK) . '</li>';
+            $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('文章列表', PUBLICUS) . '</li>';
         }
     } else if (is_search()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . (esc_html($_GET['s'])) . '</li>';
-        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('搜索结果', PUOCK) . '</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('搜索结果', PUBLICUS) . '</li>';
     } else if (is_author()) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . get_the_author_meta('nickname') . '</li>';
     } else if (is_date()) {
@@ -441,12 +440,12 @@ function pk_breadcrumbs()
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($post->post_title) . '</li>';
     } else if (is_tag()) {
         $tag_name = single_tag_title('', false);
-        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('标签', PUOCK) . '</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('标签', PUBLICUS) . '</li>';
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . ($tag_name) . '</li>';
     } else if (!empty($custom_seo_title)) {
         $out .= '<li class="breadcrumb-item active " aria-current="page">' . $custom_seo_title . '</li>';
     } else if (is_404()) {
-        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('你访问的资源不存在', PUOCK) . '</li>';
+        $out .= '<li class="breadcrumb-item active " aria-current="page">' . __('你访问的资源不存在', PUBLICUS) . '</li>';
     }
     $out .= '</div></nav></ol>';
     return $out;
@@ -590,7 +589,7 @@ function pk_bootstrap_table_class($content)
     preg_match_all('/<table.*?>[\s\S]*<\/table>/', $content, $tables);
     if (!is_null($tables)) {
         foreach ($tables[0] as $index => $value) {
-            $out = str_replace('<table', '<table class="table table-bordered puock-text"', $tables[0][$index]);
+            $out = str_replace('<table', '<table class="table table-bordered publicus-text"', $tables[0][$index]);
             $content = str_replace($tables[0][$index], $out, $content);
         }
     }
@@ -625,7 +624,7 @@ function pk_update()
                 $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
                     'https://github.com/Licoy/wordpress-theme-puock',
                     __FILE__,
-                    PUOCK,
+                    PUBLICUS,
                     $check_period
                 );
             }
@@ -635,7 +634,7 @@ function pk_update()
                 $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
                     'https://licoy.cn/go/puock-update.php?r=fastgit',
                     __FILE__,
-                    PUOCK,
+                    PUBLICUS,
                     $check_period
                 );
             }
@@ -645,7 +644,7 @@ function pk_update()
             $pkUpdateChecker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
                 'https://licoy.cn/go/puock-update.php?r=worker',
                 __FILE__,
-                PUOCK,
+                PUBLICUS,
                 $check_period
             );
         }

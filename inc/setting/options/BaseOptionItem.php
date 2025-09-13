@@ -1,6 +1,6 @@
 <?php
 
-namespace Puock\Theme\setting\options;
+namespace Publicus\Theme\setting\options;
 
 /**
  * @type = 'string' | 'number' | 'select' | 'switch' | 'date' | 'img' | 'textarea' | 'color' | 'upload' | 'radio' | 'info' | 'slider' | 'dynamic-list'
@@ -34,7 +34,7 @@ abstract class BaseOptionItem
     }
 
     /**
-     * 获取友情链接排序顺序。
+     * 获取Arkadaş Bağlantıları排序顺序。
      *
      * 升序 (ASC)、降序(DESC)，默认为升序 (ASC)。
      * https://developer.wordpress.org/reference/functions/get_bookmarks/#parameters
@@ -49,7 +49,7 @@ abstract class BaseOptionItem
     }
 
     /**
-     * 获取友情链接排序字段。
+     * 获取Arkadaş Bağlantıları排序字段。
      *
      * 下面仅为部分字段，所支持的全部字段请查看官方文档`orderby`部分
      * https://developer.wordpress.org/reference/functions/get_bookmarks/#parameters

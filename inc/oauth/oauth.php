@@ -64,7 +64,7 @@ function pk_oauth_list($user = null)
             'label' => 'LinuxDo',
             'openid' => $user ? get_the_author_meta('linuxdo_oauth', $user->ID) : null,
             'class' => \Yurun\OAuthLogin\LinuxDo\OAuth2::class,
-            'icon' => PUOCK_ABS_URI . '/assets/img/oauth/linuxdo.png',
+            'icon' => PUBLICUS_ABS_URI . '/assets/img/oauth/linuxdo.png',
             'color_type' => 'warning',
             'name_field' => 'name',
             'system' => true,
@@ -140,7 +140,7 @@ function oauth_redirect_page($success = true, $info = '', $from_redirect = '')
         pk_session_call(function () use ($info) {
             $_SESSION['error_info'] = $info;
         });
-        wp_redirect(PUOCK_ABS_URI . '/error.php');
+        wp_redirect(PUBLICUS_ABS_URI . '/error.php');
         exit;
     }
 }

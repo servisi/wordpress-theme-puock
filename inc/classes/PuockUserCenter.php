@@ -1,6 +1,6 @@
 <?php
 
-namespace Puock\Theme\classes;
+namespace Publicus\Theme\classes;
 
 class PuockUserCenter implements IPuockClassLoad
 {
@@ -16,8 +16,8 @@ class PuockUserCenter implements IPuockClassLoad
     private static function register_basic_menus()
     {
         self::$menus['profile'] = [
-            'title' => __('个人资料', PUOCK),
-            'subtitle' => __('您的基本个人资料', PUOCK),
+            'title' => __('个人资料', PUBLICUS),
+            'subtitle' => __('您的基本个人资料', PUBLICUS),
             'call' => array(__CLASS__, 'page_profile'),
         ];
     }
@@ -39,16 +39,16 @@ class PuockUserCenter implements IPuockClassLoad
     public static function update_profile()
     {
         if (is_string($data = pk_get_req_data([
-                'nickname' => ['name' => __('昵称', PUOCK), 'required' => true, 'remove_html' => true],
-                'user_url' => ['name' => __('网站地址', PUOCK), 'remove_html' => true, 'empty' => true],
-                'description' => ['name' => __('个人说明', PUOCK), 'remove_html' => true, 'empty' => true],
+                'nickname' => ['name' => __('昵称', PUBLICUS), 'required' => true, 'remove_html' => true],
+                'user_url' => ['name' => __('网站地址', PUBLICUS), 'remove_html' => true, 'empty' => true],
+                'description' => ['name' => __('个人说明', PUBLICUS), 'remove_html' => true, 'empty' => true],
             ])) === true) {
             echo pk_ajax_resp_error($data);
             wp_die();
         }
         $user = wp_get_current_user();
         if (!$user) {
-            echo pk_ajax_resp_error(__('请先登录', PUOCK));
+            echo pk_ajax_resp_error(__('请先登录', PUBLICUS));
             wp_die();
         }
         $data['ID'] = $user->ID;
@@ -57,10 +57,10 @@ class PuockUserCenter implements IPuockClassLoad
         }
         do_action('pk_update_user_profile_before', $data);
         if (!wp_update_user($data)) {
-            echo pk_ajax_resp_error(__('保存失败', PUOCK));
+            echo pk_ajax_resp_error(__('保存失败', PUBLICUS));
             wp_die();
         }
-        echo pk_ajax_resp(null, __('保存成功', PUOCK));
+        echo pk_ajax_resp(null, __('保存成功', PUBLICUS));
         do_action('pk_update_user_profile_after', $data);
         wp_die();
     }
@@ -81,47 +81,47 @@ class PuockUserCenter implements IPuockClassLoad
                             <?php if (current_user_can('administrator')): ?>
                                 <a data-no-instant href="<?php echo get_admin_url() ?>" type="button" class="btn btn-ssm btn-primary me-1">
                                     <i class="fa fa-magic"></i>
-                                    <span><?php _e('WP后台', PUOCK) ?></span>
+                                    <span><?php _e('WP后台', PUBLICUS) ?></span>
                                 </a>
                             <?php endif; ?>
                             <button type="button"
-                                    onclick="layer.confirm('<?php _e('确认注销登陆吗？', PUOCK) ?>',function (){window.Puock.goUrl('<?php echo wp_logout_url('/'); ?>')})"
+                                    onclick="layer.confirm('<?php _e('确认注销登陆吗？', PUBLICUS) ?>',function (){window.Publicus.goUrl('<?php echo wp_logout_url('/'); ?>')})"
                                     class="btn btn-ssm btn-danger">
                                 <i class="fa fa-sign-out"></i>
-                                <span><?php _e('注销登录', PUOCK) ?></span>
+                                <span><?php _e('注销登录', PUBLICUS) ?></span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label"><?php _e('用户名', PUOCK) ?></label>
+                <label class="col-sm-2 col-form-label"><?php _e('用户名', PUBLICUS) ?></label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="form-control" value="<?php echo $userinfo->user_nicename ?>">
-                    <small class="c-sub"><?php _e('用户名不可更改', PUOCK) ?></small>
+                    <small class="c-sub"><?php _e('用户名不可更改', PUBLICUS) ?></small>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label"><?php _e('昵称', PUOCK) ?></label>
+                <label class="col-sm-2 col-form-label"><?php _e('昵称', PUBLICUS) ?></label>
                 <div class="col-sm-10">
                     <input name="nickname" type="text" class="form-control" value="<?php echo $userinfo->nickname ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label"><?php _e('网站地址', PUOCK) ?></label>
+                <label class="col-sm-2 col-form-label"><?php _e('网站地址', PUBLICUS) ?></label>
                 <div class="col-sm-10">
                     <input name="user_url" type="url" class="form-control" value="<?php echo $userinfo->user_url ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label"><?php _e('个人说明', PUOCK) ?></label>
+                <label class="col-sm-2 col-form-label"><?php _e('个人说明', PUBLICUS) ?></label>
                 <div class="col-sm-10">
                     <textarea name="description" class="form-control"
                               rows="4"><?php echo $userinfo->description ?></textarea>
                 </div>
             </div>
             <div class="mb-3 text-center">
-                <button class="btn btn-primary btn-sm" type="submit"><?php _e('提交保存', PUOCK) ?></button>
+                <button class="btn btn-primary btn-sm" type="submit"><?php _e('提交保存', PUBLICUS) ?></button>
             </div>
         </form>
         <?php

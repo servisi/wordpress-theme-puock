@@ -27,7 +27,7 @@
                     <div class="col-md-6 pr-0 magazine">
                         <div class="p-block">
                             <div>
-                                <span class="t-lg puock-text pb-2 d-inline-block border-bottom border-primary"><?php echo get_post_category_link('ta3 a-link', '<i class="fa fa-layer-group"></i>&nbsp;', $catId) ?></span>
+                                <span class="t-lg publicus-text pb-2 d-inline-block border-bottom border-primary"><?php echo get_post_category_link('ta3 a-link', '<i class="fa fa-layer-group"></i>&nbsp;', $catId) ?></span>
                             </div>
                             <?php foreach ($posts as $post) : setup_postdata($post); ?>
                                 <?php if ($post_index == 0): ?>

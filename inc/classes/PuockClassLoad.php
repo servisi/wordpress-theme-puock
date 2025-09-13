@@ -1,6 +1,6 @@
 <?php
 
-namespace Puock\Theme\classes;
+namespace Publicus\Theme\classes;
 
 class PuockClassLoad
 {

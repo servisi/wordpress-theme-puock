@@ -15,7 +15,7 @@ function pk_ajax_dialog_post_share()
              class="share-to circle-button circle-sm circle-hb text-center bg-danger text-light"><i
                     class="fa-brands fa-weibo t-md"></i></div>
         <div data-id="wx" id="wx-share" data-bs-toggle="tooltip" data-bs-html="true"
-             data-bs-title="<p class='text-center t-sm mb-1 mt-1'>使用微信扫一扫</p><img width='120' height='120' class='mb-1' alt='微信二维码' src='<?php echo PUOCK_ABS_URI . pk_post_qrcode($post_link) ?>'/>"
+             data-bs-title="<p class='text-center t-sm mb-1 mt-1'>使用微信扫一扫</p><img width='120' height='120' class='mb-1' alt='微信二维码' src='<?php echo PUBLICUS_ABS_URI . pk_post_qrcode($post_link) ?>'/>"
              class="share-to circle-button circle-sm circle-hb text-center bg-success text-light"><i
                     class="fa-brands fa-weixin t-md"></i></div>
         <div data-id="qzone"

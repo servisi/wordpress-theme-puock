@@ -1,19 +1,19 @@
 <?php if (get_comments_number() == 0 && !comments_open() || pk_post_comment_is_closed()):echo ''; else: ?>
     <?php get_template_part('ad/comment', 'top') ?>
 <?php add_filter('pk_rb_float_actions',function ($content){
-        return $content.'<div data-to-area="#comments" class="p-block"><i class="fa-regular fa-comments puock-text"></i></div>';
+        return $content.'<div data-to-area="#comments" class="p-block"><i class="fa-regular fa-comments publicus-text"></i></div>';
     }) ?>
     <div class="p-block" id="comments">
         <div>
-            <span class="t-lg border-bottom border-primary puock-text pb-2"><i
-                        class="fa-regular fa-comments mr-1"></i><?php _e('评论', PUOCK) ?>（<?php comments_number() ?>）</span>
+            <span class="t-lg border-bottom border-primary publicus-text pb-2"><i
+                        class="fa-regular fa-comments mr-1"></i><?php _e('评论', PUBLICUS) ?>（<?php comments_number() ?>）</span>
         </div>
         <?php if (comments_open()): ?>
             <?php if (get_option('comment_registration', '0') == '1' && !is_user_logged_in()): //登录后才可以评论 ?>
                 <div class="mt20 clearfix" id="comment-form-box">
                     <form class="mt10" id="comment-form" method="post">
                         <div class="form-group">
-                            <textarea placeholder="<?php _e('您必须要登录之后才可以进行评论', PUOCK) ?>" disabled id="comment"
+                            <textarea placeholder="<?php _e('您必须要登录之后才可以进行评论', PUBLICUS) ?>" disabled id="comment"
                                       name="comment" class="form-control form-control-sm t-sm" rows="4"></textarea>
                         </div>
                     </form>
@@ -25,7 +25,7 @@
                                     title="快捷登录"
                                     data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
                                 <i
-                                        class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>
+                                        class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUBLICUS) ?>
                             </button>
                         </div>
                     <?php endif; ?>
@@ -35,7 +35,7 @@
                     <form class="mt10" id="comment-form" method="post"
                           action="<?php echo admin_url() . 'admin-ajax.php?action=comment_ajax' ?>">
                         <div class="form-group">
-                            <textarea placeholder="<?php _e('世界这么大发表一下你的看法~', PUOCK) ?>" id="comment" name="comment"
+                            <textarea placeholder="<?php _e('世界这么大发表一下你的看法~', PUBLICUS) ?>" id="comment" name="comment"
                                       class="form-control form-control-sm t-sm" rows="4"></textarea>
                         </div>
                         <div class="row row-cols-1 comment-info">
@@ -45,17 +45,17 @@
                                 <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="comment_author"
                                                                                                 name="author"
                                                                                                 class="form-control form-control-sm t-sm"
-                                                                                                placeholder="<?php _e('昵称（必填）', PUOCK) ?>">
+                                                                                                placeholder="<?php _e('昵称（必填）', PUBLICUS) ?>">
                                 </div>
                                 <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="email" id="comment_email"
                                                                                                 name="email"
                                                                                                 class="form-control form-control-sm t-sm"
-                                                                                                placeholder="<?php _e('邮箱（必填）', PUOCK) ?>">
+                                                                                                placeholder="<?php _e('邮箱（必填）', PUBLICUS) ?>">
                                 </div>
                                 <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="comment_url"
                                                                                                 name="url"
                                                                                                 class="form-control form-control-sm t-sm"
-                                                                                                placeholder="<?php _e('网站', PUOCK) ?>">
+                                                                                                placeholder="<?php _e('网站', PUBLICUS) ?>">
                                 </div>
 
                             <?php endif; ?>
@@ -83,11 +83,11 @@
                         <div class="p-flex-sbc mt10">
                             <div>
                                 <?php if (is_user_logged_in()): $user = wp_get_current_user(); ?>
-                                    <div class="puock-text t-sm">
+                                    <div class="publicus-text t-sm">
                                         <input type="text" value="1" hidden name="comment-logged" id="comment-logged">
                                         <span><strong><?php echo $user->data->display_name ?></strong>，<a
                                                     data-no-instant class="ta3 a-link"
-                                                    href="<?php echo wp_logout_url(get_the_permalink()) ?>"><?php _e('登出', PUOCK) ?></a></span>
+                                                    href="<?php echo wp_logout_url(get_the_permalink()) ?>"><?php _e('登出', PUBLICUS) ?></a></span>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (!is_user_logged_in() && pk_oauth_platform_count() > 0): ?>
@@ -98,20 +98,20 @@
                                                 title="快捷登录"
                                                 data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
                                             <i
-                                                    class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUOCK) ?>
+                                                    class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUBLICUS) ?>
                                         </button>
                                     </div>
                                 <?php endif; ?>
                             </div>
                             <div>
                                 <button id="comment-cancel" type="button"
-                                        class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUOCK) ?></button>
+                                        class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUBLICUS) ?></button>
                                 <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm pk-modal-toggle" type="button"
                                         title="表情" data-once-load="true"
                                         data-url="<?php echo pk_ajax_url('pk_ajax_dialog_smiley') ?>">
                                     <i class="fa-regular fa-face-smile t-md"></i></button>
                                 <button id="comment-submit" type="submit" class="btn btn-primary btn-ssm"><i
-                                            class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('发布评论', PUOCK) ?>
+                                            class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('发布评论', PUBLICUS) ?>
                                 </button>
                             </div>
                         </div>

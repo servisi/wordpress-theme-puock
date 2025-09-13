@@ -1,8 +1,8 @@
 <?php
 
-namespace Puock\Theme\classes\meta;
+namespace Publicus\Theme\classes\meta;
 
-abstract class PuockAbsMeta
+abstract class PublicusAbsMeta
 {
     private static $args = array();
 

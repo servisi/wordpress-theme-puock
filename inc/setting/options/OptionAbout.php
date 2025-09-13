@@ -1,6 +1,6 @@
 <?php
 
-namespace Puock\Theme\setting\options;
+namespace Publicus\Theme\setting\options;
 
 class OptionAbout extends BaseOptionItem
 {
@@ -9,15 +9,15 @@ class OptionAbout extends BaseOptionItem
     {
         return [
             'key' => 'about',
-            'label' => __('关于及指引', PUOCK),
+            'label' => __('关于及指引', PUBLICUS),
             'icon' => 'czs-label-info',
             'fields' => [
                 [
                     'id' => 'about_readme',
                     'type' => 'md',
-                    'tips' => file_get_contents(PUOCK_ABS_DIR.'/README.md'),
+                    'tips' => file_get_contents(PUBLICUS_ABS_DIR.'/README.md'),
                     'md'=>[
-                        'baseUrl'=>'https://raw.githubusercontent.com/Licoy/wordpress-theme-puock/master/',
+                        'baseUrl'=>'https://raw.githubusercontent.com/publicus-agency/wordpress-theme-publicus/main/',
                     ]
                 ]
             ]

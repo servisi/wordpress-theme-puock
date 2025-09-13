@@ -49,7 +49,7 @@ jQuery(function () {
     });
 })
 
-window.puockSelectMedia = (params = {}, callback = null) => {
+window.publicusSelectMedia = (params = {}, callback = null) => {
     const wpMedia = wp.media(params)
     wpMedia.on('select', function () {
         const media = wpMedia.state().get('selection').first()

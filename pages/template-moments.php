@@ -29,7 +29,7 @@ get_header();
                  class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
                 <?php foreach ($posts as $post):setup_postdata($post);
                     the_post(); ?>
-                    <div class="mb20 puock-text moments-item">
+                    <div class="mb20 publicus-text moments-item">
                         <div class="row">
                             <div class="col-12 col-md-1">
                                 <a class="meta ta3" href="<?php echo get_author_posts_url($post->post_author) ?>">

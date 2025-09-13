@@ -49,7 +49,7 @@ function pk_comment_callback($comment, $args, $depth)
         <div class="<?php if (pk_open_show_comment_avatar()) {
             echo 'ml-2';
         } ?> two-info">
-            <div class="puock-text ta3b">
+            <div class="publicus-text ta3b">
                 <span class="t-md puock-links"><?php pk_comment_author_url() ?></span>
                 <?php if (pk_is_checked('comment_level')) {
                     pk_the_author_class();
@@ -67,7 +67,7 @@ function pk_comment_callback($comment, $args, $depth)
         </div>
     </div>
     <div class="content">
-        <div class="content-text t-md mt10 puock-text" <?php if (!pk_open_show_comment_avatar()) {
+        <div class="content-text t-md mt10 publicus-text" <?php if (!pk_open_show_comment_avatar()) {
             echo 'style="margin-left:0"';
         } ?>>
             <?php comment_text() ?>

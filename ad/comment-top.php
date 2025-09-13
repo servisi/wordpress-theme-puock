@@ -1,6 +1,6 @@
-<!--评论上方-->
+<!-- Yorumlar Üstü -->
 <?php if(pk_is_checked('ad_comment_t_c')): ?>
-<div class="puock-text p-block t-md ad-comment-top">
+<div class="publicus-text p-block t-md ad-comment-top">
     <?php echo pk_get_option('ad_comment_t','') ?>
 </div>
 <?php endif; ?>

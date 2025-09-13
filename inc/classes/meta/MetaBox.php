@@ -1,8 +1,8 @@
 <?php
 
-namespace Puock\Theme\classes\meta;
+namespace Publicus\Theme\classes\meta;
 
-class MetaBox extends PuockAbsMeta
+class MetaBox extends PublicusAbsMeta
 {
     protected $instance_args = array(
         'single' => true,

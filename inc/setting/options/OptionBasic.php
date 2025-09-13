@@ -1,6 +1,6 @@
 <?php
 
-namespace Puock\Theme\setting\options;
+namespace Publicus\Theme\setting\options;
 
 class OptionBasic extends BaseOptionItem
 {
@@ -9,101 +9,101 @@ class OptionBasic extends BaseOptionItem
     {
         return [
             'key' => 'basic',
-            'label' => __('基础设置', PUOCK),
+            'label' => __('基础设置', PUBLICUS),
             'icon' => 'dashicons-admin-generic',
             'fields' => [
                 [
                     'id' => 'mobile_sidebar_enable',
-                    'label' => __('移动端侧边栏启用', PUOCK),
+                    'label' => __('移动端Kenar Çubuğu启用', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                     'badge' => ['value' => 'New'],
-                    'tips' => __('开启后，移动端将显示侧边栏按钮', PUOCK)
+                    'tips' => __('开启后，移动端将显示Kenar Çubuğu按钮', PUBLICUS)
                 ],
                 [
                     'id' => 'basic_img_lazy_s',
-                    'label' => __('图片懒加载', PUOCK),
+                    'label' => __('图片懒加载', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'basic_img_lazy_z',
-                    'label' => __('正文图片懒加载', PUOCK),
+                    'label' => __('正文图片懒加载', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'basic_img_lazy_a',
-                    'label' => __('留言头像懒加载', PUOCK),
+                    'label' => __('留言头像懒加载', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'off_img_viewer',
-                    'label' => __('禁用正文图片灯箱预览', PUOCK),
+                    'label' => __('禁用正文图片灯箱预览', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => false,
                 ],
                 [
                     'id' => 'off_code_highlighting',
-                    'label' => __('禁用主题代码高亮', PUOCK),
+                    'label' => __('禁用主题代码高亮', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => false,
                 ],
                 [
                     'id' => 'post_content_indent',
-                    'label' => __('正文内容首行缩进', PUOCK),
+                    'label' => __('正文内容首行缩进', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'link_blank_content',
-                    'label' => __('正文内容链接新标签页打开', PUOCK),
+                    'label' => __('正文内容链接新标签页打开', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'link_go_page',
-                    'label' => __('正文内容链接加跳转', PUOCK),
+                    'label' => __('正文内容链接加跳转', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'use_post_menu',
-                    'label' => __('正文内容侧边目录菜单生成', PUOCK),
+                    'label' => __('正文内容侧边目录菜单生成', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips' => __('勾选此项会在正文目录显示文章目录', PUOCK),
+                    'tips' => __('勾选此项会在正文目录显示文章目录', PUBLICUS),
                 ],
                 [
                     'id' => 'comment_ajax',
-                    'label' => __('评论ajax翻页', PUOCK),
+                    'label' => __('评论ajax翻页', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'page_ajax_load',
-                    'label' => __('页面无刷新加载', PUOCK),
+                    'label' => __('页面无刷新加载', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                     'tips' => "新标签页打开的链接除外"
                 ],
                 [
                     'id' => 'async_view',
-                    'label' => __('异步浏览量统计', PUOCK),
+                    'label' => __('异步浏览量统计', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips' => __('此选项为开启缓存后浏览量不自增问题解决方案', PUOCK)
+                    'tips' => __('此选项为开启缓存后浏览量不自增问题解决方案', PUBLICUS)
                 ],
                 [
                     'id' => 'page_animate',
-                    'label' => __('页面模块载入动画', PUOCK),
+                    'label' => __('页面模块载入动画', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'page_link_before_icon',
-                    'label' => __('页面内容链接前显示图标', PUOCK),
+                    'label' => __('页面内容链接前显示图标', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => false,
                 ],
@@ -111,25 +111,25 @@ class OptionBasic extends BaseOptionItem
                     'id' => '-',
                     'type' => 'panel',
                     'open' => pk_is_checked('post_expire_tips_open'),
-                    'label' => __('文章超过时效提示', PUOCK),
+                    'label' => __('文章超过时效提示', PUBLICUS),
                     'children'=>[
                         [
                             'id' => 'post_expire_tips_open',
-                            'label' => __('启用', PUOCK),
+                            'label' => __('启用', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
                         [
                             'id' => 'post_expire_tips_day',
-                            'label' => __('大于N天', PUOCK),
+                            'label' => __('大于N天', PUBLICUS),
                             'type' => 'number',
                             'sdt' => 100,
                         ],
                         [
                             'id' => 'post_expire_tips',
-                            'label' => __('提示内容', PUOCK),
-                            'sdt' => __('<i class="fa fa-circle-exclamation me-1"></i>提醒：本文最后更新于{date}，文中所关联的信息可能已发生改变，请知悉！', PUOCK),
-                            'tips' => __('{date}：文章最后更新时间', PUOCK),
+                            'label' => __('提示内容', PUBLICUS),
+                            'sdt' => __('<i class="fa fa-circle-exclamation me-1"></i>提醒：本文最后更新于{date}，文中所关联的信息可能已发生改变，请知悉！', PUBLICUS),
+                            'tips' => __('{date}：文章最后更新时间', PUBLICUS),
                         ],
                     ]
                 ],
@@ -137,41 +137,41 @@ class OptionBasic extends BaseOptionItem
                     'id' => '-',
                     'type' => 'panel',
                     'open' => true,
-                    'label' => __('评论相关', PUOCK),
+                    'label' => __('评论相关', PUBLICUS),
                     'children' => [
                         [
                             'id' => 'comment_level',
-                            'label' => __('评论等级', PUOCK),
+                            'label' => __('评论等级', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
                         [
                             'id' => 'comment_mail_notify',
-                            'label' => __('评论回复邮件通知', PUOCK),
+                            'label' => __('评论回复邮件通知', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
                         [
                             'id' => 'comment_has_at',
-                            'label' => __('评论@功能', PUOCK),
+                            'label' => __('评论@功能', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
                         [
                             'id' => 'comment_show_ua',
-                            'label' => __('评论显示用户UA', PUOCK),
+                            'label' => __('评论显示用户UA', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => true,
                         ],
                         [
                             'id' => 'comment_show_ip',
-                            'label' => __('评论显示IP归属地及运营商', PUOCK),
+                            'label' => __('评论显示IP归属地及运营商', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => true,
                         ],
                         [
                             'id' => 'comment_dont_show_owner_ip',
-                            'label' => __('不显示站长IP归属地及运营商', PUOCK),
+                            'label' => __('不显示站长IP归属地及运营商', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
@@ -179,75 +179,75 @@ class OptionBasic extends BaseOptionItem
                 ],
                 [
                     'id' => 'post_poster_open',
-                    'label' => __('文章海报生成', PUOCK),
-                    'tips' => __('使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求；若站点logo不显示，请将logo上传到媒体库并使用媒体库中的logo链接', PUOCK),
+                    'label' => __('文章海报生成', PUBLICUS),
+                    'tips' => __('使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求；若站点logo不显示，请将logo上传到媒体库并使用媒体库中的logo链接', PUBLICUS),
 
                     'type' => 'switch',
                     'sdt' => false,
                 ],
                 [
                     'id' => 'page_copy_right',
-                    'label' => __('显示正文版权说明', PUOCK),
+                    'label' => __('显示正文版权说明', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'page_b_recommend',
-                    'label' => __('显示正文底部相关推荐', PUOCK),
+                    'label' => __('显示正文底部相关推荐', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'page_b_recommend_num',
-                    'label' => __('正文底部相关推荐文章数量', PUOCK),
-                    'tips' => __('建议是4的倍数，不然会出现空缺位置', PUOCK),
+                    'label' => __('正文底部相关推荐文章数量', PUBLICUS),
+                    'tips' => __('建议是4的倍数，不然会出现空缺位置', PUBLICUS),
                     'type' => 'number',
                     'sdt' => 4,
                 ],
                 [
                     'id' => 'link_page',
-                    'label' => __('友情链接页面', PUOCK),
+                    'label' => __('Arkadaş Bağlantıları页面', PUBLICUS),
                     'type' => 'select',
                     'options' => self::get_pages(),
                 ],
                 [
                     'id' => 'index_link_id',
-                    'label' => __('首页友情链接目录ID', PUOCK),
+                    'label' => __('Ana SayfaArkadaş Bağlantıları目录ID', PUBLICUS),
                     'type' => 'select',
                     'options' => self::get_link_category(),
                 ],
                 [
                     'id' => 'index_link_order_by',
-                    'label' => __('首页友情链接排序字段', PUOCK),
-                    'tips' => __('根据链接字段进行排序，缺省默认值为ID排序', PUOCK),
+                    'label' => __('Ana SayfaArkadaş Bağlantıları排序字段', PUBLICUS),
+                    'tips' => __('根据链接字段进行排序，缺省默认值为ID排序', PUBLICUS),
                     'type' => 'select',
                     'options' => self::get_link_order_by(),
                 ],
                 [
                     'id' => 'index_link_order',
-                    'label' => __('首页友情链接排序顺序', PUOCK),
-                    'tips' => __('缺省默认值为升序 (ASC)', PUOCK),
+                    'label' => __('Ana SayfaArkadaş Bağlantıları排序顺序', PUBLICUS),
+                    'tips' => __('缺省默认值为升序 (ASC)', PUBLICUS),
                     'type' => 'select',
                     'options' => self::get_link_order(),
                 ],
                 [
                     'id' => 'gravatar_url',
-                    'label' => __('Gravatar头像源', PUOCK),
+                    'label' => __('Gravatar头像源', PUBLICUS),
                     'type' => 'radio',
                     'sdt' => 'cravatar',
                     'radioType' => 'radio',
                     'options' => [
                         [
                             'value' => 'wp',
-                            'label' => __('WordPress默认', PUOCK),
+                            'label' => __('WordPress默认', PUBLICUS),
                         ],
                         [
                             'value' => 'cn',
-                            'label' => __('WordPress国内默认', PUOCK),
+                            'label' => __('WordPress国内默认', PUBLICUS),
                         ],
                         [
                             'value' => 'cn_ssl',
-                            'label' => __('WordPress国内默认SSL', PUOCK),
+                            'label' => __('WordPress国内默认SSL', PUBLICUS),
                         ],
                         [
                             'value' => 'cravatar',
@@ -263,64 +263,64 @@ class OptionBasic extends BaseOptionItem
                         ],
                         [
                             'value' => 'custom',
-                            'label' => __('自定义', PUOCK)
+                            'label' => __('自定义', PUBLICUS)
                         ]
                     ],
                 ],
                 [
                     'id'=>'gravatar_custom_url',
-                    'label'=>__('自定义Gravatar源', PUOCK),
-                    'tips'=>__('例如：',PUOCK).'<code>gravatar.example.com</code>',
+                    'label'=>__('自定义Gravatar源', PUBLICUS),
+                    'tips'=>__('例如：',PUBLICUS).'<code>gravatar.example.com</code>',
                     'showRefId'=>'func:(function(args){return args.data.gravatar_url==="custom"})(args)'
                 ],
                 [
                     'id' => 'post_reward',
-                    'label' => __('文章赞赏', PUOCK),
+                    'label' => __('文章赞赏', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'post_reward_alipay',
-                    'label' => __('文章赞赏支付宝二维码', PUOCK),
+                    'label' => __('文章赞赏支付宝二维码', PUBLICUS),
                     'type' => 'img',
                     'showRefId' => 'post_reward',
-                    'tips' => __('请选择宽高比例为1:1的图片', PUOCK)
+                    'tips' => __('请选择宽高比例为1:1的图片', PUBLICUS)
                 ],
                 [
                     'id' => 'post_reward_wx',
-                    'label' => __('文章赞赏微信二维码', PUOCK),
+                    'label' => __('文章赞赏微信二维码', PUBLICUS),
                     'type' => 'img',
                     'showRefId' => 'post_reward',
-                    'tips' => __('请选择宽高比例为1:1的图片', PUOCK)
+                    'tips' => __('请选择宽高比例为1:1的图片', PUBLICUS)
                 ],
                 [
                     'id' => 'post_foot_qrcode_open',
-                    'label' => __('文章正文底部二维码', PUOCK),
+                    'label' => __('文章正文底部二维码', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
-                    'tips' => __('请选择宽高比例为1:1的图片', PUOCK)
+                    'tips' => __('请选择宽高比例为1:1的图片', PUBLICUS)
                 ],
                 [
                     'id' => 'post_foot_qrcode_title',
-                    'label' => __('文章正文底部二维码标题', PUOCK),
+                    'label' => __('文章正文底部二维码标题', PUBLICUS),
                     'sdt' => '',
                     'showRefId' => 'post_foot_qrcode_open',
                 ],
                 [
                     'id' => 'post_foot_qrcode_img',
-                    'label' => __('文章正文底部二维码', PUOCK),
+                    'label' => __('文章正文底部二维码', PUBLICUS),
                     'type' => 'img',
                     'showRefId' => 'post_foot_qrcode_open',
                 ],
                 [
                     'id' => 'post_reprint_note',
-                    'label' => __('文章转载说明', PUOCK),
+                    'label' => __('文章转载说明', PUBLICUS),
                     'type' => 'textarea',
-                    'sdt' => __('除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。', PUOCK),
+                    'sdt' => __('除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。', PUBLICUS),
                 ],
                 [
                     'id' => 'post_read_time',
-                    'label' => __('文章阅读时间', PUOCK),
+                    'label' => __('文章阅读时间', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => false,
                 ]
