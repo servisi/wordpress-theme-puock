@@ -1,4 +1,4 @@
-<?php if (get_comments_number() == 0 && !comments_open() || publicus_post_comment_is_closed()):echo ''; else: ?>
+<?php if (!(get_comments_number() == 0 && !comments_open() || publicus_post_comment_is_closed())): ?>
     <?php get_template_part('ad/comment', 'top') ?>
 <?php add_filter('publicus_rb_float_actions',function ($content){
         return $content.'<div data-to-area="#comments" class="p-block"><i class="fa-regular fa-comments publicus-text"></i></div>';
@@ -41,13 +41,14 @@
                                 <div class="col-12 col-sm-3">
                                     <div class="row flex-row justify-content-end">
                                         <div class="col-8 col-sm-7 text-end pl15">
-                                                   class="form-control form-control-sm t-sm" name="comment-vd"
+                                            <input type="text" class="form-control form-control-sm t-sm" name="comment-vd"
                                                    autocomplete="off"
                                                    id="comment-vd">
                                         </div>
                                         <div class="col-4 col-sm-5 pr15" id="comment-captcha-box">
                                             <img class="comment-captcha captcha"
                                                  src="<?php echo publicus_captcha_url('comment', 100, 28) ?>"
+                                                 alt="<?php _e('Doğrulama Kodu', PUBLICUS) ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -79,19 +80,18 @@
                             </div>
                             <div>
                                 <button id="comment-cancel" type="button"
-                                        class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUBLICUS) ?></button>
+                                        class="btn btn-outline-dark d-none btn-ssm"><?php _e('İptal', PUBLICUS) ?></button>
                                 <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm pk-modal-toggle" type="button"
-                                        title="表情" data-once-load="true"
+                                        title="<?php _e('Emoji', PUBLICUS) ?>" data-once-load="true"
                                         data-url="<?php echo publicus_ajax_url('publicus_ajax_dialog_smiley') ?>">
                                     <i class="fa-regular fa-face-smile t-md"></i></button>
                                 <button id="comment-submit" type="submit" class="btn btn-primary btn-ssm"><i
-                                            class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('发布评论', PUBLICUS) ?>
+                                            class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('Yorum Gönder', PUBLICUS) ?>
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
-            <?php endif; ?>
         <?php endif; ?>
         <?php if (publicus_is_checked('comment_ajax')): ?>
             <div id="comment-ajax-load" class="text-center mt20 d-none">
