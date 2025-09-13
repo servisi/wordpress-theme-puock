@@ -9,49 +9,40 @@ class OptionAuth extends BaseOptionItem
     {
         return [
             'key' => 'auth',
-            'label' => __('登录与授权', PUBLICUS),
             'icon' => 'czs-qq',
             'fields' => [
                 [
                     'id' => '-',
-                    'label' => __('快捷登录', PUBLICUS),
                     'type' => 'panel',
                     'open' => true,
                     'children' => [
                         [
                             'id' => 'open_quick_login',
-                            'label' => __('开启快捷登录', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
                         [
                             'id' => 'only_quick_oauth',
-                            'label' => __('仅允许第三方登录', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
                         [
                             'id' => 'quick_login_try_max_open',
-                            'label' => __('启用登录最大尝试次数限制', PUBLICUS),
-                            'tips' => __('超过此次数后，对应的IP将会被禁止登录', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
                         [
                             'id' => 'quick_login_try_max_num',
-                            'label' => __('登录最大尝试次数', PUBLICUS),
                             'type' => 'number',
                             'sdt' => 3,
                         ],
                         [
                             'id' => 'quick_login_try_max_ban_time',
-                            'label' => __('登录尝试次数达到后禁止时间（分）', PUBLICUS),
                             'type' => 'number',
                             'sdt' => 10,
                         ],
                         [
                             'id' => 'quick_login_forget_password',
-                            'label' => __('启用忘记密码找回', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => false,
                         ],
@@ -60,12 +51,10 @@ class OptionAuth extends BaseOptionItem
                 [
                     'id' => '-',
                     'type' => 'panel',
-                    'label' => __('后台登录保护', PUBLICUS),
-                    'open' => pk_is_checked('login_protection'),
+                    'open' => publicus_is_checked('login_protection'),
                     'children' => [
                         [
                             'id' => 'login_protection',
-                            'label' => __('启用后台登录保护', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                             'tips' => 'func:(function(args){
@@ -75,13 +64,11 @@ class OptionAuth extends BaseOptionItem
                         ],
                         [
                             'id' => 'lp_user',
-                            'label' => __('后台登录保护参数', PUBLICUS),
                             'sdt' => 'admin',
                             'showRefId' => 'login_protection',
                         ],
                         [
                             'id' => 'lp_pass',
-                            'label' => __('后台登录保护密码', PUBLICUS),
                             'sdt' => 'admin',
                             'showRefId' => 'login_protection',
                         ],
@@ -89,28 +76,23 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => __('第三方登录回调地址提示', PUBLICUS),
                     'type' => 'info',
                     'infoType' => 'info',
                     'tips' => '通用回调地址（callback url）为: <code>' . home_url() . '/wp-admin/admin-ajax.php</code>'
                 ],
                 [
                     'id' => 'oauth_close_register',
-                    'label' => __('关闭第三方登录直接注册', PUBLICUS),
                     'type' => 'switch',
-                    'tips' => __('开启后，若用户未绑定过账户进行第三方登录时则不会自动创建新的账户', PUBLICUS),
                     'std' => false
                 ],
                 [
                     'id' => '-',
-                    'label' => 'QQ ' . __('登录配置', PUBLICUS),
                     'type' => 'panel',
-                    'open' => pk_is_checked('oauth_qq'),
+                    'open' => publicus_is_checked('oauth_qq'),
                     'tips' => '<a target="_blank" href="https://wiki.connect.qq.com/%E7%BD%91%E7%AB%99%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B">' . __('申请步骤及说明', PUBLICUS) . '</a>',
                     'children' => [
                         [
                             'id' => 'oauth_qq',
-                            'label' => 'QQ ' . __('登录', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
@@ -130,14 +112,12 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => 'Github ' . __('登录配置', PUBLICUS),
                     'type' => 'panel',
-                    'open' => pk_is_checked('oauth_github'),
+                    'open' => publicus_is_checked('oauth_github'),
                     'tips' => '<a target="_blank" href="https://www.ruanyifeng.com/blog/2019/04/github-oauth.html">' . __('申请步骤及说明', PUBLICUS) . '</a>',
                     'children' => [
                         [
                             'id' => 'oauth_github',
-                            'label' => 'Github ' . __('登录', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
@@ -157,14 +137,12 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => __('微博', PUBLICUS).' ' . __('登录配置', PUBLICUS),
                     'type' => 'panel',
-                    'open' => pk_is_checked('oauth_weibo'),
+                    'open' => publicus_is_checked('oauth_weibo'),
                     'tips' => '<a target="_blank" href="https://open.weibo.com/wiki/%E7%BD%91%E7%AB%99%E6%8E%A5%E5%85%A5%E4%BB%8B%E7%BB%8D">' . __('申请步骤及说明', PUBLICUS) . '</a>',
                     'children' => [
                         [
                             'id' => 'oauth_weibo',
-                            'label' => __('微博', PUBLICUS) . ' ' . __('登录', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
@@ -184,14 +162,12 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => 'Gitee ' . __('登录配置', PUBLICUS),
                     'type' => 'panel',
-                    'open' => pk_is_checked('oauth_gitee'),
+                    'open' => publicus_is_checked('oauth_gitee'),
                     'tips' => '<a target="_blank" href="https://gitee.com/api/v5/oauth_doc#/list-item-3">' . __('申请步骤及说明', PUBLICUS) . '</a>',
                     'children' => [
                         [
                             'id' => 'oauth_gitee',
-                            'label' => 'Gitee ' . __('登录', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],
@@ -211,21 +187,18 @@ class OptionAuth extends BaseOptionItem
                 ],
                 [
                     'id' => '-',
-                    'label' => 'LinuxDO ' . __('登录配置', PUBLICUS),
                     'type' => 'panel',
-                    'open' => pk_is_checked('oauth_linuxdo'),
+                    'open' => publicus_is_checked('oauth_linuxdo'),
                     'tips' => '<a target="_blank" href="https://connect.linux.do">' . __('申请步骤及说明', PUBLICUS) . '</a>',
                     'children' => [
                         [
                             'id' => '-',
-                            'label' => __('第三方登录回调地址提示', PUBLICUS),
                             'type' => 'info',
                             'infoType' => 'info',
                             'tips' => '通用回调地址（callback url）为: <code>' . PUBLICUS_ABS_URI . '/inc/oauth/callback/linuxdo.php</code>'
                         ],
                         [
                             'id' => 'oauth_linuxdo',
-                            'label' => 'LinuxDO ' . __('登录', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => 'false',
                         ],

@@ -110,7 +110,7 @@ class OptionBasic extends BaseOptionItem
                 [
                     'id' => '-',
                     'type' => 'panel',
-                    'open' => pk_is_checked('post_expire_tips_open'),
+                    'open' => publicus_is_checked('post_expire_tips_open'),
                     'label' => __('文章超过时效提示', PUBLICUS),
                     'children'=>[
                         [
@@ -159,7 +159,6 @@ class OptionBasic extends BaseOptionItem
                         ],
                         [
                             'id' => 'comment_show_ua',
-                            'label' => __('评论显示用户UA', PUBLICUS),
                             'type' => 'switch',
                             'sdt' => true,
                         ],

@@ -1,6 +1,6 @@
 <?php
 
-function pk_ext_moments_init()
+function publicus_ext_moments_init()
 {
     $name = "时光圈";
     $labels = array(
@@ -39,9 +39,9 @@ function pk_ext_moments_init()
     );
     register_post_type('moments', $args);
 }
-add_action('init', 'pk_ext_moments_init');
+add_action('init', 'publicus_ext_moments_init');
 
-function pk_ext_moments_rewrites_init()
+function publicus_ext_moments_rewrites_init()
 {
     add_rewrite_rule(
         'moments/([0-9]+)?.html$',
@@ -49,13 +49,13 @@ function pk_ext_moments_rewrites_init()
         'top'
     );
 }
-add_action( 'init', 'pk_ext_moments_rewrites_init' );
+add_action( 'init', 'publicus_ext_moments_rewrites_init' );
 
-function pk_ext_moments_link( $link, $post ){
+function publicus_ext_moments_link( $link, $post ){
     if ( $post->post_type == 'moments' ){
         return home_url( 'moments/' . $post->ID .'.html' );
     } else {
         return $link;
     }
 }
-add_filter('post_type_link', 'pk_ext_moments_link', 1, 2);
+add_filter('post_type_link', 'publicus_ext_moments_link', 1, 2);

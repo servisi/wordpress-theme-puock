@@ -171,7 +171,6 @@ class OptionGlobal extends BaseOptionItem
                 ],
                 [
                     'id' => 'disable_not_admin_user_profile',
-                    'label' => __('禁止非管理员访问用户资料页', PUBLICUS),
                     'type' => 'switch',
                     'badge' => ['value' => 'New'],
                     'sdt' => false,

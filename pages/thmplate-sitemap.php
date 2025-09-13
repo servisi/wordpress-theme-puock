@@ -10,10 +10,10 @@ get_header();
 
 <div id="page" class="container mt20">
     <?php get_template_part('templates/box', 'global-top') ?>
-    <?php echo pk_breadcrumbs();?>
+    <?php echo publicus_breadcrumbs();?>
     <div id="page-sitemap">
         <div id="page-<?php the_ID() ?>" class="row row-cols-1">
-            <div id="posts" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
+            <div id="posts" class="col-lg-<?php publicus_hide_sidebar_out('12','8') ?> col-md-12 <?php publicus_open_box_animated('animated fadeInLeft') ?> ">
                 <div class="p-block" id="sitemap-posts">
                     <h2 class="t-lg publicus-text">全部文章</h2>
                     <div class="row">
@@ -22,7 +22,7 @@ get_header();
                                 <div class="media-link mt20">
                                     <h2 class="t-lg t-line-1" title="<?php the_title() ?>">
                                         <i class="fa fa-angle-right t-sm c-sub mr-1"></i>
-                                        <a class="a-link t-w-400 t-md publicus-text" title="<?php the_title() ?>" <?php pk_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                        <a class="a-link t-w-400 t-md publicus-text" title="<?php the_title() ?>" <?php publicus_link_target() ?> href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                     </h2>
                                 </div>
                             </div>

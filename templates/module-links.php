@@ -1,5 +1,5 @@
 <?php
-$link_cid = pk_get_option('index_link_id', '');
+$link_cid = publicus_get_option('index_link_id', '');
 if (!empty($link_cid)):
     ?>
     <div class="p-block index-links">
@@ -10,10 +10,10 @@ if (!empty($link_cid)):
         </div>
         <div class="mt20 t-md index-links-box">
             <?php
-            $links = pk_cache_get(PKC_FOOTER_LINKS);
+            $links = publicus_cache_get(PKC_FOOTER_LINKS);
             if(!$links){
-                $order = pk_get_option('index_link_order', 'ASC');
-                $orderby = pk_get_option('index_link_order_by', 'link_id');
+                $order = publicus_get_option('index_link_order', 'ASC');
+                $orderby = publicus_get_option('index_link_order_by', 'link_id');
                 $links = get_bookmarks(array(
                     'category' => $link_cid,
                     'orderby' => $orderby,
@@ -23,7 +23,7 @@ if (!empty($link_cid)):
                     'echo' => 0,
                     'class' => ''
                 ));
-                pk_cache_set(PKC_FOOTER_LINKS, $links);
+                publicus_cache_set(PKC_FOOTER_LINKS, $links);
             }
             foreach ($links as $link) {
                 if ($link->link_visible != 'Y') {
@@ -33,7 +33,7 @@ if (!empty($link_cid)):
                     class='badge links-item'
                     rel='$link->link_rel' target='$link->link_target'>$link->link_name</a>";
             }
-            $link_page_id = pk_get_option('link_page', '');
+            $link_page_id = publicus_get_option('link_page', '');
             if (!empty($link_page_id)) {
                 echo '<a target="_blank" class="badge links-item" href="' . get_page_link($link_page_id) . '">' . __('更多链接', PUBLICUS) . '</a>';
             }

@@ -1,9 +1,9 @@
 <?php
 
 
-function pk_baidu_wd_reject()
+function publicus_baidu_wd_reject()
 {
-    $key_list = array_map('trim', explode(',', pk_get_option('vd_kwd_access_reject_list', '')));
+    $key_list = array_map('trim', explode(',', publicus_get_option('vd_kwd_access_reject_list', '')));
     if(count($key_list) > 0){
         foreach ($key_list as $key){
             if(isset($_GET[$key])){
@@ -13,6 +13,6 @@ function pk_baidu_wd_reject()
         }
     }
 }
-if(pk_is_checked('vd_kwd_access_reject')){
-    add_action('init', 'pk_baidu_wd_reject');
+if(publicus_is_checked('vd_kwd_access_reject')){
+    add_action('init', 'publicus_baidu_wd_reject');
 }

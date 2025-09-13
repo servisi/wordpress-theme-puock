@@ -50,7 +50,6 @@ abstract class Attributes
     const MAX_REDIRECTS = 'maxRedirects';
 
     /**
-     * 是否验证 CA 证书.
      */
     const IS_VERIFY_CA = 'isVerifyCA';
 
@@ -70,7 +69,6 @@ abstract class Attributes
     const CERT_PATH = 'certPath';
 
     /**
-     * SSL 证书密码
      */
     const CERT_PASSWORD = 'certPassword';
 
@@ -85,7 +83,6 @@ abstract class Attributes
     const KEY_PATH = 'keyPath';
 
     /**
-     * SSL 密钥密码
      */
     const KEY_PASSWORD = 'keyPassword';
 
@@ -110,12 +107,10 @@ abstract class Attributes
     const PROXY_PORT = 'proxy.port';
 
     /**
-     * 代理用户名.
      */
     const PROXY_USERNAME = 'proxy.username';
 
     /**
-     * 代理密码
      */
     const PROXY_PASSWORD = 'proxy.password';
 
@@ -125,12 +120,10 @@ abstract class Attributes
     const PROXY_AUTH = 'proxy.auth';
 
     /**
-     * 认证用户名.
      */
     const USERNAME = 'username';
 
     /**
-     * 认证密码
      */
     const PASSWORD = 'password';
 

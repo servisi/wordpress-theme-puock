@@ -19,7 +19,6 @@ function publicus_post_like()
         } else {
             update_post_meta($id, 'puock_like', ($like_num + 1));
         }
-        echo json_encode(array('e' => 0, 't' => '点赞成功', 'd' => get_post_meta($id, 'puock_like', true)));
     }
     die;
 }
@@ -42,11 +41,8 @@ function publicus_post_like_num(int $id)
         $number = 0;
     }
     if ($number < 1000) {
-        return $number; // 小于1000直接返回
     } elseif ($number < 1000000) {
-        return round($number / 1000, 0) . 'k'; // 1000到999999之间返回“k”格式
     } else {
-        return round($number / 1000000, 0) . 'M'; // 大于等于1000000返回“M”格式
     }
 }
 
@@ -102,17 +98,17 @@ function get_path_query($query)
     return $params;
 }
 
-function pk_theme_footer_copyright($content)
+function publicus_theme_footer_copyright($content)
 {
-    global $pk_right_slug;
-    $content .= pk_get_option('footer_info');
-    if(!pk_is_checked('ext_dont_show_copyright')){
-        $content .= str_replace('{PUBLICUS_VERSION}', PUBLICUS_CUR_VER_STR, base64_decode($pk_right_slug));
+    global $publicus_right_slug;
+    $content .= publicus_get_option('footer_info');
+    if(!publicus_is_checked('ext_dont_show_copyright')){
+        $content .= str_replace('{PUBLICUS_VERSION}', PUBLICUS_CUR_VER_STR, base64_decode($publicus_right_slug));
     }
     return $content;
 }
 
-add_filter('pk_footer_info', 'pk_theme_footer_copyright', 10, 1);
+add_filter('publicus_footer_info', 'publicus_theme_footer_copyright', 10, 1);
 
 //GrAvatar头像源
 $gravatar_urls = array('www.gravatar.com', '0.gravatar.com', '1.gravatar.com', '2.gravatar.com', 'secure.gravatar.com', 'cn.gravatar.com');
@@ -152,9 +148,9 @@ function v2ex_ssl_avatar($avatar)
     return str_replace("http://", "https://", str_replace("/avatar", "/gravatar", str_replace($gravatar_urls, 'cdn.v2ex.com', $avatar)));
 }
 
-function pk_custom_avatar($avatar){
+function publicus_custom_avatar($avatar){
     global $gravatar_urls;
-    return str_replace($gravatar_urls, pk_get_option('gravatar_custom_url'), $avatar);
+    return str_replace($gravatar_urls, publicus_get_option('gravatar_custom_url'), $avatar);
 }
 
 //评论回复邮件通知
@@ -169,7 +165,7 @@ function comment_mail_notify($comment_id)
     if ($parent_id != '' && $spam_confirmed != 'spam') {
         $wp_email = 'no-reply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME']));
         $to = trim(get_comment($parent_id)->comment_author_email);
-        if (pk_check_email_is_sysgen($to)) { // 默认生成的第三方注册邮箱，未进行修改
+        if (publicus_check_email_is_sysgen($to)) { // 默认生成的第三方注册邮箱，未进行修改
             return;
         }
         if ($to == $comment->comment_author_email) {
@@ -184,7 +180,7 @@ function comment_mail_notify($comment_id)
 }
 
 //评论添加@
-function pk_comment_add_at($text, $comment = '')
+function publicus_comment_add_at($text, $comment = '')
 {
     if ($comment->comment_parent > 0) {
         $text = "<a class='c-sub' href='#comment-{$comment->comment_parent}'>@" . get_comment_author($comment->comment_parent) . "&nbsp;</a>" . $text;
@@ -192,10 +188,10 @@ function pk_comment_add_at($text, $comment = '')
     return $text;
 }
 
-add_action('media_buttons', 'pk_shortcode_box_init', 99);
-function pk_shortcode_box_init()
+add_action('media_buttons', 'publicus_shortcode_box_init', 99);
+function publicus_shortcode_box_init()
 {
-    $shortcodes = pk_shortcode_register();
+    $shortcodes = publicus_shortcode_register();
     $output = "";
     foreach ($shortcodes as $key => $item) {
         $attr = '';
@@ -261,9 +257,9 @@ function wp_compress_html()
 }
 
 //跳转链接
-function pk_go_link($url, $name = '')
+function publicus_go_link($url, $name = '')
 {
-    if (pk_is_cur_site($url)) {
+    if (publicus_is_cur_site($url)) {
         return $url;
     }
     $url = PUBLICUS_ABS_URI . '/inc/go.php?to=' . base64_encode($url);
@@ -274,41 +270,39 @@ function pk_go_link($url, $name = '')
 }
 
 //开启了内页链接跳转
-if (pk_is_checked('link_go_page')) {
+if (publicus_is_checked('link_go_page')) {
     /**
      * 内页跳转链接
      *
      * @param string $content 修改前的内容
      * @return string 修改后的内容
-     * @author lvshujun
-     * @date 2024-03-19
      */
-    function pk_content_addlink($content) {
+    function publicus_content_addlink($content) {
         //匹配链接
         preg_match_all('/<a(.*?)href="(.*?)"(.*?)>/',$content,$matches);
         if ($matches) {
             foreach ($matches[2] as $val) {
                 if (strpos($val,'://') !== false 
-                    && pk_is_cur_site($val) === false 
+                    && publicus_is_cur_site($val) === false 
                     && !preg_match('/\.(jpg|jepg|png|ico|bmp|gif|tiff)/i',$val)) {
-                    $content = str_replace('href="'.$val.'"', 'href="'.pk_go_link($val).'"', $content);
+                    $content = str_replace('href="'.$val.'"', 'href="'.publicus_go_link($val).'"', $content);
                 }
             }
         }
         return $content;
     }
-    add_filter('the_content', 'pk_content_addlink');
+    add_filter('the_content', 'publicus_content_addlink');
 }
 
 //检测链接是否属于本站
-function pk_is_cur_site($url)
+function publicus_is_cur_site($url)
 {
     return str_starts_with($url, home_url());
 }
 
-if (pk_is_checked('use_post_menu')) {
+if (publicus_is_checked('use_post_menu')) {
     //生成目录锚点
-    function pk_post_menu_id($content)
+    function publicus_post_menu_id($content)
     {
         if (preg_match_all("/<h([1234])(.*?)>(.*?)<\/h\\1>/im", $content, $ms)) {
             foreach ($ms[0] as $i => $full) {
@@ -323,17 +317,17 @@ if (pk_is_checked('use_post_menu')) {
         return $content;
     }
 
-    add_filter("the_content", "pk_post_menu_id");
+    add_filter("the_content", "publicus_post_menu_id");
 }
 //兼容处理
-function pk_compatible()
+function publicus_compatible()
 {
     wp_scripts()->remove("Editormd_Front");
 }
 
-add_action('wp_enqueue_scripts', 'pk_compatible', 999);
+add_action('wp_enqueue_scripts', 'publicus_compatible', 999);
 
-if (pk_is_checked("upload_webp")) {
+if (publicus_is_checked("upload_webp")) {
     add_filter('plupload_default_settings', function ($defaults) {
         $defaults['webp_upload_error'] = false;
         return $defaults;
@@ -345,7 +339,7 @@ if (pk_is_checked("upload_webp")) {
     }, 10, 1);
 }
 
-function pk_get_comment_ua_os_icon($name)
+function publicus_get_comment_ua_os_icon($name)
 {
     $prefix = "fa-brands ";
     switch ($name) {
@@ -391,7 +385,7 @@ function pk_get_comment_ua_os_icon($name)
 }
 
 // 二维码生成
-function pk_post_qrcode($url, $base_dir = '/cache/qrcode')
+function publicus_post_qrcode($url, $base_dir = '/cache/qrcode')
 {
     $file = $base_dir . '/qr-' . md5($url) . '.png';
     if (!is_dir(PUBLICUS_ABS_DIR . $base_dir)) {
@@ -406,9 +400,8 @@ function pk_post_qrcode($url, $base_dir = '/cache/qrcode')
     return $file;
 }
 
-// 评论验证码
 // request url: {host}/wp-admin/admin-ajax.php?action=puock_comment_captcha
-function pk_captcha()
+function publicus_captcha()
 {
     $type = $_GET['type'] ?? '';
     if (!in_array($type, ['comment', 'login', 'register', 'forget-password'])) {
@@ -427,24 +420,24 @@ function pk_captcha()
     ]);
     $result = $captcha->create();
     $text = $result->getText();
-    pk_session_call(function () use ($text, $type) {
+    publicus_session_call(function () use ($text, $type) {
         $_SESSION[$type . '_vd'] = $text;
     });
     $result->output();
     wp_die();
 }
 
-pk_ajax_register('pk_captcha', 'pk_captcha', true);
+publicus_ajax_register('publicus_captcha', 'publicus_captcha', true);
 
-function pk_captcha_url($type, $width = 100, $height = 40)
+function publicus_captcha_url($type, $width = 100, $height = 40)
 {
-    return admin_url() . 'admin-ajax.php?action=pk_captcha&type=' . $type . '&w=' . $width . '&h=' . $height;
+    return admin_url() . 'admin-ajax.php?action=publicus_captcha&type=' . $type . '&w=' . $width . '&h=' . $height;
 }
 
-function pk_captcha_validate($type, $val, $success_clear = true)
+function publicus_captcha_validate($type, $val, $success_clear = true)
 {
     $res = false;
-    pk_session_call(function () use ($type, $val, $success_clear, &$res) {
+    publicus_session_call(function () use ($type, $val, $success_clear, &$res) {
         if (isset($_SESSION[$type . '_vd']) && strtolower($_SESSION[$type . '_vd']) == strtolower($val)) {
             $res = true;
             if ($success_clear) {
@@ -455,18 +448,18 @@ function pk_captcha_validate($type, $val, $success_clear = true)
     return $res;
 }
 
-function pk_get_favicon_url($url)
+function publicus_get_favicon_url($url)
 {
     return PUBLICUS_ABS_URI . '/inc/favicon.php?url=' . $url;
 }
 
-function pk_post_comment_is_closed()
+function publicus_post_comment_is_closed()
 {
-    return pk_is_checked('close_post_comment', false);
+    return publicus_is_checked('close_post_comment', false);
 }
 
-//add_filter('clean_url', 'pk_compatible_githuber_md_katex', 10, 3);
-function pk_compatible_githuber_md_katex($good_protocol_url, $original_url, $_context)
+//add_filter('clean_url', 'publicus_compatible_githuber_md_katex', 10, 3);
+function publicus_compatible_githuber_md_katex($good_protocol_url, $original_url, $_context)
 {
     if (false !== strpos($original_url, '/assets/vendor/katex/katex.min.js')) {
         remove_filter('clean_url', 'unclean_url');
@@ -477,9 +470,9 @@ function pk_compatible_githuber_md_katex($good_protocol_url, $original_url, $_co
 }
 
 //获取网站标题
-function pk_get_web_title()
+function publicus_get_web_title()
 {
-    $title = pk_get_option('web_title');
+    $title = publicus_get_option('web_title');
     if (empty($title)) {
         $title = get_bloginfo('name');
     }
@@ -487,10 +480,10 @@ function pk_get_web_title()
 }
 
 // 获取链接的target属性
-function pk_link_target($echo = true)
+function publicus_link_target($echo = true)
 {
     $target = "";
-    if (!pk_is_checked('page_ajax_load') && pk_is_checked('link_blank_content')) {
+    if (!publicus_is_checked('page_ajax_load') && publicus_is_checked('link_blank_content')) {
         $target = "target=\"_blank\"";
     }
     if ($echo) {
@@ -500,28 +493,28 @@ function pk_link_target($echo = true)
 }
 
 // 头部样式定义
-function pk_head_style_var()
+function publicus_head_style_var()
 {
     $vars = [
-        "--puock-block-not-tran:" . pk_get_option('block_not_tran', 100) . "%",
+        "--puock-block-not-tran:" . publicus_get_option('block_not_tran', 100) . "%",
     ];
     return ":root{" . join(";", $vars) . "}";
 }
 
 // 加载文件媒体文件
-function pk_load_media_files()
+function publicus_load_media_files()
 {
     wp_enqueue_media();
 }
 
-add_action('admin_enqueue_scripts', 'pk_load_media_files');
+add_action('admin_enqueue_scripts', 'publicus_load_media_files');
 
 // debug sql
-function pk_debug_print_sql_list()
+function publicus_debug_print_sql_list()
 {
     global $wpdb;
-    $show_sql_count = pk_get_option('debug_sql_count');
-    $show_sql_detail = pk_get_option('debug_sql_detail');
+    $show_sql_count = publicus_get_option('debug_sql_count');
+    $show_sql_detail = publicus_get_option('debug_sql_detail');
     $out = "<script>";
     if ($show_sql_count) {
         $out .= "console.log('共计查询SQL：" . get_num_queries() . "次，耗时：" . timer_stop() . "秒');";
@@ -532,20 +525,20 @@ function pk_debug_print_sql_list()
     echo $out . "</script>";
 }
 
-function pk_get_excerpt_more_filter()
+function publicus_get_excerpt_more_filter()
 {
     return '...';
 }
 
-add_filter('excerpt_more', 'pk_get_excerpt_more_filter');
+add_filter('excerpt_more', 'publicus_get_excerpt_more_filter');
 
 
-function pk_get_client_ip()
+function publicus_get_client_ip()
 {
     return preg_replace('/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR']);
 }
 
-function pk_skeleton($type = 'default', $line = 1)
+function publicus_skeleton($type = 'default', $line = 1)
 {
     switch ($type) {
         case 'comment':
@@ -568,7 +561,7 @@ function pk_skeleton($type = 'default', $line = 1)
 function get_entry_content_class($echo = true)
 {
     $class = 'entry-content';
-    if (pk_is_checked('page_link_before_icon')) {
+    if (publicus_is_checked('page_link_before_icon')) {
         $class .= ' show-link-icon';
     }
     if ($echo) {
@@ -577,26 +570,26 @@ function get_entry_content_class($echo = true)
     return $class;
 }
 
-function pk_disable_not_admin_user_profile()
+function publicus_disable_not_admin_user_profile()
 {
     if (is_admin() && !current_user_can('administrator')) {
         wp_die('您无权访问');
     }
 }
 
-if (pk_is_checked('disable_not_admin_user_profile')) {
-    add_action('load-profile.php', 'pk_disable_not_admin_user_profile');
+if (publicus_is_checked('disable_not_admin_user_profile')) {
+    add_action('load-profile.php', 'publicus_disable_not_admin_user_profile');
 }
 
 
-function pk_read_time_tip(): string
+function publicus_read_time_tip(): string
 {
     $words_count = count_words();
     $read_time = ceil($words_count / 400);
     return sprintf(__('共计 %d 个字符，预计需要花费 %d 分钟才能阅读完成。'), $words_count, $read_time);
 }
 
-function pk_set_custom_seo($title, $keywords = '', $description = '')
+function publicus_set_custom_seo($title, $keywords = '', $description = '')
 {
     $GLOBALS['pk-seo'] = array(
         'title' => $title,
@@ -605,18 +598,18 @@ function pk_set_custom_seo($title, $keywords = '', $description = '')
     );
 }
 
-function pk_get_custom_seo()
+function publicus_get_custom_seo()
 {
     return $GLOBALS['pk-seo'] ?? array();
 }
 
-function pk_safe_base64_encode($string)
+function publicus_safe_base64_encode($string)
 {
     $data = base64_encode($string);
     return str_replace(array('+', '/', '='), array('-', '_', ''), $data);
 }
 
-function pk_safe_base64_decode($string){
+function publicus_safe_base64_decode($string){
     $data = str_replace(array('-','_'),array('+','/'),$string);
     $mod4 = strlen($data) % 4;
     if ($mod4) {
@@ -627,28 +620,28 @@ function pk_safe_base64_decode($string){
 
 
 //添加文章修改时间提示
-function pk_post_expire_tips_open($content)
+function publicus_post_expire_tips_open($content)
 {
     $u_time = get_the_time('U');
     $u_modified_time = get_the_modified_time('U');
     $custom_content = '';
-    if ($u_modified_time >= $u_time + (86400*pk_get_option('post_expire_tips_day',100))) {
+    if ($u_modified_time >= $u_time + (86400*publicus_get_option('post_expire_tips_day',100))) {
         $updated_date = get_the_modified_time('Y-m-d H:i');
-        $tips = str_replace('{date}', $updated_date, pk_get_option('post_expire_tips',''));
+        $tips = str_replace('{date}', $updated_date, publicus_get_option('post_expire_tips',''));
         $custom_content .= '<p class="fs12 c-sub">'.$tips.'</p>';
     }
     $custom_content .= $content;
     return $custom_content;
 }
 
-if (pk_is_checked('post_expire_tips_open')) {
-    add_filter('the_content', 'pk_post_expire_tips_open');
+if (publicus_is_checked('post_expire_tips_open')) {
+    add_filter('the_content', 'publicus_post_expire_tips_open');
 }
 
 
-function pk_ava_home_banners()
+function publicus_ava_home_banners()
 {
-    $index_carousel_list = pk_get_option('index_carousel_list', []);
+    $index_carousel_list = publicus_get_option('index_carousel_list', []);
     if (is_array($index_carousel_list) && count($index_carousel_list) > 0){
         $ava = [];
         foreach ($index_carousel_list as $item){

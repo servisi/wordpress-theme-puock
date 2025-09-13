@@ -15,7 +15,7 @@ include_once('gutenberg/index.php');
 
 
 // WordPress teşekkür metnini kaldır
-if (pk_is_checked('hide_footer_wp_t')) {
+if (publicus_is_checked('hide_footer_wp_t')) {
     function my_admin_footer_text()
     {
         return '';
@@ -38,7 +38,7 @@ if (pk_is_checked('hide_footer_wp_t')) {
 }
 
 // Gutenberg editörünü devre dışı bırak
-if (pk_is_checked('stop5x_editor')) {
+if (publicus_is_checked('stop5x_editor')) {
     add_filter('use_block_editor_for_post', '__return_false');
     remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
     function remove_global_styles_and_svg_filters()
@@ -51,12 +51,12 @@ if (pk_is_checked('stop5x_editor')) {
 }
 
 // Blok widget'ları
-if (!pk_is_checked('use_widgets_block')) {
-    pk_off_widgets_block();
+if (!publicus_is_checked('use_widgets_block')) {
+    publicus_off_widgets_block();
 }
 
 // Yorum seviyesini al
-function pk_the_author_class_out($count)
+function publicus_the_author_class_out($count)
 {
     if ($count <= 0) {
         return '';
@@ -89,7 +89,7 @@ function pk_the_author_class_out($count)
     return '<span class="t-sm c-sub"><i class="fa-regular fa-gem mr-1"></i>' . __('评论达人', PUBLICUS) . ' LV.' . $level . '</span>';
 }
 
-function pk_the_author_class($echo = true, $in_comment = null)
+function publicus_the_author_class($echo = true, $in_comment = null)
 {
     global $wpdb, $comment;
     if (!$comment) {
@@ -100,13 +100,13 @@ function pk_the_author_class($echo = true, $in_comment = null)
     } else {
         $comment_author_email = $comment->comment_author_email;
         $cache_key = sprintf(PKC_AUTHOR_COMMENTS, md5($comment_author_email));
-        $author_count = pk_cache_get($cache_key);
+        $author_count = publicus_cache_get($cache_key);
         if (!$author_count) {
             $query = $wpdb->prepare("SELECT count(1) as c FROM $wpdb->comments WHERE comment_author_email = %s", $comment_author_email);
             $author_count = $wpdb->get_results($query)[0]->c;
-            pk_cache_set($cache_key, $author_count);
+            publicus_cache_set($cache_key, $author_count);
         }
-        $res = pk_the_author_class_out($author_count);
+        $res = publicus_the_author_class_out($author_count);
     }
     if (!$echo) {
         return $res;
@@ -115,7 +115,7 @@ function pk_the_author_class($echo = true, $in_comment = null)
 }
 
 // Gravatar avatarını al
-function pk_get_gravatar($email, $echo = true)
+function publicus_get_gravatar($email, $echo = true)
 {
     $link = get_avatar_url($email);
     if (!$echo) {
@@ -139,7 +139,7 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
     if ($cid != null) {
         $cate = get_category($cid);
         if ($cate != null) {
-            return '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
+            return '<a ' . publicus_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '">' . $icon . $cate->name . '</a>';
         }
     } else {
         $cats = get_the_category();
@@ -147,13 +147,13 @@ function get_post_category_link_exec($all = true, $class = '', $icon = '', $cid 
             if ($all) {
                 $out = "";
                 foreach ($cats as $cate) {
-                    $out .= '<a ' . pk_link_target(false) . ' class="' . $class . ' mr5" href="' . get_category_link($cate) . '"><i class="fa-regular fa-folder-open"></i> ' . $icon . $cate->name . '</a> ';
+                    $out .= '<a ' . publicus_link_target(false) . ' class="' . $class . ' mr5" href="' . get_category_link($cate) . '"><i class="fa-regular fa-folder-open"></i> ' . $icon . $cate->name . '</a> ';
                 }
                 $out = mb_substr($out, 0, mb_strlen($out) - 1);
                 return $out;
             } else {
                 $cate = $cats[0];
-                return '<a ' . pk_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '"><i class="fa-regular fa-folder-open"></i> ' . $icon . $cate->name . '</a>';
+                return '<a ' . publicus_link_target(false) . ' class="' . $class . '" href="' . get_category_link($cate) . '"><i class="fa-regular fa-folder-open"></i> ' . $icon . $cate->name . '</a>';
             }
         }
     }
@@ -179,7 +179,7 @@ function get_post_tags($class = '', $item_class = '')
     return $out;
 }
 
-function pk_get_post_date()
+function publicus_get_post_date()
 {
     $time = get_post_time();
     $c_time = time() - $time;
@@ -210,7 +210,7 @@ function pk_get_post_date()
 }
 
 // Rastgele bootstrap renk gösterimini al
-function pk_get_color_tag($ex = array())
+function publicus_get_color_tag($ex = array())
 {
     global $publicus_colors_name;
     while (true) {
@@ -356,8 +356,8 @@ function get_random_default_image(): string
 }
 
 // Sayfalama işlevi
-if (!function_exists('pk_paging')) {
-    function pk_paging($pnum = 2)
+if (!function_exists('publicus_paging')) {
+    function publicus_paging($pnum = 2)
     {
         if (is_singular()) {
             return;
@@ -398,11 +398,11 @@ if (!function_exists('pk_paging')) {
 }
 
 // Breadcrumb navigasyonunu al
-function pk_breadcrumbs()
+function publicus_breadcrumbs()
 {
     global $cat;
-    $custom_seo_title = pk_get_custom_seo()['title'] ?? '';
-    $out = '<div id="breadcrumb" class="' . (pk_open_box_animated('animated fadeInUp', false)) . '">';
+    $custom_seo_title = publicus_get_custom_seo()['title'] ?? '';
+    $out = '<div id="breadcrumb" class="' . (publicus_open_box_animated('animated fadeInUp', false)) . '">';
     $out .= '<nav aria-label="breadcrumb">';
     $out .= '<ol class="breadcrumb">';
     $out .= '<li class="breadcrumb-item"><a class="a-link" href="' . home_url() . '">' . __('Ana Sayfa', PUBLICUS) . '</a></li>';
@@ -452,21 +452,17 @@ function pk_breadcrumbs()
 }
 
 /**
- * 返回图标信息
  *
  * @return string
- * @author lvshujun
- * @date 2024-03-19
  */
-function pk_icon_mate() {
+function publicus_icon_mate() {
     //获取icon地址
-    $pk_icon = pk_get_option('favicon');
-    //未设置返回空
-    if ($pk_icon === '') return '';
+    $publicus_icon = publicus_get_option('favicon');
+    if ($publicus_icon === '') return '';
     
     //连接字符串
-    $str = '<link rel="shortcut icon" href="' . $pk_icon . '">
-    <link rel="apple-touch-icon" href="' . $pk_icon . '"/>';
+    $str = '<link rel="shortcut icon" href="' . $publicus_icon . '">
+    <link rel="apple-touch-icon" href="' . $publicus_icon . '"/>';
 
     return $str;
 }
@@ -475,65 +471,61 @@ function pk_icon_mate() {
  * 输出SEO标题
  *
  * @return string SEO标题
- * @author lvshujun
- * @date 2024-03-19
  */
-function pk_get_seo_title() {
-    // 未启用SEO返回空
-    if (!pk_is_checked('seo_open',true)) {
+function publicus_get_seo_title() {
+    if (!publicus_is_checked('seo_open',true)) {
         return '';
     }
-    // 用户定义的连接符
-    $pk_title_conn = ' ' . pk_get_option("title_conn") . ' ';
+    $publicus_title_conn = ' ' . publicus_get_option("title_conn") . ' ';
     // 网站名称
-    $pk_blog_name = pk_get_web_title();
+    $publicus_blog_name = publicus_get_web_title();
     // 分页情况
-    $pk_paged_title = '';
+    $publicus_paged_title = '';
     if (get_query_var('paged')) {
-        $pk_paged_title = $pk_title_conn . '第' . get_query_var('paged') . '页';
+        $publicus_paged_title = $publicus_title_conn . '第' . get_query_var('paged') . '页';
     }
     // 获取SEO设置
-    $pk_custom_seo_title = pk_get_custom_seo()['title'] ?? '';
+    $publicus_custom_seo_title = publicus_get_custom_seo()['title'] ?? '';
     // 输出内容
-    $pk_title = '';
+    $publicus_title = '';
     // 通用结尾
-    $pk_common_end = $pk_paged_title . $pk_title_conn . $pk_blog_name;
+    $publicus_common_end = $publicus_paged_title . $publicus_title_conn . $publicus_blog_name;
     // 已经自定义标题
-    if (!empty($pk_custom_seo_title)) {
-        $pk_title .= $pk_custom_seo_title . $pk_common_end;
+    if (!empty($publicus_custom_seo_title)) {
+        $publicus_title .= $publicus_custom_seo_title . $publicus_common_end;
     } else if (is_home()) {
-        $pk_description = pk_get_option('web_title_2');
-        if (!empty($pk_description)) {
-            $pk_title .= $pk_blog_name . $pk_paged_title . $pk_title_conn . $pk_description;
+        $publicus_description = publicus_get_option('web_title_2');
+        if (!empty($publicus_description)) {
+            $publicus_title .= $publicus_blog_name . $publicus_paged_title . $publicus_title_conn . $publicus_description;
         } else {
-            $pk_title .= $pk_blog_name . $pk_paged_title;
+            $publicus_title .= $publicus_blog_name . $publicus_paged_title;
         }
     } else if (is_search()) {
-        $pk_title .= '搜索“' . $_REQUEST['s'] . '”的结果' . $pk_common_end;
+        $publicus_title .= '搜索“' . $_REQUEST['s'] . '”的结果' . $publicus_common_end;
     } else if (is_single() || is_page()) {
-        $pk_title .= single_post_title('', false) . $pk_common_end;
+        $publicus_title .= single_post_title('', false) . $publicus_common_end;
     } else if (is_year()) {
-        $pk_title .= get_the_time('Y年') . '的所有文章' . $pk_common_end;
+        $publicus_title .= get_the_time('Y年') . '的所有文章' . $publicus_common_end;
     } else if (is_month()) {
-        $pk_title .= get_the_time('m') . '的所有文章' . $pk_common_end;
+        $publicus_title .= get_the_time('m') . '的所有文章' . $publicus_common_end;
     } else if (is_day()) {
-        $pk_title .= get_the_time('Y年m月d日') . '的所有文章' . $pk_common_end;
+        $publicus_title .= get_the_time('Y年m月d日') . '的所有文章' . $publicus_common_end;
     } else if (is_author()) {
-        $pk_title .= '作者：' . get_the_author() . $pk_common_end;
+        $publicus_title .= '作者：' . get_the_author() . $publicus_common_end;
     } else if (is_category()) {
-        $pk_title .= single_cat_title('', false) . $pk_common_end;
+        $publicus_title .= single_cat_title('', false) . $publicus_common_end;
     } else if (is_tag()) {
-        $pk_title .= single_tag_title('', false) . $pk_common_end;
+        $publicus_title .= single_tag_title('', false) . $publicus_common_end;
     } else if (is_404()) {
-        $pk_title .= '你访问的资源不存在' . $pk_common_end;
+        $publicus_title .= '你访问的资源不存在' . $publicus_common_end;
     } else {
-        $pk_title .= $pk_blog_name . $pk_paged_title;
+        $publicus_title .= $publicus_blog_name . $publicus_paged_title;
     }
-    return '<title>'.$pk_title.'</title>';
+    return '<title>'.$publicus_title.'</title>';
 }
 
 //获取阅读数量
-function pk_get_post_views()
+function publicus_get_post_views()
 {
     if (function_exists('the_views')) {
         echo the_views(null, false);
@@ -583,7 +575,7 @@ function content_img_add_alt_title($content)
 add_filter('the_content', 'content_img_add_alt_title', 99);
 
 //加上bootstrap的表格class
-function pk_bootstrap_table_class($content)
+function publicus_bootstrap_table_class($content)
 {
     global $post;
     preg_match_all('/<table.*?>[\s\S]*<\/table>/', $content, $tables);
@@ -596,23 +588,23 @@ function pk_bootstrap_table_class($content)
     return $content;
 }
 
-add_filter('the_content', 'pk_bootstrap_table_class', 99);
+add_filter('the_content', 'publicus_bootstrap_table_class', 99);
 
 //初始化wp_style函数，以防止出现Invalid argument supplied for foreach()错误
-function pk_init_wp_empty_style()
+function publicus_init_wp_empty_style()
 {
     wp_enqueue_style('');
 }
 
-add_action('wp_enqueue_scripts', 'pk_init_wp_empty_style');
+add_action('wp_enqueue_scripts', 'publicus_init_wp_empty_style');
 
 require_once dirname(__FILE__) . '/fun-custom.php';
 
 //更新支持
-function pk_update()
+function publicus_update()
 {
-    $update_server = pk_get_option('update_server');
-    $check_period = pk_get_option('update_server_check_period');
+    $update_server = publicus_get_option('update_server');
+    $check_period = publicus_get_option('update_server_check_period');
     if (empty($check_period) || !is_numeric($check_period)) {
         $check_period = 6;
     }
@@ -653,7 +645,7 @@ function pk_update()
 
 
 ////WordPress 评论回复邮件通知代码 TODO 等待测试改进
-//function pk_comment_mail_notify($comment_id)
+//function publicus_comment_mail_notify($comment_id)
 //{
 //    $admin_notify = '1'; // admin 要不要收回复通知 ( '1'=要 ; '0'=不要 )
 //    $admin_email = get_bloginfo('admin_email');
@@ -728,10 +720,10 @@ function pk_update()
 //    }
 //}
 //
-//add_action('comment_post', 'pk_comment_mail_notify');
+//add_action('comment_post', 'publicus_comment_mail_notify');
 
 if (is_admin()) {
     // 在线更新支持
-    pk_update();
+    publicus_update();
 }
 

@@ -52,7 +52,6 @@ class HttpRequest
     public $cookies = [];
 
     /**
-     * 失败重试次数，默认为0.
      *
      * @var int
      */
@@ -80,7 +79,6 @@ class HttpRequest
     public $proxy = [];
 
     /**
-     * 是否验证证书.
      *
      * @var bool
      */
@@ -122,14 +120,12 @@ class HttpRequest
     public $uploadSpeed;
 
     /**
-     * 用于连接中需要的用户名.
      *
      * @var string|null
      */
     public $username;
 
     /**
-     * 用于连接中需要的密码
      *
      * @var string|null
      */
@@ -171,7 +167,6 @@ class HttpRequest
      */
     public $certPath = '';
     /**
-     * 使用证书需要的密码
      *
      * @var string
      */
@@ -192,7 +187,6 @@ class HttpRequest
     public $keyPath = '';
 
     /**
-     * SSL私钥的密码
      *
      * @var string
      */
@@ -642,7 +636,6 @@ class HttpRequest
     }
 
     /**
-     * 设置失败重试次数，状态码为5XX或者0才需要重试.
      *
      * @param int $retry
      * @param callable|null $callback
@@ -733,10 +726,7 @@ class HttpRequest
     }
 
     /**
-     * 设置用于连接中需要的用户名和密码
      *
-     * @param string $username 用户名
-     * @param string $password 密码
      *
      * @return static
      */
@@ -781,7 +771,6 @@ class HttpRequest
      *
      * @param string $path 一个包含 PEM 格式证书的文件名
      * @param string $type 证书类型，支持的格式有”PEM”(默认值),“DER”和”ENG”
-     * @param string $password 使用证书需要的密码
      *
      * @return static
      */
@@ -803,7 +792,6 @@ class HttpRequest
      *
      * @param string $path 包含 SSL 私钥的文件名
      * @param string $type certType规定的私钥的加密类型，支持的密钥类型为”PEM”(默认值)、”DER”和”ENG”
-     * @param string $password SSL私钥的密码
      *
      * @return static
      */

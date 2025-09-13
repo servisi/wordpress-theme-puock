@@ -13,28 +13,24 @@ class OAuth2 extends Base
     const API_DOMAIN = 'https://openapi.baidu.com/';
 
     /**
-     * 非必须参数，登录和授权页面的展现样式，默认为“page”，具体参数定义请参考http://developer.baidu.com/wiki/index.php?title=docs/oauth/set.
      *
      * @var string
      */
     public $display;
 
     /**
-     * 非必须参数，如传递“force_login=1”，则加载登录页时强制用户输入用户名和口令，不会从cookie中读取百度用户的登陆状态。
      *
      * @var string
      */
     public $forceLogin;
 
     /**
-     * 非必须参数，如传递“confirm_login=1”且百度用户已处于登陆状态，会提示是否使用已当前登陆用户对应用授权。
      *
      * @var string
      */
     public $confirmLogin;
 
     /**
-     * 非必须参数，如传递“login_type=sms”，授权页面会默认使用短信动态密码注册登陆方式。
      *
      * @var string
      */
@@ -61,11 +57,7 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第一步:获取登录页面跳转url.
      *
-     * @param string $callbackUrl 登录回调地址
-     * @param string $state       非必须参数，用于保持请求和回调的状态，授权服务器在回调时（重定向用户浏览器到“redirect_uri”时），会在Query Parameter中原样回传该参数。OAuth2.0标准协议建议，利用state参数来防止CSRF攻击。
-     * @param array  $scope       非必须参数，以空格分隔的权限列表，若不传递此参数，代表请求用户的默认权限。关于权限的具体信息请参考“权限列表”。
      *
      * @return string
      */
@@ -93,7 +85,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第二步:处理回调并获取access_token。与getAccessToken不同的是会验证state值是否匹配，防止csrf攻击。
      *
      * @param string $storeState 存储的正确的state
      * @param string $code       第一步里$redirectUri地址中传过来的code，为null则通过get参数获取
@@ -122,7 +113,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 获取用户资料.
      *
      * @param string $accessToken
      *
@@ -174,7 +164,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 检验授权凭证AccessToken是否有效.
      *
      * @param string $accessToken
      *

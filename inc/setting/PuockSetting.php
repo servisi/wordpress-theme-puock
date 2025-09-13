@@ -48,7 +48,7 @@ class PuockSetting
         $classes[] = ['class' => OptionDebug::class, 'sort' => 13];
         $classes[] = ['class' => OptionResource::class, 'sort' => 14];
         $classes[] = ['class' => OptionAbout::class, 'sort' => 99];
-        $classes = apply_filters('pk_theme_option_menus_register', $classes, 10, 1);
+        $classes = apply_filters('publicus_theme_option_menus_register', $classes, 10, 1);
         array_multisort(array_column($classes, 'sort'), SORT_ASC, $classes);
         return $classes;
     }
@@ -78,9 +78,9 @@ class PuockSetting
         $fields = [];
         foreach ($menus as $menu) {
             $f = (new $menu['class']())->get_fields();
-            $fields[] = apply_filters('pk_load_theme_option_fields_'.$f['key'], $f);
+            $fields[] = apply_filters('publicus_load_theme_option_fields_'.$f['key'], $f);
         }
-        do_action('pk_get_theme_option_fields', $fields);
+        do_action('publicus_get_theme_option_fields', $fields);
         require_once dirname(__FILE__) . '/template.php';
     }
 }

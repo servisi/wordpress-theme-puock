@@ -8,11 +8,9 @@
 class CaptchaBuilder
 {
     /**
-     * @var resource 验证码图片
      */
     protected $image;
     /**
-     * @var string 验证码文字
      */
     protected $text ;
     /**
@@ -30,7 +28,6 @@ class CaptchaBuilder
 
     private $fonts = [];
     /**
-     * @var int 验证码字符的个数
      */
     private $number = 4;
     /**
@@ -38,7 +35,6 @@ class CaptchaBuilder
      */
     private $fontSize = 24;
     /**
-     * @var string 验证码字体
      */
     private $textFont;
 
@@ -122,7 +118,6 @@ class CaptchaBuilder
         }
         $this->isDrawCurve && $this->drawSineLine();
 
-        $codeNX = 0; // 验证码第N个字符的左边距
         $code = [];
 
         for ($i = 0; $i < $this->number; $i++) {

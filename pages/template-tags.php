@@ -9,10 +9,10 @@ get_header();
 
 <div id="page" class="container mt20">
     <?php get_template_part('templates/box', 'global-top') ?>
-    <?php echo pk_breadcrumbs(); while (have_posts()):the_post();?>
+    <?php echo publicus_breadcrumbs(); while (have_posts()):the_post();?>
         <div id="page-tags">
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
-                <div id="posts" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
+                <div id="posts" class="col-lg-<?php publicus_hide_sidebar_out('12','8') ?> col-md-12 <?php publicus_open_box_animated('animated fadeInLeft') ?> ">
                     <?php if(!empty(get_the_content())): ?>
                         <div class="mt20 p-block publicus-text entry-content">
                             <?php the_content() ?>

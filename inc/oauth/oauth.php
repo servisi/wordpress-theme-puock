@@ -19,7 +19,7 @@ class PkOAuthBase
 
 }
 
-function pk_oauth_list($user = null)
+function publicus_oauth_list($user = null)
 {
     $list = [
         'qq' => [
@@ -70,30 +70,30 @@ function pk_oauth_list($user = null)
             'system' => true,
         ]
     ];
-    return apply_filters('pk_oauth_list', $list);
+    return apply_filters('publicus_oauth_list', $list);
 }
 
-function pk_extra_user_profile_oauth($user)
+function publicus_extra_user_profile_oauth($user)
 {
-    $oauth_list = pk_oauth_list($user)
+    $oauth_list = publicus_oauth_list($user)
     ?>
     <h3>第三方账号绑定</h3>
     <table class="form-table">
         <?php foreach ($oauth_list as $item_key => $item_val):
-            if (!pk_is_checked('oauth_' . $item_key)) {
+            if (!publicus_is_checked('oauth_' . $item_key)) {
                 continue;
             } ?>
             <tr>
                 <th><label for="<?php echo $item_key ?>_oauth"><?php echo $item_val['label'] ?></label></th>
                 <td>
                     <?php if (empty($item_val['openid'])): ?>
-                        <a href="<?php echo pk_oauth_url_page_ajax($item_key, get_edit_profile_url()) ?>"
+                        <a href="<?php echo publicus_oauth_url_page_ajax($item_key, get_edit_profile_url()) ?>"
                            target="_blank"
                            class="button"
                            id="<?php echo $item_key ?>_oauth">立即绑定</a>
                     <?php else: ?>
                         <a id="<?php echo $item_key ?>_oauth"
-                           href="<?php echo pk_oauth_clear_bind_url($item_key, get_edit_profile_url()) ?>"
+                           href="<?php echo publicus_oauth_clear_bind_url($item_key, get_edit_profile_url()) ?>"
                            class="button">解除绑定<?php echo $item_val['label'] ?></a>
                     <?php endif; ?>
                 </td>
@@ -103,31 +103,30 @@ function pk_extra_user_profile_oauth($user)
     <?php
 }
 
-add_action('show_user_profile', 'pk_extra_user_profile_oauth');
-add_action('edit_user_profile', 'pk_extra_user_profile_oauth');
+add_action('show_user_profile', 'publicus_extra_user_profile_oauth');
+add_action('edit_user_profile', 'publicus_extra_user_profile_oauth');
 
-function pk_oauth_clear_bind_url($type, $redirect = null)
+function publicus_oauth_clear_bind_url($type, $redirect = null)
 {
     if (!$redirect) {
         $redirect = get_edit_profile_url();
     }
-    return admin_url() . "admin-ajax.php?action=pk_oauth_clear_bind&type={$type}&redirect={$redirect}";
+    return admin_url() . "admin-ajax.php?action=publicus_oauth_clear_bind&type={$type}&redirect={$redirect}";
 }
 
-function pk_oauth_clear_bind()
+function publicus_oauth_clear_bind()
 {
     $type = $_GET['type'];
     $redirect = $_GET['redirect'];
-    $oauth_list = pk_oauth_list();
+    $oauth_list = publicus_oauth_list();
     if (isset($oauth_list[$type])) {
         delete_user_meta(get_current_user_id(), $type . '_oauth');
     }
     wp_redirect($redirect);
 }
 
-pk_ajax_register('pk_oauth_clear_bind', 'pk_oauth_clear_bind');
+publicus_ajax_register('publicus_oauth_clear_bind', 'publicus_oauth_clear_bind');
 
-//授权返回页面回调
 function oauth_redirect_page($success = true, $info = '', $from_redirect = '')
 {
     if ($success) {
@@ -137,7 +136,7 @@ function oauth_redirect_page($success = true, $info = '', $from_redirect = '')
             wp_redirect($from_redirect);
         }
     } else {
-        pk_session_call(function () use ($info) {
+        publicus_session_call(function () use ($info) {
             $_SESSION['error_info'] = $info;
         });
         wp_redirect(PUBLICUS_ABS_URI . '/error.php');
@@ -145,44 +144,42 @@ function oauth_redirect_page($success = true, $info = '', $from_redirect = '')
     }
 }
 
-function pk_oauth_get_callback_url($type, $redirect = '')
+function publicus_oauth_get_callback_url($type, $redirect = '')
 {
-    return admin_url() . 'admin-ajax.php?action=pk_oauth_callback&type=' . $type . '&redirect=' . urlencode($redirect);
+    return admin_url() . 'admin-ajax.php?action=publicus_oauth_callback&type=' . $type . '&redirect=' . urlencode($redirect);
 }
 
-function pk_oauth_url_page_ajax($type, $redirect = '')
+function publicus_oauth_url_page_ajax($type, $redirect = '')
 {
-    return admin_url() . "admin-ajax.php?action=pk_oauth_start_redirect&type={$type}&redirect={$redirect}";
+    return admin_url() . "admin-ajax.php?action=publicus_oauth_start_redirect&type={$type}&redirect={$redirect}";
 }
 
-function pk_oauth_get_base($type, $redirect = '')
+function publicus_oauth_get_base($type, $redirect = '')
 {
-    if (!pk_is_checked('oauth_' . $type)) {
+    if (!publicus_is_checked('oauth_' . $type)) {
         return null;
     }
-    $oauth_list = pk_oauth_list();
+    $oauth_list = publicus_oauth_list();
     if (array_key_exists($type, $oauth_list)) {
         $oauth = $oauth_list[$type];
-        $oauth_id = pk_get_option('oauth_' . $type . '_' . (empty($oauth['id_field']) ? 'id' : $oauth['id_field']));
-        $oauth_key = pk_get_option('oauth_' . $type . '_' . (empty($oauth['secret_field']) ? 'secret' : $oauth['secret_field']));
-        return new PkOAuthBase($oauth, new $oauth['class']($oauth_id, $oauth_key, pk_oauth_get_callback_url($type, $redirect)));
+        $oauth_id = publicus_get_option('oauth_' . $type . '_' . (empty($oauth['id_field']) ? 'id' : $oauth['id_field']));
+        $oauth_key = publicus_get_option('oauth_' . $type . '_' . (empty($oauth['secret_field']) ? 'secret' : $oauth['secret_field']));
+        return new PkOAuthBase($oauth, new $oauth['class']($oauth_id, $oauth_key, publicus_oauth_get_callback_url($type, $redirect)));
     }
     return null;
 }
 
-// 第三方授权登录开始跳转
-function pk_oauth_start_redirect()
+function publicus_oauth_start_redirect()
 {
     $type = $_GET['type'];
     $redirect = $_GET['redirect'];
-    $oauth = pk_oauth_get_base($type, $redirect);
+    $oauth = publicus_oauth_get_base($type, $redirect);
     if (!$oauth) {
-        oauth_redirect_page(false, '不支持的第三方授权请求', $redirect);
         exit;
     }
     $url = $oauth->base->getAuthUrl();
     if (!empty($url)) {
-        pk_session_call(function () use ($oauth, $type) {
+        publicus_session_call(function () use ($oauth, $type) {
             $_SESSION['oauth_state_' . $type] = $oauth->base->state;
         });
         wp_redirect($url);
@@ -190,31 +187,29 @@ function pk_oauth_start_redirect()
     exit;
 }
 
-pk_ajax_register('pk_oauth_start_redirect', 'pk_oauth_start_redirect', true);
+publicus_ajax_register('publicus_oauth_start_redirect', 'publicus_oauth_start_redirect', true);
 
-function pk_oauth_callback()
+function publicus_oauth_callback()
 {
     $type = $_GET['type'];
     $redirect = $_GET['redirect'];
-    pk_oauth_callback_execute($type, $redirect);
+    publicus_oauth_callback_execute($type, $redirect);
 }
 
-function pk_oauth_callback_execute($type, $redirect)
+function publicus_oauth_callback_execute($type, $redirect)
 {
     if (!empty($redirect)) {
         $redirect = urldecode($redirect);
     }
-    $oauth = pk_oauth_get_base($type, $redirect);
+    $oauth = publicus_oauth_get_base($type, $redirect);
     if (!$oauth) {
-        oauth_redirect_page(false, '无效授权请求', $redirect);
         exit;
     }
     $oauth_state = null;
-    pk_session_call(function () use (&$oauth_state, $type) {
+    publicus_session_call(function () use (&$oauth_state, $type) {
         $oauth_state = $_SESSION['oauth_state_' . $type];
     });
     if (empty($oauth_state)) {
-        oauth_redirect_page(false, '无效的授权状态', $redirect);
         exit;
     }
     $oauthBase = $oauth->base;
@@ -222,17 +217,14 @@ function pk_oauth_callback_execute($type, $redirect)
         $oauthBase->getAccessToken($oauth_state);
         $userInfo = $oauthBase->getUserInfo();
     } catch (Exception $e) {
-        oauth_redirect_page(false, '授权失败：' . $e->getMessage(), $redirect);
         exit;
     }
     if (is_user_logged_in()) {
         $bind_users = get_users(array('meta_key' => $type . '_oauth', 'meta_value' => $oauthBase->openid, 'exclude' => get_current_user_id()));
         if ($bind_users && count($bind_users) > 0) {
-            oauth_redirect_page(false, '绑定失败：此授权' . $oauth->oauth['label'] . '账户已被其他账户使用', $redirect);
             exit;
         }
         if (!empty(get_user_meta(get_current_user_id(), $type . "_oauth"))) {
-            oauth_redirect_page(false, '绑定失败：此账户已绑定其他' . $oauth->oauth['label'] . '授权账户', $redirect);
             exit;
         }
         $user = wp_get_current_user();
@@ -242,8 +234,7 @@ function pk_oauth_callback_execute($type, $redirect)
     } else {
         $users = get_users(array('meta_key' => $type . '_oauth', 'meta_value' => $oauthBase->openid));
         if (!$users || count($users) <= 0) {
-            //不存在用户，先自动注册再登录
-            if (pk_is_checked('oauth_close_register')) {
+            if (publicus_is_checked('oauth_close_register')) {
                 oauth_redirect_page(false, '您的' . $oauth->oauth['label'] . '账号未绑定本站账户，当前已关闭自动注册，请手动注册后再进入个人资料中进行绑定', $redirect);
                 exit;
             }
@@ -268,33 +259,31 @@ function pk_oauth_callback_execute($type, $redirect)
     }
 }
 
-pk_ajax_register('pk_oauth_callback', 'pk_oauth_callback', true);
+publicus_ajax_register('publicus_oauth_callback', 'publicus_oauth_callback', true);
 
-//登录页快捷按钮
-function pk_oauth_form()
+function publicus_oauth_form()
 {
     $out = "<div>";
-    $oauth_list = pk_oauth_list();
+    $oauth_list = publicus_oauth_list();
     foreach ($oauth_list as $key => $val) {
-        if (pk_is_checked('oauth_' . $key)) {
-            $out .= '<a style="margin-right:5px;margin-bottom:10px" href="' . pk_oauth_url_page_ajax($key, admin_url()) . '" class="button button-large">' . $val['label'] . '登录</a>';
+        if (publicus_is_checked('oauth_' . $key)) {
         }
     }
     $out .= "</div>";
     echo $out;
 }
 
-add_action('login_form', 'pk_oauth_form');
-add_action('register_form', 'pk_oauth_form');
+add_action('login_form', 'publicus_oauth_form');
+add_action('register_form', 'publicus_oauth_form');
 
-function pk_oauth_platform_count()
+function publicus_oauth_platform_count()
 {
     $count = 0;
-    $oauth_list = pk_oauth_list();
+    $oauth_list = publicus_oauth_list();
     foreach ($oauth_list as $key => $val) {
-        if (pk_is_checked('oauth_' . $key)) {
+        if (publicus_is_checked('oauth_' . $key)) {
             $count++;
         }
     }
-    return apply_filters('pk_oauth_platform_count', $count);
+    return apply_filters('publicus_oauth_platform_count', $count);
 }

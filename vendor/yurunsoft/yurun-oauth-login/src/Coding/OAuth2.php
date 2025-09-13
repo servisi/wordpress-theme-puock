@@ -26,11 +26,8 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第一步:获取登录页面跳转url.
      *
-     * @param string $callbackUrl 登录回调地址
      * @param string $state       coding无用
-     * @param array  $scope       请求用户授权时向用户显示的可进行授权的列表，多个用逗号分隔
      *
      * @return string
      */
@@ -53,7 +50,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第二步:处理回调并获取access_token。与getAccessToken不同的是会验证state值是否匹配，防止csrf攻击。
      *
      * @param string $storeState 存储的正确的state
      * @param string $code       第一步里$redirectUri地址中传过来的code，为null则通过get参数获取
@@ -80,7 +76,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 获取用户资料.
      *
      * @param string $accessToken
      *
@@ -112,12 +107,10 @@ class OAuth2 extends Base
      */
     public function refreshToken($refreshToken)
     {
-        // api/oauth/access_token接口返回了refresh_token，但没刷新接口
         return false;
     }
 
     /**
-     * 检验授权凭证AccessToken是否有效.
      *
      * @param string $accessToken
      *

@@ -1,8 +1,7 @@
-<?php if (pk_is_checked('use_post_menu')) get_template_part('templates/module', 'menus') ?>
-<!--返回顶部和底部-->
+<?php if (publicus_is_checked('use_post_menu')) get_template_part('templates/module', 'menus') ?>
 <div id="rb-float-actions">
-    <?php echo apply_filters('pk_rb_float_actions','') ?>
-    <?php if (pk_is_checked('mobile_sidebar_enable')): ?>
+    <?php echo apply_filters('publicus_rb_float_actions','') ?>
+    <?php if (publicus_is_checked('mobile_sidebar_enable')): ?>
     <div id="mobile-sidebar-toggle" class="p-block d-md-none"><i class="fa-solid fa-bars-progress publicus-text"></i></div>
     <?php endif; ?>
     <div data-to="top" class="p-block"><i class="fa fa-arrow-up publicus-text"></i></div>
@@ -11,27 +10,27 @@
 <footer id="footer">
     <div class="container">
         <div class="row row-cols-md-1">
-            <?php if (pk_is_checked('footer_about_me_open')): ?>
+            <?php if (publicus_is_checked('footer_about_me_open')): ?>
                 <div class="col-md-6">
                     <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
-                                    class="fa-regular fa-bell"></i> <?php echo pk_get_option('footer_about_me_title', '') ?></span>
+                                    class="fa-regular fa-bell"></i> <?php echo publicus_get_option('footer_about_me_title', '') ?></span>
                     </div>
-                    <p class="mt20 t-md"><?php echo pk_get_option('footer_about_me', '') ?></p>
+                    <p class="mt20 t-md"><?php echo publicus_get_option('footer_about_me', '') ?></p>
                 </div>
             <?php endif; ?>
-            <?php if (pk_is_checked('footer_copyright_open')): ?>
+            <?php if (publicus_is_checked('footer_copyright_open')): ?>
                 <div class="col-md-6">
                     <div><span class="t-md pb-2 d-inline-block border-bottom border-primary"><i
-                                    class="fa-regular fa-copyright"></i> <?php echo pk_get_option('footer_copyright_title', '') ?></span>
+                                    class="fa-regular fa-copyright"></i> <?php echo publicus_get_option('footer_copyright_title', '') ?></span>
                     </div>
-                    <p class="mt20 t-md"><?php echo pk_get_option('footer_copyright', '') ?></p>
+                    <p class="mt20 t-md"><?php echo publicus_get_option('footer_copyright', '') ?></p>
                 </div>
             <?php endif; ?>
         </div>
     </div>
     <div class="mt20 text-center t-md">
         <div class="info">
-            <?php echo apply_filters('pk_footer_info','') ?>
+            <?php echo apply_filters('publicus_footer_info','') ?>
         </div>
     </div>
     </div>
@@ -40,10 +39,10 @@
 <div id="gt-validate-box"></div>
 <?php get_template_part('inc/metas') ?>
 <?php wp_footer(); ?>
-<?php if (!empty(pk_get_option('tj_code_footer', ''))): ?>
-    <?php echo pk_get_option('tj_code_footer', ''); ?>
+<?php if (!empty(publicus_get_option('tj_code_footer', ''))): ?>
+    <?php echo publicus_get_option('tj_code_footer', ''); ?>
 <?php endif; ?>
-<?php pk_debug_print_sql_list(); ?>
+<?php publicus_debug_print_sql_list(); ?>
 
 <!-- 移动端Kenar Çubuğu -->
 <div id="mobile-sidebar" class="mobile-sidebar">
@@ -55,17 +54,17 @@
         <div class="mobile-sidebar-body">
             <?php
             if (is_home()):
-                pk_sidebar_check_has('sidebar_home');
+                publicus_sidebar_check_has('sidebar_home');
             elseif (is_single()):
-                pk_sidebar_check_has('sidebar_single');
+                publicus_sidebar_check_has('sidebar_single');
             elseif (is_search()):
-                pk_sidebar_check_has('sidebar_search');
+                publicus_sidebar_check_has('sidebar_search');
             elseif (is_category() || is_tag()):
-                pk_sidebar_check_has('sidebar_cat');
+                publicus_sidebar_check_has('sidebar_cat');
             elseif (is_page()):
-                pk_sidebar_check_has('sidebar_page');
+                publicus_sidebar_check_has('sidebar_page');
             else:
-                pk_sidebar_check_has('sidebar_other');
+                publicus_sidebar_check_has('sidebar_other');
             endif;
             ?>
         </div>

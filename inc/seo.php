@@ -1,6 +1,6 @@
 <?php if (is_home()) : ?>
-    <meta name="keywords" content="<?php echo pk_get_option('keyword') ?>"/>
-    <meta name="description" content="<?php echo pk_get_option('description') ?>"/>
+    <meta name="keywords" content="<?php echo publicus_get_option('keyword') ?>"/>
+    <meta name="description" content="<?php echo publicus_get_option('description') ?>"/>
 <?php endif; ?>
 <?php if (is_single()) : while (have_posts()) : the_post(); ?>
     <meta name="keywords" content="<?php

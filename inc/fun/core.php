@@ -10,15 +10,15 @@ function publicus_theme_setup()
 }
 
 
-function pk_ajax_resp($data = null, $msg = '', $code = 0)
+function publicus_ajax_resp($data = null, $msg = '', $code = 0)
 {
     header('Content-Type: application/json; charset=utf-8');
     return json_encode(array('data' => $data, 'msg' => $msg, 'code' => $code));
 }
 
-function pk_ajax_resp_error($msg = 'fail', $data = null)
+function publicus_ajax_resp_error($msg = 'fail', $data = null)
 {
-    return pk_ajax_resp($data, $msg, -1);
+    return publicus_ajax_resp($data, $msg, -1);
 }
 
 require_once PUBLICUS_ABS_DIR . '/inc/fun/cache.php';
@@ -41,7 +41,7 @@ require_once PUBLICUS_ABS_DIR . '/inc/fun/comment-notify.php';
 require_once PUBLICUS_ABS_DIR . '/inc/user-agent-parse.php';
 require_once PUBLICUS_ABS_DIR . '/inc/phpqrcode.php';
 require_once PUBLICUS_ABS_DIR . '/inc/ajax/index.php';
-if (pk_is_checked('no_category')) {
+if (publicus_is_checked('no_category')) {
     require_once PUBLICUS_ABS_DIR . '/inc/no-category.php';
 }
 $puock_class_load = new PuockClassLoad();
@@ -49,25 +49,25 @@ $puock_class_load = new PuockClassLoad();
 /*Auth-Domains*/
 
 //钩子添加集合
-if (pk_is_checked('html_page_permalink')) {
+if (publicus_is_checked('html_page_permalink')) {
     add_action('init', 'html_page_permalink', -1);
 }
 add_filter('user_trailingslashit', 'add_init_trailingslashit', 10, 2);
 
 
-function pk_open_session()
+function publicus_open_session()
 {
     session_start();
 }
 
-function pk_wclose_session()
+function publicus_wclose_session()
 {
     session_write_close();
 }
 
-function pk_session_call($function)
+function publicus_session_call($function)
 {
-    pk_open_session();
+    publicus_open_session();
     try {
         $function();
     } finally {
@@ -75,14 +75,14 @@ function pk_session_call($function)
     }
 }
 
-function pk_get_theme_option_url($to = '')
+function publicus_get_theme_option_url($to = '')
 {
     return admin_url() . 'admin.php?page=publicus-options&to=' . $to;
 }
 
 
 // Üst menüye özel menü ekle
-function pk_toolbar_link(WP_Admin_Bar $bar)
+function publicus_toolbar_link(WP_Admin_Bar $bar)
 {
     $menu_id = 'theme-quick-start';
     $bar->add_node(array(
@@ -94,7 +94,7 @@ function pk_toolbar_link(WP_Admin_Bar $bar)
         'id' => 'theme-setting',
         'parent' => $menu_id,
         'title' => '<i class="czs-setting" style="color:#9627e3"></i>&nbsp;Tema Ayarları',
-        'href' => pk_get_theme_option_url()
+        'href' => publicus_get_theme_option_url()
     ));
     $bar->add_node(array(
         'id' => 'theme-docs',
@@ -135,17 +135,17 @@ function pk_toolbar_link(WP_Admin_Bar $bar)
 }
 
 if (is_user_logged_in() && current_user_can('manage_options')) {
-    add_action('admin_bar_menu', 'pk_toolbar_link', 999);
+    add_action('admin_bar_menu', 'publicus_toolbar_link', 999);
 }
 
-function pk_admin_scripts()
+function publicus_admin_scripts()
 {
     wp_enqueue_script('puock-admin', get_stylesheet_directory_uri() . '/assets/dist/admin.min.js',
         array(), PUBLICUS_CUR_VER_STR, true);
 }
 
-add_action('admin_enqueue_scripts', 'pk_admin_scripts');
-function pk_admin_print_scripts()
+add_action('admin_enqueue_scripts', 'publicus_admin_scripts');
+function publicus_admin_print_scripts()
 {
     $settings = json_encode(array(
         'compatible' => [
@@ -155,12 +155,12 @@ function pk_admin_print_scripts()
     echo "<script type='text/javascript'>var puock_admin_setting = $settings</script>";
 }
 
-add_action('admin_print_footer_scripts', 'pk_admin_print_scripts', 1);
+add_action('admin_print_footer_scripts', 'publicus_admin_print_scripts', 1);
 
 
-function pk_is_pjax()
+function publicus_is_pjax()
 {
-    return pk_is_checked('page_ajax_load', false);
+    return publicus_is_checked('page_ajax_load', false);
 }
 
 //判断阅读数量是否需要增加并进行操作
@@ -205,10 +205,10 @@ function async_pk_views()
 {
     $postId = $_POST['id'];
     if (empty($postId)) {
-        echo pk_ajax_resp(0);
+        echo publicus_ajax_resp(0);
         return;
     }
-    echo pk_ajax_resp(the_views($postId, false, true));
+    echo publicus_ajax_resp(the_views($postId, false, true));
     wp_die();
 }
 
@@ -230,24 +230,24 @@ add_action('publish_post', 'set_views');
 function get_total_views()
 {
     global $wpdb;
-    $views = pk_cache_get(PKC_TOTAL_VIEWS);
+    $views = publicus_cache_get(PKC_TOTAL_VIEWS);
     if (!$views) {
         $views = $wpdb->get_var("SELECT SUM(meta_value) FROM $wpdb->postmeta where meta_key='views'");
-        pk_cache_set(PKC_TOTAL_VIEWS, $views);
+        publicus_cache_set(PKC_TOTAL_VIEWS, $views);
     }
     return $views;
 }
 
 
-function pk_check_right_md5()
+function publicus_check_right_md5()
 {
-    global $pk_right_slug;
-    if (empty($pk_right_slug) || md5($pk_right_slug) != 'd8775b419146efc39dea7b0ab50c56d0') {
+    global $publicus_right_slug;
+    if (empty($publicus_right_slug) || md5($publicus_right_slug) != 'd8775b419146efc39dea7b0ab50c56d0') {
         wp_die(base64_decode('UGxlYXNlIGZvbGxvdyB0aGUgb3BlbiBzb3VyY2UgcnVsZXMgYW5kIGRvIG5vdCBjaGFuZ2Ugb3IgZGVsZXRlIHRoZSBib3R0b20gY29weXJpZ2h0IQ=='));
     }
 }
 
-add_action('init', 'pk_check_right_md5');
+add_action('init', 'publicus_check_right_md5');
 
 
 /**
@@ -270,10 +270,10 @@ function get_views_most_post($days, $nums)
 }
 
 //是否隐藏Kenar Çubuğu
-function pk_hide_sidebar($post_id = null)
+function publicus_hide_sidebar($post_id = null)
 {
     global $post;
-    if (pk_is_checked("hide_global_sidebar")) {
+    if (publicus_is_checked("hide_global_sidebar")) {
         return true;
     }
     if (is_single() || is_page()) {
@@ -286,10 +286,10 @@ function pk_hide_sidebar($post_id = null)
 }
 
 //隐藏/显示Kenar Çubuğu的输出字符
-function pk_hide_sidebar_out($hide = '', $show = '', $post_id = null, $echo = true)
+function publicus_hide_sidebar_out($hide = '', $show = '', $post_id = null, $echo = true)
 {
     $out = $show;
-    if (pk_hide_sidebar()) {
+    if (publicus_hide_sidebar()) {
         $out = $hide;
     }
     if (!$echo) {
@@ -299,7 +299,7 @@ function pk_hide_sidebar_out($hide = '', $show = '', $post_id = null, $echo = tr
 }
 
 //Kenar Çubuğu检测数据
-function pk_sidebar_check_has($name)
+function publicus_sidebar_check_has($name)
 {
     if (!dynamic_sidebar($name)) {
         dynamic_sidebar('sidebar_not');
@@ -307,7 +307,7 @@ function pk_sidebar_check_has($name)
 }
 
 //获取链接对象，用于书籍推荐及其他页面使用
-function pk_get_wp_links($link_cats = '')
+function publicus_get_wp_links($link_cats = '')
 {
     global $wpdb;
     if (empty($link_cats)) {
@@ -324,26 +324,26 @@ function pk_get_wp_links($link_cats = '')
 }
 
 //获取懒加载图片信息
-function pk_get_lazy_pl_img()
+function publicus_get_lazy_pl_img()
 {
-    return pk_get_static_url() . "/assets/img/z/load.svg";
+    return publicus_get_static_url() . "/assets/img/z/load.svg";
 }
 
-function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = null, $thumbnail = true)
+function publicus_get_lazy_img_info($origin, $class = '', $width = null, $height = null, $thumbnail = true)
 {
-    if (!pk_is_checked('basic_img_lazy_s')) {
+    if (!publicus_is_checked('basic_img_lazy_s')) {
         if ($thumbnail) {
-            $out = "src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "' ";
+            $out = "src='" . publicus_get_img_thumbnail_src($origin, $width, $height) . "' ";
             $out .= "class='" . $class . "' ";
         } else {
             $out = "src='{$origin}' ";
             $out .= "class='{$class}' ";
         }
     } else {
-        $out = "src='" . pk_get_lazy_pl_img() . "' ";
+        $out = "src='" . publicus_get_lazy_pl_img() . "' ";
         $out .= "class='lazy " . $class . "' ";
         if ($thumbnail) {
-            $out .= "data-src='" . pk_get_img_thumbnail_src($origin, $width, $height) . "'";
+            $out .= "data-src='" . publicus_get_img_thumbnail_src($origin, $width, $height) . "'";
         } else {
             $out .= "data-src='" . $origin . "'";
         }
@@ -351,39 +351,39 @@ function pk_get_lazy_img_info($origin, $class = '', $width = null, $height = nul
     return $out;
 }
 
-function pk_content_img_lazy($content)
+function publicus_content_img_lazy($content)
 {
-    return preg_replace('/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i', "<img\$1data-src=\"\$2\" data-lazy=\"true\" src=\"" . pk_get_lazy_pl_img() . "\"\$3/>", $content);
+    return preg_replace('/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i', "<img\$1data-src=\"\$2\" data-lazy=\"true\" src=\"" . publicus_get_lazy_pl_img() . "\"\$3/>", $content);
 }
 
-if (pk_is_checked('basic_img_lazy_z')) {
-    add_filter('the_content', 'pk_content_img_lazy');
+if (publicus_is_checked('basic_img_lazy_z')) {
+    add_filter('the_content', 'publicus_content_img_lazy');
 }
 //获取图片缩略图链接
-function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
+function publicus_get_img_thumbnail_src($src, $width, $height, $args = array())
 {
     if ($width == null || $height == null) {
         return $src;
     }
-    if (pk_is_checked('thumbnail_rewrite_open')) {
-        return home_url() . "/timthumb/w_{$width}/h_{$height}/q_90/zc_1/a_c/" . pk_safe_base64_encode($src) . ".png";
+    if (publicus_is_checked('thumbnail_rewrite_open')) {
+        return home_url() . "/timthumb/w_{$width}/h_{$height}/q_90/zc_1/a_c/" . publicus_safe_base64_encode($src) . ".png";
     }
     return PUBLICUS_ABS_URI . "/timthumb.php?w={$width}&h={$height}&a=c&zc=1&q=90&src=" . $src;
 }
 
 //获取文章样式是否是卡片式
-function pk_post_style_list()
+function publicus_post_style_list()
 {
-    return pk_get_option('post_style', 'list') == 'list';
+    return publicus_get_option('post_style', 'list') == 'list';
 }
 
 //评论添加@功能
-if (pk_is_checked('comment_has_at')) {
-    add_filter('comment_text', 'pk_comment_add_at', 10, 2);
+if (publicus_is_checked('comment_has_at')) {
+    add_filter('comment_text', 'publicus_comment_add_at', 10, 2);
 }
 //GrAvatar头像源切换
-if (pk_get_option('gravatar_url', 'wp') != 'wp') {
-    $type = pk_get_option('gravatar_url', 'wp');
+if (publicus_get_option('gravatar_url', 'wp') != 'wp') {
+    $type = publicus_get_option('gravatar_url', 'wp');
     if ($type == 'cravatar') {
         add_filter('get_avatar', 'cr_avatar');
         add_filter('get_avatar_url', 'cr_avatar');
@@ -403,12 +403,12 @@ if (pk_get_option('gravatar_url', 'wp') != 'wp') {
         add_filter('get_avatar', 'v2ex_ssl_avatar');
         add_filter('get_avatar_url', 'v2ex_ssl_avatar');
     } else if($type=='custom'){
-        add_filter('get_avatar', 'pk_custom_avatar');
-        add_filter('get_avatar_url', 'pk_custom_avatar');
+        add_filter('get_avatar', 'publicus_custom_avatar');
+        add_filter('get_avatar_url', 'publicus_custom_avatar');
     }
 }
 //评论者链接
-function pk_comment_author_url($comment_ID = 0)
+function publicus_comment_author_url($comment_ID = 0)
 {
     global $comment;
     $attr = '';
@@ -419,25 +419,25 @@ function pk_comment_author_url($comment_ID = 0)
         $attr = "target='_blank' rel='external nofollow'";
     }
     $author = get_comment_author($comment_ID);
-    echo empty($url) ? $author : "<a " . $attr . " href='" . pk_go_link($url) . "' class='url'>$author</a>";
+    echo empty($url) ? $author : "<a " . $attr . " href='" . publicus_go_link($url) . "' class='url'>$author</a>";
 }
 
 //评论回复通知
-if (pk_is_checked('comment_mail_notify')) {
+if (publicus_is_checked('comment_mail_notify')) {
     add_action('comment_unapproved_to_approved', 'comment_mail_notify');
     add_action('comment_post', 'comment_mail_notify');
 }
 //覆盖邮件配置
-if (pk_is_checked('smtp_open')) {
+if (publicus_is_checked('smtp_open')) {
     function mail_smtp_set($phpmailer)
     {
-        $phpmailer->From = pk_get_option('smtp_form', '');
-        $phpmailer->FromName = pk_get_option('smtp_form_n', '');
-        $phpmailer->Host = pk_get_option('smtp_host', '');
-        $phpmailer->Port = pk_get_option('smtp_port', '');
-        $phpmailer->SMTPSecure = pk_is_checked('smtp_ssl') ? 'ssl' : '';
-        $phpmailer->Username = pk_get_option('smtp_u', '');
-        $phpmailer->Password = pk_get_option('smtp_p', '');
+        $phpmailer->From = publicus_get_option('smtp_form', '');
+        $phpmailer->FromName = publicus_get_option('smtp_form_n', '');
+        $phpmailer->Host = publicus_get_option('smtp_host', '');
+        $phpmailer->Port = publicus_get_option('smtp_port', '');
+        $phpmailer->SMTPSecure = publicus_is_checked('smtp_ssl') ? 'ssl' : '';
+        $phpmailer->Username = publicus_get_option('smtp_u', '');
+        $phpmailer->Password = publicus_get_option('smtp_p', '');
         $phpmailer->IsSMTP();
         $phpmailer->SMTPAuth = true;
     }
@@ -445,43 +445,42 @@ if (pk_is_checked('smtp_open')) {
     add_action('phpmailer_init', 'mail_smtp_set');
 }
 //检测是否默认的第三方生成邮箱
-function pk_email_change_email($email_change_email, $user = null, $userdata = null)
+function publicus_email_change_email($email_change_email, $user = null, $userdata = null)
 {
-    if (pk_check_email_is_sysgen($email_change_email['to'])) {
+    if (publicus_check_email_is_sysgen($email_change_email['to'])) {
         return null;
     }
     return $email_change_email;
 }
 
-add_filter('email_change_email', 'pk_email_change_email');
+add_filter('email_change_email', 'publicus_email_change_email');
 //检测邮箱是否系统生成
-function pk_check_email_is_sysgen($email)
+function publicus_check_email_is_sysgen($email)
 {
     return preg_match("/^_p_[\w].+@null.null/", $email);
 }
 
-//后台登录保护
 function login_protection()
 {
     if (!is_user_logged_in()) {
-        if ($_GET[pk_get_option('lp_user', 'admin')] != pk_get_option('lp_pass', 'admin')) {
+        if ($_GET[publicus_get_option('lp_user', 'admin')] != publicus_get_option('lp_pass', 'admin')) {
             header("Location: " . home_url());
         }
     }
 }
 
-if (pk_is_checked('login_protection')) {
+if (publicus_is_checked('login_protection')) {
     add_action('login_enqueue_scripts', 'login_protection');
 }
-if (pk_is_checked('compress_html')) {
+if (publicus_is_checked('compress_html')) {
     add_action('get_header', 'wp_compress_html');
 }
 //百度主动推送
-function pk_baidu_submit($post_ID)
+function publicus_baidu_submit($post_ID)
 {
     if (get_post_meta($post_ID, 'baidu_submit_url_status', true) == 1) return;
     $post_url = get_permalink($post_ID);
-    $api_url = pk_get_option('baidu_submit_url');
+    $api_url = publicus_get_option('baidu_submit_url');
     $resp = wp_remote_post($api_url, array('body' => $post_url, 'headers' => 'Content-Type: text/plain'));
     $res = @json_decode($resp['body'], true);
     if (isset($res['success'])) {
@@ -489,11 +488,11 @@ function pk_baidu_submit($post_ID)
     }
 }
 
-if (pk_is_checked('open_baidu_submit')) {
-    add_action('publish_post', 'pk_baidu_submit', 0);
+if (publicus_is_checked('open_baidu_submit')) {
+    add_action('publish_post', 'publicus_baidu_submit', 0);
 }
 //对pre里面的内容进行转义
-function pk_tag_pre_encode($content)
+function publicus_tag_pre_encode($content)
 {
     preg_match_all("/<pre.*?>(.+?)<\/pre>/is", $content, $matches);
     if (isset($matches[1])) {
@@ -511,9 +510,9 @@ function pk_tag_pre_encode($content)
     return $content;
 }
 
-add_filter('the_content', 'pk_tag_pre_encode');
-add_filter('comment_text', 'pk_tag_pre_encode');
-function pk_htmlspecialchars($content)
+add_filter('the_content', 'publicus_tag_pre_encode');
+add_filter('comment_text', 'publicus_tag_pre_encode');
+function publicus_htmlspecialchars($content)
 {
     $content = str_replace("<", "&lt;", $content);
     $content = str_replace(">", "&gt;", $content);
@@ -558,7 +557,7 @@ register_nav_menus(array(
 ));
 
 //获取主题配置
-function pk_get_option($name, $default = null)
+function publicus_get_option($name, $default = null)
 {
     $config = get_option(PUBLICUS_OPT);
     if ($config && isset($config[$name])) {
@@ -568,9 +567,9 @@ function pk_get_option($name, $default = null)
 }
 
 //配置是否选择
-function pk_is_checked($name, $default = false)
+function publicus_is_checked($name, $default = false)
 {
-    $val = pk_get_option($name);
+    $val = publicus_get_option($name);
     if ($val === true || $val === 'true' || $val === 1 || $val === '1') {
         return true;
     }
@@ -581,23 +580,23 @@ function pk_is_checked($name, $default = false)
 }
 
 //配置选择输出
-function pk_checked_out($name, $out = '', $default = 0)
+function publicus_checked_out($name, $out = '', $default = 0)
 {
-    if (pk_is_checked($name, $default)) {
+    if (publicus_is_checked($name, $default)) {
         echo $out;
     }
 }
 
 //主题模式
-function pk_theme_light()
+function publicus_theme_light()
 {
     if (isset($_COOKIE['mode'])) {
         return ($_COOKIE['mode'] == 'light') || $_COOKIE['mode'] == 'auto';
     }
-    return pk_get_option('theme_mode', 'light') == 'light';
+    return publicus_get_option('theme_mode', 'light') == 'light';
 }
 
-function pk_theme_mode()
+function publicus_theme_mode()
 {
     if (isset($_COOKIE['mode'])) {
         return $_COOKIE['mode'];
@@ -606,9 +605,9 @@ function pk_theme_mode()
 }
 
 //动画载入
-function pk_open_box_animated($class, $echo = true)
+function publicus_open_box_animated($class, $echo = true)
 {
-    $open = pk_is_checked("page_animate") == 1;
+    $open = publicus_is_checked("page_animate") == 1;
     if ($open) {
         if (!$echo) {
             return $class;
@@ -656,27 +655,26 @@ function get_all_category_id_row($type = null)
 
 
 //获取菜单数据
-function pk_get_main_menu($mobile = false)
+function publicus_get_main_menu($mobile = false)
 {
     global $wp;
     $menus = get_nav_menu_object('primary');
     $out = $mobile ? "<ul class='puock-links t-md'>" : "<ul>";
     if ($menus && count($menus) > 0) {
-        pk_get_menu_obj_to_html($menus, $out, $mobile);
+        publicus_get_menu_obj_to_html($menus, $out, $mobile);
     }
     if (is_user_logged_in()) {
         $user = wp_get_current_user();
         $avatar = get_avatar_url($user->user_email);
-        $out .= '<li><a ' . (pk_is_checked('user_center') ? '' : 'data-no-instant') . ' data-bs-toggle="tooltip" title="用户中心" href="' . pk_user_center_url() . '"><img alt="用户中心" src="' . $avatar . '" class="min-avatar"></a></li>';
     } else {
-        if (pk_is_checked('open_quick_login')) {
-            $url = pk_ajax_url('pk_font_login_page', ['redirect' => home_url($wp->request)]);
+        if (publicus_is_checked('open_quick_login')) {
+            $url = publicus_ajax_url('publicus_font_login_page', ['redirect' => home_url($wp->request)]);
             $out .= '<li><a data-no-instant data-bs-toggle="tooltip" title="登入" data-title="登入" href="javascript:void(0)" class="pk-modal-toggle" data-once-load="true" data-url="' . $url . '"><i class="fa fa-right-to-bracket"></i></a></li>';
         }
     }
     if (!$mobile) {
-        if (pk_is_checked('theme_mode_s')) {
-            $out .= '<li><a class="colorMode" data-bs-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="fa fa-' . ((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))) . '"></i></a></li>';
+        if (publicus_is_checked('theme_mode_s')) {
+            $out .= '<li><a class="colorMode" data-bs-toggle="tooltip" title="模式切换" href="javascript:void(0)"><i class="fa fa-' . ((publicus_theme_mode() === 'auto' ? 'circle-half-stroke' : (publicus_theme_light() ? 'sun' : 'moon'))) . '"></i></a></li>';
         }
         $out .= '<li><a class="search-modal-btn" data-bs-toggle="tooltip" title="搜索" href="javascript:void(0)"><i class="fa fa-search"></i></a></li>';
     }
@@ -723,10 +721,10 @@ function get_nav_menu_object($location)
 }
 
 //将匹配的到的菜单数据转换为html
-function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1, $max_dpath = 2)
+function publicus_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1, $max_dpath = 2)
 {
     $child_class = $dpath_cur != 1 ? 'menu-item-child' : '';
-    $target = pk_link_target(false);
+    $target = publicus_link_target(false);
     foreach ($menus as $menu) {
         $classes = join(" ", $menu->classes);
         $cur = $menu->current ? 'menu-current' : '';
@@ -751,7 +749,7 @@ function pk_get_menu_obj_to_html($menus, &$out, $mobile = false, $dpath_cur = 1,
         if (count($menu->children) > 0 && $dpath_cur < $max_dpath) {
             $out .= '<ul ' . ($mobile ? 'id="menu-sub-' . $menu->ID . '"' : '') . ' class="sub-menu ' . ($mobile
                     ? 'collapse' : '') . '">';
-            pk_get_menu_obj_to_html($menu->children, $out, $mobile, $dpath_cur + 1, $max_dpath);
+            publicus_get_menu_obj_to_html($menu->children, $out, $mobile, $dpath_cur + 1, $max_dpath);
             $out .= '</ul>';
         }
     }
@@ -772,12 +770,12 @@ function get_category_child($parentId)
 }
 
 //主查询设置
-function pk_pre_post_set($query)
+function publicus_pre_post_set($query)
 {
     if ($query->is_home() && $query->is_main_query()) {
-        if (pk_get_option('index_mode', '') == 'cms') {
-            $sort = pk_get_option('cms_new_sort', 'published');
-            $query->set('posts_per_page', pk_get_option('cms_show_new_num', 6));
+        if (publicus_get_option('index_mode', '') == 'cms') {
+            $sort = publicus_get_option('cms_new_sort', 'published');
+            $query->set('posts_per_page', publicus_get_option('cms_show_new_num', 6));
             if ( $sort == 'published' ) {
                 $query->set( 'orderby', 'date' );
                 $query->set( 'order', 'DESC' );
@@ -789,12 +787,12 @@ function pk_pre_post_set($query)
     }
 }
 
-add_action('pre_get_posts', 'pk_pre_post_set');
+add_action('pre_get_posts', 'publicus_pre_post_set');
 
 //静态资源加载源的链接
-function pk_get_static_url()
+function publicus_get_static_url()
 {
-    $type = pk_get_option('static_load_origin', 'self');
+    $type = publicus_get_option('static_load_origin', 'self');
     switch ($type) {
         case "jsdelivr":
             $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUBLICUS_CUR_VER_STR;
@@ -809,7 +807,7 @@ function pk_get_static_url()
             $url_pre = "https://gcore.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUBLICUS_CUR_VER_STR;
             break;
         case 'custom':
-            $url_pre = pk_get_option('custom_static_load_origin', '');
+            $url_pre = publicus_get_option('custom_static_load_origin', '');
             break;
         default:
             $url_pre = PUBLICUS_ABS_URI;
@@ -818,20 +816,20 @@ function pk_get_static_url()
 }
 
 //是否打开讨论-显示头像
-function pk_open_show_comment_avatar()
+function publicus_open_show_comment_avatar()
 {
     return get_option('show_avatars') == "1";
 }
 
 //关闭区块小工具
-function pk_off_widgets_block()
+function publicus_off_widgets_block()
 {
     add_filter('gutenberg_use_widgets_block_editor', '__return_false');
     add_filter('use_widgets_block_editor', '__return_false');
 }
 
 //获取中文格式化的实例
-function pk_chinese_format($content)
+function publicus_chinese_format($content)
 {
     include_once dirname(__FILE__) . '/../lib/ChineseTypesetting.php';
     $typesetting = new ChineseTypesetting();
@@ -840,15 +838,15 @@ function pk_chinese_format($content)
     return $typesetting->full2Half($content);
 }
 
-if (pk_is_checked('chinese_format')) {
-    add_filter('the_content', 'pk_chinese_format', 199);
+if (publicus_is_checked('chinese_format')) {
+    add_filter('the_content', 'publicus_chinese_format', 199);
 }
 
 //获取缩略图的白名单
-function pk_get_thumbnail_allow_sites()
+function publicus_get_thumbnail_allow_sites()
 {
     $sites = [];
-    $thumbnail_allows = trim(pk_get_option("thumbnail_allows", ''));
+    $thumbnail_allows = trim(publicus_get_option("thumbnail_allows", ''));
     if (!empty($thumbnail_allows)) {
         foreach (explode("\n", $thumbnail_allows) as $site) {
             $site = trim($site);
@@ -861,15 +859,15 @@ function pk_get_thumbnail_allow_sites()
 }
 
 //生成缩略图白名单文件名称
-function pk_get_thumbnail_allow_sites_filepath()
+function publicus_get_thumbnail_allow_sites_filepath()
 {
     return PUBLICUS_ABS_DIR . '/.tas.php';
 }
 
 //生成缩略图白名单文件
-function pk_generate_thumbnail_allow_sites_file()
+function publicus_generate_thumbnail_allow_sites_file()
 {
-    $sites = pk_get_thumbnail_allow_sites();
+    $sites = publicus_get_thumbnail_allow_sites();
     $template = "<?php \$ALLOWED_SITES = [\n";
     if (count($sites) > 0) {
         foreach ($sites as $site) {
@@ -877,13 +875,13 @@ function pk_generate_thumbnail_allow_sites_file()
         }
     }
     $template .= "];";
-    return file_put_contents(pk_get_thumbnail_allow_sites_filepath(), $template);
+    return file_put_contents(publicus_get_thumbnail_allow_sites_filepath(), $template);
 }
 
-add_action('pk_option_updated', 'pk_generate_thumbnail_allow_sites_file', 10, 0);
+add_action('publicus_option_updated', 'publicus_generate_thumbnail_allow_sites_file', 10, 0);
 
 // get request model data
-function pk_get_req_data(array $model)
+function publicus_get_req_data(array $model)
 {
     $data = [];
     foreach ($model as $key => $item) {
@@ -908,7 +906,7 @@ function pk_get_req_data(array $model)
     return $data;
 }
 
-function pk_get_ip_region_str($ip)
+function publicus_get_ip_region_str($ip)
 {
     $ip2_instance = $GLOBALS['ip2_region'] ?? false;
     if (!$ip2_instance) {
@@ -935,10 +933,9 @@ function pk_get_ip_region_str($ip)
 }
 
 /**
- * 极验验证码校验
  * @throws Exception
  */
-function pk_vd_gt_validate(array $args = null)
+function publicus_vd_gt_validate(array $args = null)
 {
     if ($args == null) {
         $args = [
@@ -949,7 +946,7 @@ function pk_vd_gt_validate(array $args = null)
             'gen_time' => $_REQUEST['gen_time'] ?? '',
         ];
     }
-    $key = pk_get_option('vd_gt_key');
+    $key = publicus_get_option('vd_gt_key');
     $args['sign_token'] = hash_hmac('sha256', $args['lot_number'], $key);
     $result = wp_remote_request('https://gcaptcha4.geetest.com/validate?captcha_id=' . $args['captcha_id'], [
         'method' => 'POST',
@@ -957,33 +954,31 @@ function pk_vd_gt_validate(array $args = null)
         'timeout' => 5
     ]);
     if (is_wp_error($result)) {
-        throw new Exception('验证行为失败');
     }
     $result = json_decode($result['body'], true);
     if ($result['status'] != 'success' || $result['result'] != 'success') {
-        throw new Exception('验证行为失败: ' . $result['msg'] ?? $result['reason']);
     }
     return true;
 }
 
-function pk_user_center_url(): string
+function publicus_user_center_url(): string
 {
-    if (pk_is_checked('user_center')) {
+    if (publicus_is_checked('user_center')) {
         return home_url() . '/uc';
     }
     return get_edit_profile_url();
 }
 
-function pk_rewrite_rule()
+function publicus_rewrite_rule()
 {
-    if (pk_is_checked('user_center')) {
+    if (publicus_is_checked('user_center')) {
         add_rewrite_rule('^uc/?([0-9A-Za-z_\-]+)?$', 'index.php?pagename=user-center&id=$matches[1]', "top");
     }
 }
 
-add_action('init', 'pk_rewrite_rule');
+add_action('init', 'publicus_rewrite_rule');
 
-function pk_template_redirect()
+function publicus_template_redirect()
 {
     global $wp_query;
     $page_name = $wp_query->get('pagename');
@@ -997,21 +992,21 @@ function pk_template_redirect()
                 break;
         }
         if (!empty($template)) {
-            pk_load_template($template);
+            publicus_load_template($template);
             exit;
         }
     }
 }
 
-add_action('template_redirect', 'pk_template_redirect');
+add_action('template_redirect', 'publicus_template_redirect');
 
-function pk_query_vars($vars){
+function publicus_query_vars($vars){
     $vars[] = 'id';
     return $vars;
 }
-add_filter( 'query_vars', 'pk_query_vars' );
+add_filter( 'query_vars', 'publicus_query_vars' );
 
-function pk_load_template($_template_file, $require_once = true, $args = array())
+function publicus_load_template($_template_file, $require_once = true, $args = array())
 {
     status_header(200);
     load_template($_template_file, $require_once, $args);

@@ -28,7 +28,6 @@ abstract class Base
     public $appSecret;
 
     /**
-     * 登录回调地址
      *
      * @var string
      */
@@ -42,7 +41,6 @@ abstract class Base
     public $state;
 
     /**
-     * 授权权限列表.
      *
      * @var array
      */
@@ -70,7 +68,6 @@ abstract class Base
     public $openid;
 
     /**
-     * 登录代理地址，用于解决只能设置一个回调域名/地址的问题.
      *
      * @var string
      */
@@ -81,7 +78,6 @@ abstract class Base
      *
      * @param string $appid       应用的唯一标识
      * @param string $appSecret   appid对应的密钥
-     * @param string $callbackUrl 登录回调地址
      */
     public function __construct($appid = null, $appSecret = null, $callbackUrl = null)
     {
@@ -95,7 +91,6 @@ abstract class Base
      * 把jsonp转为php数组.
      *
      * @param string $jsonp jsonp字符串
-     * @param bool   $assoc 当该参数为true时，将返回array而非object
      *
      * @return array
      */
@@ -190,18 +185,13 @@ abstract class Base
     }
 
     /**
-     * 第一步:获取登录页面跳转url.
      *
-     * @param string $callbackUrl 登录回调地址
-     * @param string $state       状态值，不传则自动生成，随后可以通过->state获取。用于第三方应用防止CSRF攻击，成功授权后回调时会原样带回。一般为每个用户登录时随机生成state存在session中，登录回调中判断state是否和session中相同
-     * @param array  $scope       请求用户授权时向用户显示的可进行授权的列表。可空
      *
      * @return string
      */
     abstract public function getAuthUrl($callbackUrl = null, $state = null, $scope = null);
 
     /**
-     * 第二步:处理回调并获取access_token。与getAccessToken不同的是会验证state值是否匹配，防止csrf攻击。
      *
      * @param string $storeState 存储的正确的state
      * @param string $code       第一步里$callbackUrl地址中传过来的code，为null则通过get参数获取
@@ -213,14 +203,12 @@ abstract class Base
     {
         if (!$this->checkState($storeState, $state))
         {
-            throw new \InvalidArgumentException('state验证失败');
         }
 
         return $this->__getAccessToken($storeState, $code, $state);
     }
 
     /**
-     * 第二步:处理回调并获取access_token。与getAccessToken不同的是会验证state值是否匹配，防止csrf攻击。
      *
      * @param string $storeState 存储的正确的state
      * @param string $code       第一步里$callbackUrl地址中传过来的code，为null则通过get参数获取
@@ -231,7 +219,6 @@ abstract class Base
     abstract protected function __getAccessToken($storeState, $code = null, $state = null);
 
     /**
-     * 获取用户资料.
      *
      * @param string $accessToken
      *
@@ -249,7 +236,6 @@ abstract class Base
     abstract public function refreshToken($refreshToken);
 
     /**
-     * 检验授权凭证AccessToken是否有效.
      *
      * @param string $accessToken
      *
@@ -258,7 +244,6 @@ abstract class Base
     abstract public function validateAccessToken($accessToken = null);
 
     /**
-     * 输出登录代理页内容，用于解决只能设置一个回调域名/地址的问题.
      *
      * @return void
      */

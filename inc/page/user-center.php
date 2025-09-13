@@ -11,12 +11,11 @@ if (empty($current_user_center_menu)) {
     $current_user_center_menu = 'profile';
 }
 $user_center_menus = PuockUserCenter::get_menus();
-pk_set_custom_seo((isset($user_center_menus[$current_user_center_menu]) ? $user_center_menus[$current_user_center_menu]['title'].' - ' : '') . '用户中心');
 get_header();
 ?>
 
 <div id="content" class="mt20 container min-height-container">
-    <?php echo pk_breadcrumbs() ?>
+    <?php echo publicus_breadcrumbs() ?>
     <div class="p-block" id="user-center">
         <div class="row row-cols-1">
             <div class="col-lg-3 col-md-12">

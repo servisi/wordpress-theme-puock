@@ -8,7 +8,6 @@ use Yurun\Util\YurunHttp\Http\Psr7\Response as Psr7Response;
 class Response extends Psr7Response
 {
     /**
-     * 是否请求成功
      *
      * @var bool
      */
@@ -153,9 +152,7 @@ class Response extends Psr7Response
     }
 
     /**
-     * 获取返回的主体内容.
      *
-     * @param string $fromEncoding 请求返回数据的编码，如果不为空则进行编码转换
      * @param string $toEncoding   要转换到的编码，默认为UTF-8
      *
      * @return string
@@ -175,8 +172,6 @@ class Response extends Psr7Response
     /**
      * 获取xml格式内容.
      *
-     * @param bool   $assoc        为true时返回数组，为false时返回对象
-     * @param string $fromEncoding 请求返回数据的编码，如果不为空则进行编码转换
      * @param string $toEncoding   要转换到的编码，默认为UTF-8
      *
      * @return mixed
@@ -195,8 +190,6 @@ class Response extends Psr7Response
     /**
      * 获取json格式内容.
      *
-     * @param bool   $assoc        为true时返回数组，为false时返回对象
-     * @param string $fromEncoding 请求返回数据的编码，如果不为空则进行编码转换
      * @param string $toEncoding   要转换到的编码，默认为UTF-8
      *
      * @return mixed
@@ -209,8 +202,6 @@ class Response extends Psr7Response
     /**
      * 获取jsonp格式内容.
      *
-     * @param bool   $assoc        为true时返回数组，为false时返回对象
-     * @param string $fromEncoding 请求返回数据的编码，如果不为空则进行编码转换
      * @param string $toEncoding   要转换到的编码，默认为UTF-8
      *
      * @return mixed
@@ -280,7 +271,6 @@ class Response extends Psr7Response
     }
 
     /**
-     * 返回错误信息.
      *
      * @return string
      */
@@ -315,7 +305,6 @@ class Response extends Psr7Response
     }
 
     /**
-     * 返回错误代码
      *
      * @return int
      */

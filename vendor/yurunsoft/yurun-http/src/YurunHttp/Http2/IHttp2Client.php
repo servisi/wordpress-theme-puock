@@ -35,7 +35,6 @@ interface IHttp2Client
 
     /**
      * 发送数据
-     * 成功返回streamId，失败返回false.
      *
      * @param \Yurun\Util\YurunHttp\Http\Request $request
      * @param bool                               $pipeline         默认send方法在发送请求之后，会结束当前的Http2 Stream，启用PIPELINE后，底层会保持stream流，可以多次调用write方法，向服务器发送数据帧，请参考write方法

@@ -1,10 +1,10 @@
 <?php
 
-pk_ajax_register('pk_ajax_dialog_reward', 'pk_ajax_dialog_reward', true);
-function pk_ajax_dialog_reward()
+publicus_ajax_register('publicus_ajax_dialog_reward', 'publicus_ajax_dialog_reward', true);
+function publicus_ajax_dialog_reward()
 {
-    $reward_alipay = pk_get_option('post_reward_alipay');
-    $reward_wx = pk_get_option('post_reward_wx');
+    $reward_alipay = publicus_get_option('post_reward_alipay');
+    $reward_wx = publicus_get_option('post_reward_wx');
     if (empty($reward_alipay) && empty($reward_wx)) {
         echo '<div class="mt20 text-center">暂无打赏二维码</div>';
     } else {

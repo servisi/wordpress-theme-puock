@@ -6,8 +6,6 @@ use Yurun\OAuthLogin\ApiException;
 use Yurun\OAuthLogin\Base;
 
 /**
- * 支付宝授权
- * 网页授权文档：https://docs.open.alipay.com/53/104114.
  */
 class OAuth2 extends Base
 {
@@ -31,7 +29,6 @@ class OAuth2 extends Base
     public $signType = 'RSA2';
 
     /**
-     * 详见应用授权概述:https://opendocs.alipay.com/isv/10467/xldcyq.
      *
      * @var string
      */
@@ -52,11 +49,7 @@ class OAuth2 extends Base
     public $appPrivateKeyFile;
 
     /**
-     * 第一步:获取登录页面跳转url.
      *
-     * @param string $callbackUrl 登录回调地址
-     * @param string $state       非必须参数，用于保持请求和回调的状态，授权服务器在回调时（重定向用户浏览器到“redirect_uri”时），会在Query Parameter中原样回传该参数。OAuth2.0标准协议建议，利用state参数来防止CSRF攻击。
-     * @param array  $scope       非必须参数，以空格分隔的权限列表，若不传递此参数，代表请求用户的默认权限。
      *
      * @return string
      */
@@ -79,7 +72,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 第二步:处理回调并获取access_token。与getAccessToken不同的是会验证state值是否匹配，防止csrf攻击。
      *
      * @param string $storeState 存储的正确的state
      * @param string $code       第一步里$redirectUri地址中传过来的code，为null则通过get参数获取
@@ -122,7 +114,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 获取用户资料.
      *
      * @param string $accessToken
      * @link https://opendocs.alipay.com/apis/api_2/alipay.user.info.share
@@ -203,7 +194,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 检验授权凭证AccessToken是否有效.
      *
      * @param string $accessToken
      *
@@ -259,7 +249,6 @@ class OAuth2 extends Base
     }
 
     /**
-     * 处理验证数据.
      *
      * @param array $data
      *

@@ -3,18 +3,18 @@
 use Orhanerday\OpenAi\OpenAi;
 use Rahul900day\Gpt3Encoder\Encoder;
 
-function pk_openai_token_len($text): int
+function publicus_openai_token_len($text): int
 {
     return count(Encoder::encode($text));
 }
 
-function pk_ajax_ai_ask()
+function publicus_ajax_ai_ask()
 {
-    if (!pk_is_checked('ai_chat_enable')) {
+    if (!publicus_is_checked('ai_chat_enable')) {
         wp_die('<code>未启用AI助手</code>');
     }
     $uid = get_current_user_id();
-    if (!$uid && !pk_is_checked('ai_guest_use')) {
+    if (!$uid && !publicus_is_checked('ai_guest_use')) {
         wp_die('<code>游客不允许使用AI助手</code>');
     }
     $json_body = file_get_contents('php://input');
@@ -24,13 +24,13 @@ function pk_ajax_ai_ask()
     if (empty($text)) {
         wp_die('<code>请输入描述</code>');
     }
-    $ai_platform = pk_get_option('ai_chat_platform','gptnb');
+    $ai_platform = publicus_get_option('ai_chat_platform','gptnb');
     switch ($ai_platform){
         case 'gptnb': $openai_url='https://goapi.gptnb.ai';break;
         case 'openai': $openai_url='https://api.openai.com';break;
-        default:$openai_url=pk_get_option('ai_chat_agent', 'https://api.openai.com');
+        default:$openai_url=publicus_get_option('ai_chat_agent', 'https://api.openai.com');
     }
-    $openai_api_key = pk_get_option('ai_chat_key');
+    $openai_api_key = publicus_get_option('ai_chat_key');
     if (empty($openai_api_key)) {
         wp_die('<code>请先配置OpenAI API Key</code>');
     }
@@ -38,44 +38,42 @@ function pk_ajax_ai_ask()
     $openaiClient->setBaseURL($openai_url);
     $use_img_mode = $body['imgMode'] ?? false;
     if ($use_img_mode) {
-        if (!pk_is_checked('ai_draw_dall_e')) {
+        if (!publicus_is_checked('ai_draw_dall_e')) {
             wp_die('<code>暂未启用AI绘图</code>');
         }
         try {
             $chat_res = $openaiClient->image([
-                'model'=> pk_get_option('ai_draw_dall_e_model', 'dall-e-2'),
+                'model'=> publicus_get_option('ai_draw_dall_e_model', 'dall-e-2'),
                 'prompt' => $text,
                 'n' => 1,
-                'size' => pk_get_option('ai_draw_dall_e_size', '512x512'),
+                'size' => publicus_get_option('ai_draw_dall_e_size', '512x512'),
                 'response_format' => 'url',
             ]);
             $res = json_decode($chat_res);
             if (!$res) {
-                wp_die('<code>AI绘图失败：解析响应错误</code>');
             }
             $answer = $res->data[0]->url;
             wp_die('![img](' . $answer . ')');
         } catch (Exception $e) {
-            wp_die('<code>AI绘图失败：' . $e->getMessage() . '</code>');
         }
     }
-    $use_stream = pk_is_checked('ai_chat_stream');
+    $use_stream = publicus_is_checked('ai_chat_stream');
     if ($use_stream) {
         set_time_limit(0);
         ini_set('memory_limit', '-1');
         header('Content-Type: text/event-stream');
         header('X-Accel-Buffering: no');
     }
-    $sys_content = pk_get_option('ai_chat_model_sys_prompt');
+    $sys_content = publicus_get_option('ai_chat_model_sys_prompt');
     $messages = [];
-    $use_total_token = pk_openai_token_len($text);
+    $use_total_token = publicus_openai_token_len($text);
     if (!empty($sys_content)) {
         $messages[] = ['role' => 'system', 'content' => $sys_content];
-        $use_total_token += pk_openai_token_len($sys_content);
+        $use_total_token += publicus_openai_token_len($sys_content);
     }
     $messages[] = ['role' => 'user', 'content' => $text];
-    $max_tokens = pk_get_option('openai_max_tokens', 0);
-    $temperature = pk_get_option('openai_temperature', 0.9);
+    $max_tokens = publicus_get_option('openai_max_tokens', 0);
+    $temperature = publicus_get_option('openai_temperature', 0.9);
     $args = [
         'model' => $model,
         'messages' => $messages,
@@ -113,4 +111,4 @@ function pk_ajax_ai_ask()
     }
 }
 
-pk_ajax_register('pk_ai_ask', 'pk_ajax_ai_ask', true);
+publicus_ajax_register('publicus_ai_ask', 'publicus_ajax_ai_ask', true);

@@ -1,6 +1,6 @@
-<?php if (get_comments_number() == 0 && !comments_open() || pk_post_comment_is_closed()):echo ''; else: ?>
+<?php if (get_comments_number() == 0 && !comments_open() || publicus_post_comment_is_closed()):echo ''; else: ?>
     <?php get_template_part('ad/comment', 'top') ?>
-<?php add_filter('pk_rb_float_actions',function ($content){
+<?php add_filter('publicus_rb_float_actions',function ($content){
         return $content.'<div data-to-area="#comments" class="p-block"><i class="fa-regular fa-comments publicus-text"></i></div>';
     }) ?>
     <div class="p-block" id="comments">
@@ -9,23 +9,19 @@
                         class="fa-regular fa-comments mr-1"></i><?php _e('评论', PUBLICUS) ?>（<?php comments_number() ?>）</span>
         </div>
         <?php if (comments_open()): ?>
-            <?php if (get_option('comment_registration', '0') == '1' && !is_user_logged_in()): //登录后才可以评论 ?>
                 <div class="mt20 clearfix" id="comment-form-box">
                     <form class="mt10" id="comment-form" method="post">
                         <div class="form-group">
-                            <textarea placeholder="<?php _e('您必须要登录之后才可以进行评论', PUBLICUS) ?>" disabled id="comment"
                                       name="comment" class="form-control form-control-sm t-sm" rows="4"></textarea>
                         </div>
                     </form>
-                    <?php if (pk_oauth_platform_count() > 0): ?>
+                    <?php if (publicus_oauth_platform_count() > 0): ?>
                         <div>
                             <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
                                     data-id="front-login"
                                     data-once-load="true"
-                                    title="快捷登录"
-                                    data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
+                                    data-url="<?php echo publicus_ajax_url('publicus_font_login_page', ['redirect' => get_permalink()]) ?>">
                                 <i
-                                        class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUBLICUS) ?>
                             </button>
                         </div>
                     <?php endif; ?>
@@ -39,7 +35,7 @@
                                       class="form-control form-control-sm t-sm" rows="4"></textarea>
                         </div>
                         <div class="row row-cols-1 comment-info">
-                            <?php $commentInfoCol = pk_is_checked('vd_comment') ? 3 : 4; ?>
+                            <?php $commentInfoCol = publicus_is_checked('vd_comment') ? 3 : 4; ?>
                             <?php if (!is_user_logged_in()): ?>
                                 <input type="text" value="0" hidden name="comment-logged" id="comment-logged">
                                 <div class="col-12 col-sm-<?php echo $commentInfoCol ?>"><input type="text" id="comment_author"
@@ -59,19 +55,17 @@
                                 </div>
 
                             <?php endif; ?>
-                            <?php if (pk_is_checked('vd_comment') && pk_get_option('vd_type', 'img') === 'img'): ?>
+                            <?php if (publicus_is_checked('vd_comment') && publicus_get_option('vd_type', 'img') === 'img'): ?>
                                 <div class="col-12 col-sm-3">
                                     <div class="row flex-row justify-content-end">
                                         <div class="col-8 col-sm-7 text-end pl15">
-                                            <input type="text" value="" placeholder="验证码" maxlength="4"
                                                    class="form-control form-control-sm t-sm" name="comment-vd"
                                                    autocomplete="off"
                                                    id="comment-vd">
                                         </div>
                                         <div class="col-4 col-sm-5 pr15" id="comment-captcha-box">
                                             <img class="comment-captcha captcha"
-                                                 src="<?php echo pk_captcha_url('comment', 100, 28) ?>"
-                                                 alt="验证码">
+                                                 src="<?php echo publicus_captcha_url('comment', 100, 28) ?>"
                                         </div>
                                     </div>
                                 </div>
@@ -90,15 +84,13 @@
                                                     href="<?php echo wp_logout_url(get_the_permalink()) ?>"><?php _e('登出', PUBLICUS) ?></a></span>
                                     </div>
                                 <?php endif; ?>
-                                <?php if (!is_user_logged_in() && pk_oauth_platform_count() > 0): ?>
+                                <?php if (!is_user_logged_in() && publicus_oauth_platform_count() > 0): ?>
                                     <div class="d-inline-block">
                                         <button class="btn btn-primary btn-ssm pk-modal-toggle" type="button"
                                                 data-once-load="true"
                                                 data-id="front-login"
-                                                title="快捷登录"
-                                                data-url="<?php echo pk_ajax_url('pk_font_login_page', ['redirect' => get_permalink()]) ?>">
+                                                data-url="<?php echo publicus_ajax_url('publicus_font_login_page', ['redirect' => get_permalink()]) ?>">
                                             <i
-                                                    class="fa fa-right-to-bracket"></i>&nbsp;<?php _e('快捷登录', PUBLICUS) ?>
                                         </button>
                                     </div>
                                 <?php endif; ?>
@@ -108,7 +100,7 @@
                                         class="btn btn-outline-dark d-none btn-ssm"><?php _e('取消', PUBLICUS) ?></button>
                                 <button id="comment-smiley" class="btn btn-outline-secondary btn-ssm pk-modal-toggle" type="button"
                                         title="表情" data-once-load="true"
-                                        data-url="<?php echo pk_ajax_url('pk_ajax_dialog_smiley') ?>">
+                                        data-url="<?php echo publicus_ajax_url('publicus_ajax_dialog_smiley') ?>">
                                     <i class="fa-regular fa-face-smile t-md"></i></button>
                                 <button id="comment-submit" type="submit" class="btn btn-primary btn-ssm"><i
                                             class="fa-regular fa-paper-plane"></i>&nbsp;<?php _e('发布评论', PUBLICUS) ?>
@@ -119,9 +111,9 @@
                 </div>
             <?php endif; ?>
         <?php endif; ?>
-        <?php if (pk_is_checked('comment_ajax')): ?>
+        <?php if (publicus_is_checked('comment_ajax')): ?>
             <div id="comment-ajax-load" class="text-center mt20 d-none">
-                <?php echo pk_skeleton('comment',3) ?>
+                <?php echo publicus_skeleton('comment',3) ?>
             </div>
         <?php endif; ?>
         <div id="post-comments">
@@ -129,16 +121,16 @@
             if (have_comments()):
                 wp_list_comments(array(
                     'type' => 'comment',
-                    'callback' => 'pk_comment_callback',
+                    'callback' => 'publicus_comment_callback',
                 ));
 
-                if (isset($GLOBALS['pk_comment_callback_cur_id'])) {
+                if (isset($GLOBALS['publicus_comment_callback_cur_id'])) {
                     echo '</div>';
                 }
             endif;
             ?>
 
-            <div class="mt20 p-flex-s-right" <?php echo pk_is_checked('comment_ajax') ? 'data-no-instant' : '' ?>>
+            <div class="mt20 p-flex-s-right" <?php echo publicus_is_checked('comment_ajax') ? 'data-no-instant' : '' ?>>
                 <ul class="pagination comment-ajax-load">
                     <?php
                     paginate_comments_links(array(

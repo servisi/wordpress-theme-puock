@@ -23,7 +23,6 @@ class OptionExtend extends BaseOptionItem
                 ],
                 [
                     'id' => 'user_center',
-                    'label' => __('用户中心', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => false,
                     'badge' => ['value' => 'New'],

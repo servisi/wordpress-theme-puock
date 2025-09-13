@@ -3,7 +3,7 @@
 
 use Puock\Theme\setting\options\OptionCarousel;
 
-if (pk_is_checked('index_carousel')):
+if (publicus_is_checked('index_carousel')):
     global $home_banner_ava;
     if (is_array($home_banner_ava) && count($home_banner_ava) > 0):
         ?>
@@ -13,7 +13,7 @@ if (pk_is_checked('index_carousel')):
             <div class="swiper index-banner-swiper">
                 <div class="swiper-wrapper">
                     <?php
-                    $index_carousel_hide_title = pk_is_checked('index_carousel_hide_title');
+                    $index_carousel_hide_title = publicus_is_checked('index_carousel_hide_title');
                     foreach ($home_banner_ava as $item):
                         ?>
                         <div class="swiper-slide swiper-lazy">
