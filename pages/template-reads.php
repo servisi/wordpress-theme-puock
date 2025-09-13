@@ -18,7 +18,7 @@ get_header();
         <div id="page-reads">
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
                 <div id="posts" class="col-lg-<?php pk_hide_sidebar_out('12','8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
-                    <div class="p-block puock-text">
+                    <div class="p-block publicus-text">
                         <h2 class="t-lg"><?php the_title() ?></h2>
                         <?php if(!empty(get_the_content())): ?>
                             <div class="mt20 <?php get_entry_content_class() ?>">

@@ -31,7 +31,7 @@ get_header();
 
     <?php echo pk_breadcrumbs() ?>
 
-    <div class="text-center p-block puock-text">
+    <div class="text-center p-block publicus-text">
         <h3 class="mt20">跳转提示</h3>
         <?php if (!empty($error)): ?>
             <p class="mt20"><?php echo $error ?></p>
@@ -44,7 +44,7 @@ get_header();
             <a rel="nofollow" href="<?php echo $url; ?>" class="btn btn-ssm btn-primary"><i
                         class="fa-regular fa-paper-plane"></i>&nbsp;立即进入</a>
             <a href="<?php echo home_url() ?>" class="btn btn-ssm btn-secondary"><i
-                        class="fa fa-home"></i>&nbsp;返回首页</a>
+                        class="fa fa-home"></i>&nbsp;返回Ana Sayfa</a>
         </div>
     </div>
 </div>

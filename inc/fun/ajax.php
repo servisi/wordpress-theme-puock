@@ -36,7 +36,7 @@ function pk_ajax_result_page($success = true, $info = '', $from_redirect = '')
         pk_session_call(function () use ($info) {
             $_SESSION['error_info'] = $info;
         });
-        wp_redirect(PUOCK_ABS_URI . '/error.php');
+        wp_redirect(PUBLICUS_ABS_URI . '/error.php');
         wp_die();
     }
 }
@@ -45,7 +45,7 @@ function pk_ajax_get_theme_options()
 {
     if (current_user_can('edit_theme_options')) {
         wp_send_json_success([
-            'settings' => get_option(PUOCK_OPT),
+            'settings' => get_option(PUBLICUS_OPT),
         ]);
     } else {
         wp_send_json_error('权限不足');
@@ -58,7 +58,7 @@ function pk_ajax_update_theme_options()
 {
     if (current_user_can('edit_theme_options')) {
         $body = pk_ajax_get_req_body();
-        update_option(PUOCK_OPT, $body);
+        update_option(PUBLICUS_OPT, $body);
         do_action('pk_option_updated', $body);
         flush_rewrite_rules();
         wp_send_json_success();

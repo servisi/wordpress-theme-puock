@@ -1,6 +1,6 @@
 <?php
 // 点赞
-function puock_post_like()
+function publicus_post_like()
 {
     $id = $_POST["um_id"];
     $action = $_POST["um_action"];
@@ -24,18 +24,18 @@ function puock_post_like()
     die;
 }
 
-add_action('wp_ajax_nopriv_puock_like', 'puock_post_like');
-add_action('wp_ajax_puock_like', 'puock_post_like');
+add_action('wp_ajax_nopriv_puock_like', 'publicus_post_like');
+add_action('wp_ajax_puock_like', 'publicus_post_like');
 
 // 获取当前访问cookie是否点赞
-function puock_post_is_like()
+function publicus_post_is_like()
 {
     global $post;
     return !empty($_COOKIE['puock_like_' . $post->ID]);
 }
 
 // 点赞数显示
-function puock_post_like_num(int $id)
+function publicus_post_like_num(int $id)
 {
     $number = get_post_meta($id, 'puock_like', true) ?: 0;
     if (!is_numeric($number)) {
@@ -107,7 +107,7 @@ function pk_theme_footer_copyright($content)
     global $pk_right_slug;
     $content .= pk_get_option('footer_info');
     if(!pk_is_checked('ext_dont_show_copyright')){
-        $content .= str_replace('{PUOCK_VERSION}', PUOCK_CUR_VER_STR, base64_decode($pk_right_slug));
+        $content .= str_replace('{PUBLICUS_VERSION}', PUBLICUS_CUR_VER_STR, base64_decode($pk_right_slug));
     }
     return $content;
 }
@@ -206,8 +206,8 @@ function pk_shortcode_box_init()
         $output .= "<a href='javascript:void(0)' class='add-shortcode button button-small' data-key='{$key}' {$attr} data-content='{$content}'>{$item['name']}</a>";
     }
     echo '<a id="insert-shortcode-button" style="position:relative" class="button" 
-        title="' . __('添加短代码', PUOCK) . '" data-editor="content" href="javascript:;">  
-        <span>' . __('添加短代码', PUOCK) . '</span>
+        title="' . __('添加短代码', PUBLICUS) . '" data-editor="content" href="javascript:;">  
+        <span>' . __('添加短代码', PUBLICUS) . '</span>
         </a><div id="insert-shortcode-wrap" class="pk-media-wrap" style="display: none">' . $output . '</div>';
 }
 
@@ -266,7 +266,7 @@ function pk_go_link($url, $name = '')
     if (pk_is_cur_site($url)) {
         return $url;
     }
-    $url = PUOCK_ABS_URI . '/inc/go.php?to=' . base64_encode($url);
+    $url = PUBLICUS_ABS_URI . '/inc/go.php?to=' . base64_encode($url);
     if (!empty($name)) {
         $url .= '&name=' . base64_encode($name);
     }
@@ -394,12 +394,12 @@ function pk_get_comment_ua_os_icon($name)
 function pk_post_qrcode($url, $base_dir = '/cache/qrcode')
 {
     $file = $base_dir . '/qr-' . md5($url) . '.png';
-    if (!is_dir(PUOCK_ABS_DIR . $base_dir)) {
-        if (!mkdir(PUOCK_ABS_DIR . $base_dir, 0775, true)) {
+    if (!is_dir(PUBLICUS_ABS_DIR . $base_dir)) {
+        if (!mkdir(PUBLICUS_ABS_DIR . $base_dir, 0775, true)) {
             return false;
         }
     }
-    $filepath = PUOCK_ABS_DIR . $file;
+    $filepath = PUBLICUS_ABS_DIR . $file;
     if (!file_exists($filepath)) {
         QRcode::png($url, $filepath, QR_ECLEVEL_L, 7, 1);
     }
@@ -416,14 +416,14 @@ function pk_captcha()
     }
     $width = $_GET['w'];
     $height = $_GET['h'];
-    include_once PUOCK_ABS_DIR.'/inc/php-captcha.php';
+    include_once PUBLICUS_ABS_DIR.'/inc/php-captcha.php';
     $captcha = new CaptchaBuilder();
     $captcha->initialize([
         'width' => intval($width),     // 宽度
         'height' => intval($height),     // 高度
         'curve' => true,   // 曲线
         'noise' => 1,   // 噪点背景
-        'fonts' => [PUOCK_ABS_DIR . '/assets/fonts/G8321-Bold.ttf']       // 字体
+        'fonts' => [PUBLICUS_ABS_DIR . '/assets/fonts/G8321-Bold.ttf']       // 字体
     ]);
     $result = $captcha->create();
     $text = $result->getText();
@@ -457,7 +457,7 @@ function pk_captcha_validate($type, $val, $success_clear = true)
 
 function pk_get_favicon_url($url)
 {
-    return PUOCK_ABS_URI . '/inc/favicon.php?url=' . $url;
+    return PUBLICUS_ABS_URI . '/inc/favicon.php?url=' . $url;
 }
 
 function pk_post_comment_is_closed()

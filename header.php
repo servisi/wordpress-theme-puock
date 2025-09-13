@@ -32,7 +32,7 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
             <div class="container">
                 <a href="<?php echo home_url() ?>" id="logo" class="navbar-brand <?php if(pk_is_checked('logo_loop_light')) echo 'logo-loop-light'; ?>">
                     <?php if (pk_is_checked('on_txt_logo') || empty(pk_get_option('light_logo')) || empty(pk_get_option('dark_logo'))): ?>
-                        <span class="puock-text txt-logo"><?php echo pk_get_web_title() ?></span>
+                        <span class="publicus-text txt-logo"><?php echo pk_get_web_title() ?></span>
                     <?php else: ?>
                         <img id="logo-light" alt="logo" class="w-100 <?php echo pk_theme_light() ? '' : 'd-none' ?>"
                              src="<?php echo pk_get_option('light_logo') ?>">
@@ -45,7 +45,7 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
                         <?php echo pk_get_main_menu() ?>
                     </div>
                 </div>
-                <div class="mobile-menus d-block d-lg-none p-1 puock-text">
+                <div class="mobile-menus d-block d-lg-none p-1 publicus-text">
                     <i class="fa fa-bars t-md mr-2 mobile-menu-s"></i>
                     <?php if (pk_is_checked('theme_mode_s')): ?>
                         <i class="fa fa-<?php echo((pk_theme_mode() === 'auto' ? 'circle-half-stroke' : (pk_theme_light() ? 'sun' : 'moon'))); ?> colorMode t-md mr-2"></i>
@@ -62,11 +62,11 @@ echo current_theme_supports('custom-background') ? ' custom-background' : ''; ?>
                     <div class="search-layout">
                         <div class="search-input">
                             <input required type="text" name="s" class="form-control"
-                                   placeholder="<?php _e('请输入搜索关键字', PUOCK) ?>">
+                                   placeholder="<?php _e('请输入搜索关键字', PUBLICUS) ?>">
                         </div>
                         <div class="search-start">
                             <button type="submit" class="btn-dark btn"><i
-                                        class="fa fa-search mr-1"></i><?php _e('搜索', PUOCK) ?></button>
+                                        class="fa fa-search mr-1"></i><?php _e('搜索', PUBLICUS) ?></button>
                         </div>
                         <div class="search-close-btn">
                             <button type="button" class="btn-danger btn ml-1 search-modal-btn"><i

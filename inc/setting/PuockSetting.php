@@ -1,24 +1,24 @@
 <?php
 
-namespace Puock\Theme\setting;
+namespace Publicus\Theme\setting;
 
-use Puock\Theme\setting\options\OptionAbout;
-use Puock\Theme\setting\options\OptionAd;
-use Puock\Theme\setting\options\OptionAi;
-use Puock\Theme\setting\options\OptionBasic;
-use Puock\Theme\setting\options\OptionCache;
-use Puock\Theme\setting\options\OptionCarousel;
-use Puock\Theme\setting\options\OptionCms;
-use Puock\Theme\setting\options\OptionCompany;
-use Puock\Theme\setting\options\OptionDebug;
-use Puock\Theme\setting\options\OptionEmail;
-use Puock\Theme\setting\options\OptionExtend;
-use Puock\Theme\setting\options\OptionGlobal;
-use Puock\Theme\setting\options\OptionAuth;
-use Puock\Theme\setting\options\OptionResource;
-use Puock\Theme\setting\options\OptionScript;
-use Puock\Theme\setting\options\OptionSeo;
-use Puock\Theme\setting\options\OptionValidate;
+use Publicus\Theme\setting\options\OptionAbout;
+use Publicus\Theme\setting\options\OptionAd;
+use Publicus\Theme\setting\options\OptionAi;
+use Publicus\Theme\setting\options\OptionBasic;
+use Publicus\Theme\setting\options\OptionCache;
+use Publicus\Theme\setting\options\OptionCarousel;
+use Publicus\Theme\setting\options\OptionCms;
+use Publicus\Theme\setting\options\OptionCompany;
+use Publicus\Theme\setting\options\OptionDebug;
+use Publicus\Theme\setting\options\OptionEmail;
+use Publicus\Theme\setting\options\OptionExtend;
+use Publicus\Theme\setting\options\OptionGlobal;
+use Publicus\Theme\setting\options\OptionAuth;
+use Publicus\Theme\setting\options\OptionResource;
+use Publicus\Theme\setting\options\OptionScript;
+use Publicus\Theme\setting\options\OptionSeo;
+use Publicus\Theme\setting\options\OptionValidate;
 
 class PuockSetting
 {
@@ -60,12 +60,12 @@ class PuockSetting
     public function __wp_reg_menu()
     {
         add_menu_page(
-            __('Puock主题配置', PUOCK),
-            __('Puock主题配置', PUOCK),
+            __('Puock主题配置', PUBLICUS),
+            __('Puock主题配置', PUBLICUS),
             "manage_options",
-            "puock-options",
+            "publicus-options",
             array($this, 'setting_page'),
-            PUOCK_ABS_URI . '/assets/img/logo/puock-20.png',
+            PUBLICUS_ABS_URI . '/assets/img/logo/publicus-20.png',
         );
     }
 
@@ -73,7 +73,7 @@ class PuockSetting
     {
         $menus = $this->option_menus_register();
         if (!current_user_can('edit_theme_options')) {
-            wp_send_json_error(__('权限不足', PUOCK));
+            wp_send_json_error(__('权限不足', PUBLICUS));
         }
         $fields = [];
         foreach ($menus as $menu) {

@@ -1,16 +1,16 @@
 {
-  "name": "licoy/wordpress-theme-puock",
-  "description": "A high-value adaptive theme based on WordPress, supports day and night modes, no refresh loading, etc.",
+  "name": "publicus-agency/wordpress-theme-publicus",
+  "description": "A modern, responsive WordPress theme with dark/light mode support, perfect for professional websites.",
   "type": "project",
   "license": "GPL V3",
   "autoload": {
     "psr-4": {
-      "Puock\\Theme\\": "inc/"
+      "Publicus\\Theme\\": "inc/"
     }
   },
   "authors": [
     {
-      "name": "Licoy"
+      "name": "Publicus Agency"
     }
   ],
   "require": {

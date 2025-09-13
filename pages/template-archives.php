@@ -26,7 +26,7 @@ get_header();
         <div id="page-archives">
             <div id="page-<?php the_ID() ?>" class="w-100">
                 <div id="posts" class="<?php pk_open_box_animated('animated fadeInLeft') ?> ">
-                    <div class="p-block puock-text">
+                    <div class="p-block publicus-text">
                         <div class="<?php get_entry_content_class() ?> mb15">
                             <?php the_content(); ?>
                         </div>

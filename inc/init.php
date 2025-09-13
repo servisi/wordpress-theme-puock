@@ -85,7 +85,7 @@ function deel_setup()
     );
     //屏蔽顶部工具栏
     add_filter('show_admin_bar', '__return_false');
-    // 友情链接扩展
+    // Arkadaş Bağlantıları扩展
     add_filter('pre_option_link_manager_enabled', '__return_true');
     //评论回复邮件通知
 //    add_action('comment_post', 'comment_mail_notify');
@@ -168,30 +168,30 @@ add_action('admin_notices', 'pk_env_check');
 function pk_init_register_assets()
 {
     if (is_admin()) {
-        wp_enqueue_style('puock-strawberry-icon-admin', pk_get_static_url() . '/assets/libs/strawberry-icon.css', [], PUOCK_CUR_VER_STR);
-        wp_enqueue_script('puock-admin', pk_get_static_url() . '/assets/dist/js/admin.min.js', [], PUOCK_CUR_VER_STR, true);
+        wp_enqueue_style('puock-strawberry-icon-admin', pk_get_static_url() . '/assets/libs/strawberry-icon.css', [], PUBLICUS_CUR_VER_STR);
+        wp_enqueue_script('puock-admin', pk_get_static_url() . '/assets/dist/js/admin.min.js', [], PUBLICUS_CUR_VER_STR, true);
     } else {
-        wp_register_script('jquery', pk_get_static_url() . '/assets/libs/jquery.min.js', [], PUOCK_CUR_VER_STR);
+        wp_register_script('jquery', pk_get_static_url() . '/assets/libs/jquery.min.js', [], PUBLICUS_CUR_VER_STR);
         wp_enqueue_script('jquery');
-        wp_enqueue_style('puock-libs', pk_get_static_url() . '/assets/dist/style/libs.min.css', [], PUOCK_CUR_VER_STR);
-        wp_enqueue_style('puock', pk_get_static_url() . '/assets/dist/style/style.min.css', ['puock-libs'], PUOCK_CUR_VER_STR);
-        wp_enqueue_script('puock-libs', pk_get_static_url() . '/assets/dist/js/libs.min.js', [], PUOCK_CUR_VER_STR, true);
-        wp_enqueue_script('puock-layer', pk_get_static_url() . '/assets/libs/layer/layer.js', [], PUOCK_CUR_VER_STR, true);
-        wp_enqueue_script('puock-spark-md5', pk_get_static_url() . '/assets/libs/spark-md5.min.js', [], PUOCK_CUR_VER_STR, true);
+        wp_enqueue_style('puock-libs', pk_get_static_url() . '/assets/dist/style/libs.min.css', [], PUBLICUS_CUR_VER_STR);
+        wp_enqueue_style('puock', pk_get_static_url() . '/assets/dist/style/style.min.css', ['puock-libs'], PUBLICUS_CUR_VER_STR);
+        wp_enqueue_script('puock-libs', pk_get_static_url() . '/assets/dist/js/libs.min.js', [], PUBLICUS_CUR_VER_STR, true);
+        wp_enqueue_script('puock-layer', pk_get_static_url() . '/assets/libs/layer/layer.js', [], PUBLICUS_CUR_VER_STR, true);
+        wp_enqueue_script('puock-spark-md5', pk_get_static_url() . '/assets/libs/spark-md5.min.js', [], PUBLICUS_CUR_VER_STR, true);
         if (pk_is_checked('strawberry_icon')) {
-            wp_enqueue_style('puock-strawberry-icon', pk_get_static_url() . '/assets/libs/strawberry-icon.css', [], PUOCK_CUR_VER_STR);
+            wp_enqueue_style('puock-strawberry-icon', pk_get_static_url() . '/assets/libs/strawberry-icon.css', [], PUBLICUS_CUR_VER_STR);
         }
         if (pk_is_checked('dplayer')) {
-            wp_enqueue_style('puock-dplayer', pk_get_static_url() . '/assets/libs/dplayer/DPlayer.min.css', ['puock'], PUOCK_CUR_VER_STR);
-            wp_enqueue_script('puock-dplayer', pk_get_static_url() . '/assets/libs/dplayer/DPlayer.min.js', ['puock-libs'], PUOCK_CUR_VER_STR, true);
+            wp_enqueue_style('puock-dplayer', pk_get_static_url() . '/assets/libs/dplayer/DPlayer.min.css', ['puock'], PUBLICUS_CUR_VER_STR);
+            wp_enqueue_script('puock-dplayer', pk_get_static_url() . '/assets/libs/dplayer/DPlayer.min.js', ['puock-libs'], PUBLICUS_CUR_VER_STR, true);
         }
         if (pk_is_checked('post_poster_open')) {
-            wp_enqueue_script('puock-html2canvas', pk_get_static_url() . '/assets/libs/html2canvas.min.js', [], PUOCK_CUR_VER_STR, true);
+            wp_enqueue_script('puock-html2canvas', pk_get_static_url() . '/assets/libs/html2canvas.min.js', [], PUBLICUS_CUR_VER_STR, true);
         }
         if (pk_get_option('vd_type') === 'gt') {
-            wp_enqueue_script('puock-gt4', pk_get_static_url() . '/assets/libs/gt4.js', [], PUOCK_CUR_VER_STR, true);
+            wp_enqueue_script('puock-gt4', pk_get_static_url() . '/assets/libs/gt4.js', [], PUBLICUS_CUR_VER_STR, true);
         }
-        wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/puock.min.js', array('puock-libs'), PUOCK_CUR_VER_STR, true);
+        wp_enqueue_script('puock', pk_get_static_url() . '/assets/dist/js/publicus.min.js', array('puock-libs'), PUBLICUS_CUR_VER_STR, true);
 
         //加载全站黑白样式
         if (pk_is_checked('grey')) {

@@ -1,19 +1,14 @@
 <?php
 
 
-use Puock\Theme\classes\PuockClassLoad;
+use Publicus\Theme\classes\PuockClassLoad;
 
-add_action('after_setup_theme', 'puock_theme_setup');
-function puock_theme_setup()
+add_action('after_setup_theme', 'publicus_theme_setup');
+function publicus_theme_setup()
 {
-    load_theme_textdomain(PUOCK, PUOCK_ABS_DIR . '/languages');
+    load_theme_textdomain(PUBLICUS, PUBLICUS_ABS_DIR . '/languages');
 }
 
-if (is_dir(PUOCK_ABS_DIR . '/inc/puock')) {
-    if (file_exists(PUOCK_ABS_DIR . '/inc/puock/fun.php')) {
-        require_once PUOCK_ABS_DIR . '/inc/puock/fun.php';
-    }
-}
 
 function pk_ajax_resp($data = null, $msg = '', $code = 0)
 {
@@ -26,28 +21,28 @@ function pk_ajax_resp_error($msg = 'fail', $data = null)
     return pk_ajax_resp($data, $msg, -1);
 }
 
-require_once PUOCK_ABS_DIR . '/inc/fun/cache.php';
-require_once PUOCK_ABS_DIR . '/inc/setting/index.php';
-require_once PUOCK_ABS_DIR . '/inc/ext/init.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/ajax.php';
-require_once PUOCK_ABS_DIR . '/inc/oauth/oauth.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/security.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/comment-ajax.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/widget.php';
-require_once PUOCK_ABS_DIR . '/inc/init.php';
-require_once PUOCK_ABS_DIR . '/inc/category-seo.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/comment.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/short-code.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/opt.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/post-meta.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/sidebar.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/post-tags.php';
-require_once PUOCK_ABS_DIR . '/inc/fun/comment-notify.php';
-require_once PUOCK_ABS_DIR . '/inc/user-agent-parse.php';
-require_once PUOCK_ABS_DIR . '/inc/phpqrcode.php';
-require_once PUOCK_ABS_DIR . '/inc/ajax/index.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/cache.php';
+require_once PUBLICUS_ABS_DIR . '/inc/setting/index.php';
+require_once PUBLICUS_ABS_DIR . '/inc/ext/init.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/ajax.php';
+require_once PUBLICUS_ABS_DIR . '/inc/oauth/oauth.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/security.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/comment-ajax.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/widget.php';
+require_once PUBLICUS_ABS_DIR . '/inc/init.php';
+require_once PUBLICUS_ABS_DIR . '/inc/category-seo.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/comment.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/short-code.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/opt.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/post-meta.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/sidebar.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/post-tags.php';
+require_once PUBLICUS_ABS_DIR . '/inc/fun/comment-notify.php';
+require_once PUBLICUS_ABS_DIR . '/inc/user-agent-parse.php';
+require_once PUBLICUS_ABS_DIR . '/inc/phpqrcode.php';
+require_once PUBLICUS_ABS_DIR . '/inc/ajax/index.php';
 if (pk_is_checked('no_category')) {
-    require_once PUOCK_ABS_DIR . '/inc/no-category.php';
+    require_once PUBLICUS_ABS_DIR . '/inc/no-category.php';
 }
 $puock_class_load = new PuockClassLoad();
 
@@ -82,48 +77,48 @@ function pk_session_call($function)
 
 function pk_get_theme_option_url($to = '')
 {
-    return admin_url() . 'admin.php?page=puock-options&to=' . $to;
+    return admin_url() . 'admin.php?page=publicus-options&to=' . $to;
 }
 
 
-// 顶部添加自定义菜单
+// Üst menüye özel menü ekle
 function pk_toolbar_link(WP_Admin_Bar $bar)
 {
     $menu_id = 'theme-quick-start';
     $bar->add_node(array(
         'id' => $menu_id,
-        'title' => '<i class="czs-paper-plane"></i>&nbsp;Puock Theme 快捷入口',
+        'title' => '<i class="czs-paper-plane"></i>&nbsp;Publicus Theme Hızlı Erişim',
         'href' => '#'
     ));
     $bar->add_node(array(
         'id' => 'theme-setting',
         'parent' => $menu_id,
-        'title' => '<i class="czs-setting" style="color:#9627e3"></i>&nbsp;主题设置',
+        'title' => '<i class="czs-setting" style="color:#9627e3"></i>&nbsp;Tema Ayarları',
         'href' => pk_get_theme_option_url()
     ));
     $bar->add_node(array(
         'id' => 'theme-docs',
         'parent' => $menu_id,
-        'title' => '<i class="czs-doc-file" style="color:#496cf9"></i>&nbsp;主题文档',
-        'href' => 'https://licoy.cn/puock-doc.html',
+        'title' => '<i class="czs-doc-file" style="color:#496cf9"></i>&nbsp;Tema Dokümantasyonu',
+        'href' => 'https://www.publicus.agency/docs',
         'meta' => array(
             'target' => 'blank'
         )
     ));
     $bar->add_node(array(
-        'id' => 'theme-sponsor',
+        'id' => 'theme-support',
         'parent' => $menu_id,
-        'title' => '<i class="czs-heart" style="color:#f54747"></i>&nbsp;赞助主题',
-        'href' => 'https://licoy.cn/puock-theme-sponsor.html',
+        'title' => '<i class="czs-heart" style="color:#f54747"></i>&nbsp;Destek',
+        'href' => 'https://www.publicus.agency/support',
         'meta' => array(
             'target' => 'blank'
         )
     ));
     $bar->add_node(array(
-        'id' => 'theme-group',
+        'id' => 'theme-contact',
         'parent' => $menu_id,
-        'title' => '<i class="czs-weixin" style="color:#177b17"></i>&nbsp;主题交流群',
-        'href' => 'https://licoy.cn/go/puock-update.php?r=qq_qun',
+        'title' => '<i class="czs-mail" style="color:#177b17"></i>&nbsp;İletişim',
+        'href' => 'https://www.publicus.agency/contact',
         'meta' => array(
             'target' => 'blank'
         )
@@ -131,8 +126,8 @@ function pk_toolbar_link(WP_Admin_Bar $bar)
     $bar->add_node(array(
         'id' => 'theme-github',
         'parent' => $menu_id,
-        'title' => '<i class="czs-github-logo"></i>&nbsp;Github 开源主页',
-        'href' => 'https://github.com/Licoy/wordpress-theme-puock',
+        'title' => '<i class="czs-github-logo"></i>&nbsp;Github Sayfası',
+        'href' => 'https://github.com/publicus-agency/wordpress-theme-publicus',
         'meta' => array(
             'target' => 'blank'
         )
@@ -146,7 +141,7 @@ if (is_user_logged_in() && current_user_can('manage_options')) {
 function pk_admin_scripts()
 {
     wp_enqueue_script('puock-admin', get_stylesheet_directory_uri() . '/assets/dist/admin.min.js',
-        array(), PUOCK_CUR_VER_STR, true);
+        array(), PUBLICUS_CUR_VER_STR, true);
 }
 
 add_action('admin_enqueue_scripts', 'pk_admin_scripts');
@@ -274,7 +269,7 @@ function get_views_most_post($days, $nums)
     return $wpdb->get_results($sql);
 }
 
-//是否隐藏侧边栏
+//是否隐藏Kenar Çubuğu
 function pk_hide_sidebar($post_id = null)
 {
     global $post;
@@ -290,7 +285,7 @@ function pk_hide_sidebar($post_id = null)
     return false;
 }
 
-//隐藏/显示侧边栏的输出字符
+//隐藏/显示Kenar Çubuğu的输出字符
 function pk_hide_sidebar_out($hide = '', $show = '', $post_id = null, $echo = true)
 {
     $out = $show;
@@ -303,7 +298,7 @@ function pk_hide_sidebar_out($hide = '', $show = '', $post_id = null, $echo = tr
     echo $out;
 }
 
-//侧边栏检测数据
+//Kenar Çubuğu检测数据
 function pk_sidebar_check_has($name)
 {
     if (!dynamic_sidebar($name)) {
@@ -373,7 +368,7 @@ function pk_get_img_thumbnail_src($src, $width, $height, $args = array())
     if (pk_is_checked('thumbnail_rewrite_open')) {
         return home_url() . "/timthumb/w_{$width}/h_{$height}/q_90/zc_1/a_c/" . pk_safe_base64_encode($src) . ".png";
     }
-    return PUOCK_ABS_URI . "/timthumb.php?w={$width}&h={$height}&a=c&zc=1&q=90&src=" . $src;
+    return PUBLICUS_ABS_URI . "/timthumb.php?w={$width}&h={$height}&a=c&zc=1&q=90&src=" . $src;
 }
 
 //获取文章样式是否是卡片式
@@ -565,7 +560,7 @@ register_nav_menus(array(
 //获取主题配置
 function pk_get_option($name, $default = null)
 {
-    $config = get_option(PUOCK_OPT);
+    $config = get_option(PUBLICUS_OPT);
     if ($config && isset($config[$name])) {
         return $config[$name];
     }
@@ -802,22 +797,22 @@ function pk_get_static_url()
     $type = pk_get_option('static_load_origin', 'self');
     switch ($type) {
         case "jsdelivr":
-            $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            $url_pre = "https://cdn.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUBLICUS_CUR_VER_STR;
             break;
         case "jsdelivr-fastly":
-            $url_pre = "https://fastly.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            $url_pre = "https://fastly.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUBLICUS_CUR_VER_STR;
             break;
         case "jsdelivr-testingcf":
-            $url_pre = "https://testingcf.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            $url_pre = "https://testingcf.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUBLICUS_CUR_VER_STR;
             break;
         case "jsdelivr-gcore":
-            $url_pre = "https://gcore.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUOCK_CUR_VER_STR;
+            $url_pre = "https://gcore.jsdelivr.net/gh/Licoy/wordpress-theme-puock@v" . PUBLICUS_CUR_VER_STR;
             break;
         case 'custom':
             $url_pre = pk_get_option('custom_static_load_origin', '');
             break;
         default:
-            $url_pre = PUOCK_ABS_URI;
+            $url_pre = PUBLICUS_ABS_URI;
     }
     return $url_pre;
 }
@@ -868,7 +863,7 @@ function pk_get_thumbnail_allow_sites()
 //生成缩略图白名单文件名称
 function pk_get_thumbnail_allow_sites_filepath()
 {
-    return PUOCK_ABS_DIR . '/.tas.php';
+    return PUBLICUS_ABS_DIR . '/.tas.php';
 }
 
 //生成缩略图白名单文件
@@ -996,7 +991,7 @@ function pk_template_redirect()
         $template = '';
         switch ($page_name) {
             case 'user-center':
-                $template = PUOCK_ABS_DIR . '/inc/page/user-center.php';
+                $template = PUBLICUS_ABS_DIR . '/inc/page/user-center.php';
                 break;
             default:
                 break;

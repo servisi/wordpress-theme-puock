@@ -25,7 +25,7 @@ PuockAbsMeta::newPostMeta('pk-post-basic', [
     'options' => [
         array(
             "id" => "hide_side",
-            "title" => "隐藏侧边栏",
+            "title" => "隐藏Kenar Çubuğu",
             "type" => "checkbox"
         ),
         array(
@@ -56,7 +56,7 @@ function pk_page_meta_basic()
         'options' => [
             array(
                 "id" => "hide_side",
-                "title" => "隐藏侧边栏",
+                "title" => "隐藏Kenar Çubuğu",
                 "type" => "checkbox"
             ),
             array(
@@ -74,7 +74,7 @@ function pk_page_meta_basic()
                 "id" => "page_links_id",
                 "std" => "",
                 "title" => "链接显示分类目录ID列表",
-                'desc' => "（仅为<b>友情链接</b>及<b>网址导航</b>模板时有效，为空则不显示，可多选）",
+                'desc' => "（仅为<b>Arkadaş Bağlantıları</b>及<b>网址导航</b>模板时有效，为空则不显示，可多选）",
                 "type" => "select",
                 'multiple'=>true,
                 "options" => $link_cats

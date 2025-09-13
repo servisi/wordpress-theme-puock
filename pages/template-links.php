@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: 友情链接
+Template Name: Arkadaş Bağlantıları
 */
 
 $cats = get_post_meta($post->ID,'page_links_id',true);
@@ -36,11 +36,11 @@ get_header();
             <div id="page-<?php the_ID() ?>" class="row row-cols-1">
                 <div id="posts" class="col-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
                     <?php if(!empty(get_the_content())): ?>
-                        <div class="mt20 p-block puock-text <?php get_entry_content_class() ?>">
+                        <div class="mt20 p-block publicus-text <?php get_entry_content_class() ?>">
                             <?php the_content() ?>
                         </div>
                     <?php endif; ?>
-                    <div class="puock-text no-style">
+                    <div class="publicus-text no-style">
                         <?php foreach ($groups as $group): ?>
                         <div class="p-block links-main" id="page-links-<?php echo $group['id'] ?>">
                             <h6><?php echo $group['name'] ?></h6>
@@ -49,7 +49,7 @@ get_header();
                                 <a class="link-item a-link col-lg-3 col-md-4 col-sm-6 col-6" href="<?php echo $use_theme_link_forward ? pk_go_link($link->link_url,$link->link_name) : $link->link_url; ?>" target="<?php echo $link->link_target ?>"
                                     rel="<?php echo $link->link_rel ?>" title="<?php echo empty($link->link_notes) ? $link->link_name : $link->link_notes ?>"
                                    data-bs-toggle="tooltip">
-                                    <div class="clearfix puock-bg">
+                                    <div class="clearfix publicus-bg">
                                         <?php if (empty($link->link_image)) : ?>
                                             <img alt="<?php echo $link->link_name ?>" <?php echo pk_get_lazy_img_info(pk_get_favicon_url($link->link_url),'md-avatar') ?> alt="<?php echo $link->link_name ?>">
                                         <?php else :?>      

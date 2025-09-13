@@ -1,6 +1,6 @@
 <?php
 
-namespace Puock\Theme\setting\options;
+namespace Publicus\Theme\setting\options;
 
 class OptionAd extends BaseOptionItem{
 
@@ -8,44 +8,44 @@ class OptionAd extends BaseOptionItem{
     {
         return [
             'key' => 'ad',
-            'label' => __('广告设置', PUOCK),
+            'label' => __('广告设置', PUBLICUS),
             'icon'=>'dashicons-megaphone',
             'fields' => [
                 [
                     'id' => 'ad_g_top_c',
-                    'label' => __('全站顶部广告', PUOCK),
+                    'label' => __('全站顶部广告', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'ad_g_top',
-                    'label' => __('全站顶部广告内容', PUOCK),
+                    'label' => __('全站顶部广告内容', PUBLICUS),
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'ad_g_top_c',
                 ],
                 [
                     'id' => 'ad_g_bottom_c',
-                    'label' => __('全站底部广告', PUOCK),
+                    'label' => __('全站底部广告', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'ad_g_bottom',
-                    'label' => __('全站底部广告内容', PUOCK),
+                    'label' => __('全站底部广告内容', PUBLICUS),
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'ad_g_bottom_c',
                 ],
                 [
                     'id' => 'ad_page_t_c',
-                    'label' => __('文章内顶部广告', PUOCK),
+                    'label' => __('文章内顶部广告', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'ad_page_t',
-                    'label' => __('文章内顶部广告内容', PUOCK),
+                    'label' => __('文章内顶部广告内容', PUBLICUS),
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'ad_page_t_c',
@@ -53,13 +53,13 @@ class OptionAd extends BaseOptionItem{
                 ],
                 [
                     'id' => 'ad_page_c_b_c',
-                    'label' => __('文章内容底部广告', PUOCK),
+                    'label' => __('文章内容底部广告', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'ad_page_c_b',
-                    'label' => __('文章内容底部广告内容', PUOCK),
+                    'label' => __('文章内容底部广告内容', PUBLICUS),
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'ad_page_c_b_c',
@@ -67,13 +67,13 @@ class OptionAd extends BaseOptionItem{
                 ],
                 [
                     'id' => 'ad_comment_t_c',
-                    'label' => __('评论上方广告', PUOCK),
+                    'label' => __('Yorumlar Üstü广告', PUBLICUS),
                     'type' => 'switch',
                     'sdt' => 'false',
                 ],
                 [
                     'id' => 'ad_comment_t',
-                    'label' => __('评论上方广告内容', PUOCK),
+                    'label' => __('Yorumlar Üstü广告内容', PUBLICUS),
                     'type' => 'textarea',
                     'sdt' => '',
                     'showRefId' => 'ad_comment_t_c',

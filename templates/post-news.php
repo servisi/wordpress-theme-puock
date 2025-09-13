@@ -17,7 +17,7 @@ if (is_home()):
                 <h4 class="text-center"><?php echo pk_get_option('company_news_title') ?></h4>
 
                 <div class="pb-0 mt30">
-                    <div class="row puock-text post-relevant">
+                    <div class="row publicus-text post-relevant">
                         <?php foreach ($news as $post): setup_postdata($post) ?>
                             <a <?php pk_link_target() ?> href="<?php the_permalink() ?>"
                                                          class="col-6 col-md-3 post-relevant-item">

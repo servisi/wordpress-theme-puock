@@ -25,7 +25,7 @@ if (is_single()):
         if ($relevants && count($relevants) > 0): ?>
 
             <div class="p-block pb-0">
-                <div class="row puock-text post-relevant">
+                <div class="row publicus-text post-relevant">
                     <?php foreach ($relevants as $post): setup_postdata($post) ?>
                         <a <?php pk_link_target() ?> href="<?php the_permalink() ?>"
                                                      class="col-6 col-md-3 post-relevant-item ww">

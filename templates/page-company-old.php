@@ -1,6 +1,6 @@
-<div id="content" class="puock-text">
+<div id="content" class="publicus-text">
     <?php get_template_part('templates/module','banners') ?>
-    <div id="index-company" class="puock-bg pt20">
+    <div id="index-company" class="publicus-bg pt20">
         <div class="container text-center">
             <h4><?php echo pk_get_option('company_about_t') ?></h4>
             <p class="tin2 mt30 t-md"><?php echo pk_get_option('company_about_c') ?></p>
@@ -11,7 +11,7 @@
             <h4 class="text-center"><?php echo pk_get_option('company_product_title') ?></h4>
             <div class="card-deck mb-3 text-center mt30">
                 <?php for ($i=1;$i<=4;$i++): if(pk_is_checked('company_product_open_'.$i)): ?>
-                <div class="card mb-4 shadow-sm puock-bg">
+                <div class="card mb-4 shadow-sm publicus-bg">
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal"><?php echo pk_get_option('company_product_t_'.$i) ?></h4>
                     </div>

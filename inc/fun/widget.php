@@ -118,7 +118,7 @@ abstract class puockWidgetBase extends WP_Widget{
             <?php if($show_title): ?>
                 <div>
                 <span class="t-lg border-bottom border-primary
-                puock-text pb-2"><i class="<?php echo $this->get_icon($instance['icon']) ?> mr-1"></i><?php echo $instance['title'] ?></span>
+                publicus-text pb-2"><i class="<?php echo $this->get_icon($instance['icon']) ?> mr-1"></i><?php echo $instance['title'] ?></span>
                 </div>
             <?php endif; ?>
             <div class="<?php if($show_title): ?>mt20<?php endif; ?>">
@@ -437,7 +437,7 @@ class puockReadPerson extends puockWidgetBase {
             pk_cache_set(PKC_WIDGET_READ_PERSONS, $authors);
         }
         $this->get_common_widget_header($instance); ?>
-        <div class="row puock-text">
+        <div class="row publicus-text">
             <?php foreach ($authors as $author): ?>
              <div class="col col-12 col-lg-6 pl-0">
                  <div class="p-2 text-truncate text-nowrap">
@@ -548,7 +548,7 @@ class puockStrongText extends puockWidgetBase {
 
     function widget( $args, $instance ){
         $this->get_common_widget_header($instance);
-        echo '<div class="puock-text t-md">'.$instance['content'].'</div>';
+        echo '<div class="publicus-text t-md">'.$instance['content'].'</div>';
         $this->get_common_widget_footer($instance);
      }
 }
@@ -586,7 +586,7 @@ class puockSearch extends puockWidgetBase {
             <?php if(!$this->is_checked($instance['hide_title'])): ?>
             <div>
                 <span class="t-lg border-bottom border-primary
-                puock-text pb-2"><i class="fa fa-search mr-1"></i><?php echo $instance['title'] ?></span>
+                publicus-text pb-2"><i class="fa fa-search mr-1"></i><?php echo $instance['title'] ?></span>
             </div>
             <?php endif; ?>
             <div class="<?php if(!$this->is_checked($instance['hide_title'])): ?>mt20<?php endif; ?>">
@@ -713,7 +713,7 @@ class puockAboutAuthor extends puockWidgetBase {
                 <img <?php echo pk_get_lazy_img_info(pk_get_gravatar($email,false),'avatar') ?>
                  alt="<?php echo $name ?>" title="<?php echo $name ?>">
             </div>
-            <div class="content t-md puock-text">
+            <div class="content t-md publicus-text">
                 <div class="text-center p-2">
                     <div class="t-lg"><?php echo $name ?></div>
                     <div class="mt10 t-sm"><?php echo $des ?></div>
@@ -721,25 +721,25 @@ class puockAboutAuthor extends puockWidgetBase {
                 <div class="row mt10">
                     <?php if($show_users): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
-                        <div class="c-sub t-sm"><?php _e('用户数', PUOCK) ?></div>
+                        <div class="c-sub t-sm"><?php _e('用户数', PUBLICUS) ?></div>
                         <div><?php echo $users_count ?></div>
                     </div>
                     <?php endif; ?>
                     <?php if($show_posts): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
-                        <div class="c-sub t-sm"><?php _e('文章数', PUOCK) ?></div>
+                        <div class="c-sub t-sm"><?php _e('文章数', PUBLICUS) ?></div>
                         <div><?php echo $posts_count ?></div>
                     </div>
                     <?php endif; ?>
                     <?php if($show_comments): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
-                        <div class="c-sub t-sm"><?php _e('评论数', PUOCK) ?></div>
+                        <div class="c-sub t-sm"><?php _e('评论数', PUBLICUS) ?></div>
                         <div><?php echo $comment_num ?></div>
                     </div>
                     <?php endif; ?>
                     <?php if($show_views): ?>
                     <div class="col-<?php echo $col_width ?> text-center">
-                        <div class="c-sub t-sm"><?php _e('阅读量', PUOCK) ?></div>
+                        <div class="c-sub t-sm"><?php _e('阅读量', PUBLICUS) ?></div>
                         <div><?php echo get_total_views() ?></div>
                     </div>
                     <?php endif; ?>
@@ -796,7 +796,7 @@ class puockCategory extends puockWidgetBase {
         echo '<div class="row t-md">';
         foreach ($cats as $cat){ ?>
             <div class="col col-lg-6 text-center p-2">
-            <a href="<?php echo get_category_link($cat) ?>" class="puock-bg p-2 abhl
+            <a href="<?php echo get_category_link($cat) ?>" class="publicus-bg p-2 abhl
              d-inline-block w-100" title="<?php echo $cat->name ?>"><?php echo $cat->name ?></a>
             </div>
         <?php }
@@ -898,7 +898,7 @@ class puockTagHitokoto extends puockWidgetBase {
         $api = $instance['api'] ?? '';
         $this->get_common_widget_header($instance); ?>
         <div class="widget-puock-hitokoto" data-api="<?php echo $api; ?>">
-            <div class="t puock-text">
+            <div class="t publicus-text">
                 <?php echo pk_skeleton() ?>
             </div>
             <div class="fb d-none">-「<span class="f"></span>」</div>

@@ -2,8 +2,8 @@
 /*
 Template Name: AI助手
 */
-wp_enqueue_script('puock-md', pk_get_static_url() . '/assets/libs/marked.js', ['puock-libs'], PUOCK_CUR_VER_STR, true);
-wp_enqueue_script('puock-page-ai', pk_get_static_url() . '/assets/dist/js/page-ai.min.js', ['puock-md'], PUOCK_CUR_VER_STR, true);
+wp_enqueue_script('puock-md', pk_get_static_url() . '/assets/libs/marked.js', ['puock-libs'], PUBLICUS_CUR_VER_STR, true);
+wp_enqueue_script('puock-page-ai', pk_get_static_url() . '/assets/dist/js/page-ai.min.js', ['puock-md'], PUBLICUS_CUR_VER_STR, true);
 
 get_header();
 
@@ -31,11 +31,11 @@ $gc_ai_chat_models = pk_get_option('ai_chat_models', []);
                 <div id="posts"
                      class="col-lg-<?php pk_hide_sidebar_out('12', '8') ?> col-md-12 <?php pk_open_box_animated('animated fadeInLeft') ?> ">
                     <?php if (!empty(get_the_content())): ?>
-                        <div class="mt20 p-block puock-text <?php get_entry_content_class() ?>">
+                        <div class="mt20 p-block publicus-text <?php get_entry_content_class() ?>">
                             <?php the_content() ?>
                         </div>
                     <?php endif; ?>
-                    <div class="mt20 p-block puock-text">
+                    <div class="mt20 p-block publicus-text">
                         <div class="chats">
                             <?php if (!empty(pk_get_option('ai_chat_welcome'))): ?>
                                 <div class="chat-item is-ai chat-template">
@@ -52,7 +52,7 @@ $gc_ai_chat_models = pk_get_option('ai_chat_models', []);
                             <?php endif; ?>
                         </div>
                     </div>
-                    <div class="mt-20 p-block puock-text">
+                    <div class="mt-20 p-block publicus-text">
                         <textarea class="form-control fs14 chat-input" rows="3"
                                   placeholder="请在此处描述您的问题"></textarea>
                         <div class="chat-btn-init d-flex justify-content-end mt10">

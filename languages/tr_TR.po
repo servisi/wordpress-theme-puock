@@ -1,0 +1,444 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Publicus\n"
+"POT-Creation-Date: 2024-01-20 14:15+0300\n"
+"PO-Revision-Date: 2024-01-20 14:16+0300\n"
+"Last-Translator: Publicus Agency <info@publicus.agency>\n"
+"Language-Team: Publicus Agency <info@publicus.agency>\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
+
+#: 404.php:12
+msgid "你访问的资源不存在！"
+msgstr "Aradığınız kaynak bulunamadı!"
+
+#: 404.php:13
+msgid "秒后即将跳转至首页"
+msgstr "saniye sonra ana sayfaya yönlendirileceksiniz"
+
+#: 404.php:15 error.php:26
+msgid "返回首页"
+msgstr "Ana Sayfaya Dön"
+
+#: comments.php:9
+msgid "评论"
+msgstr "Yorumlar"
+
+#: comments.php:16
+msgid "您必须要登录之后才可以进行评论"
+msgstr "Yorum yapabilmek için giriş yapmalısınız"
+
+#: comments.php:28 comments.php:101 inc/setting/options/OptionAuth.php:17
+msgid "快捷登录"
+msgstr "Hızlı Giriş"
+
+#: comments.php:38
+msgid "世界这么大发表一下你的看法~"
+msgstr "Düşüncelerinizi paylaşın~"
+
+#: comments.php:48
+msgid "昵称（必填）"
+msgstr "Ad Soyad (zorunlu)"
+
+#: comments.php:53
+msgid "邮箱（必填）"
+msgstr "E-posta (zorunlu)"
+
+#: comments.php:58
+msgid "网站"
+msgstr "Web Sitesi"
+
+#: comments.php:90
+msgid "登出"
+msgstr "Çıkış Yap"
+
+#: comments.php:108
+msgid "取消"
+msgstr "İptal"
+
+#: comments.php:114
+msgid "发布评论"
+msgstr "Yorumu Gönder"
+
+#: error.php:13
+msgid "无错误信息"
+msgstr "Hata bilgisi yok"
+
+#: functions.php:86
+msgid "评论达人"
+msgstr "Yorum Uzmanı"
+
+#: functions.php:96
+msgid "博主"
+msgstr "Site Sahibi"
+
+#: functions.php:134
+msgid "无分类"
+msgstr "Kategorisiz"
+
+#: functions.php:293 functions.php:294
+msgid "添加表情"
+msgstr "Emoji Ekle"
+
+#: functions.php:375
+msgid "首页"
+msgstr "Ana Sayfa"
+
+#: functions.php:394
+msgid "正文"
+msgstr "İçerik"
+
+#: functions.php:396
+msgid "文章列表"
+msgstr "Yazı Listesi"
+
+#: functions.php:400
+msgid "搜索结果"
+msgstr "Arama Sonuçları"
+
+#: functions.php:410
+msgid "标签"
+msgstr "Etiket"
+
+#: functions.php:415
+msgid "你访问的资源不存在"
+msgstr "Erişmeye çalıştığınız kaynak mevcut değil"
+
+#: header.php:73
+msgid "请输入搜索关键字"
+msgstr "Arama kelimesi girin"
+
+#: header.php:77
+msgid "搜索"
+msgstr "Ara"
+
+#: inc/fun/opt.php:186 inc/fun/opt.php:187
+msgid "添加短代码"
+msgstr "Kısa Kod Ekle"
+
+#: inc/setting/PuockSetting.php:62 inc/setting/PuockSetting.php:63
+msgid "Puock主题配置"
+msgstr "Publicus Tema Ayarları"
+
+#: inc/setting/PuockSetting.php:75
+msgid "权限不足"
+msgstr "Yetkisiz Erişim"
+
+#: inc/setting/options/OptionAbout.php:12
+msgid "关于及指引"
+msgstr "Hakkında ve Rehber"
+
+#: inc/setting/options/OptionAd.php:11
+msgid "广告设置"
+msgstr "Reklam Ayarları"
+
+#: inc/setting/options/OptionAd.php:16
+msgid "全站顶部广告"
+msgstr "Site Geneli Üst Reklam"
+
+#: inc/setting/options/OptionAd.php:22
+msgid "全站顶部广告内容"
+msgstr "Site Geneli Üst Reklam İçeriği"
+
+#: inc/setting/options/OptionAd.php:29
+msgid "全站底部广告"
+msgstr "Site Geneli Alt Reklam"
+
+#: inc/setting/options/OptionAd.php:35
+msgid "全站底部广告内容"
+msgstr "Site Geneli Alt Reklam İçeriği"
+
+#: inc/setting/options/OptionAd.php:42
+msgid "文章内顶部广告"
+msgstr "Yazı İçi Üst Reklam"
+
+#: inc/setting/options/OptionAd.php:48
+msgid "文章内顶部广告内容"
+msgstr "Yazı İçi Üst Reklam İçeriği"
+
+#: inc/setting/options/OptionAd.php:56
+msgid "文章内容底部广告"
+msgstr "Yazı İçeriği Alt Reklam"
+
+#: inc/setting/options/OptionAd.php:62
+msgid "文章内容底部广告内容"
+msgstr "Yazı İçeriği Alt Reklam İçeriği"
+
+#: inc/setting/options/OptionAd.php:70
+msgid "评论上方广告"
+msgstr "Yorumlar Üstü Reklam"
+
+#: inc/setting/options/OptionAd.php:76
+msgid "评论上方广告内容"
+msgstr "Yorumlar Üstü Reklam İçeriği"
+
+#: inc/setting/options/OptionAuth.php:12
+msgid "登录与授权"
+msgstr "Giriş ve Yetkilendirme"
+
+#: inc/setting/options/OptionAuth.php:23
+msgid "开启快捷登录"
+msgstr "Hızlı Girişi Etkinleştir"
+
+#: inc/setting/options/OptionAuth.php:29
+msgid "仅允许第三方登录"
+msgstr "Sadece Üçüncü Taraf Girişine İzin Ver"
+
+#: inc/setting/options/OptionAuth.php:35
+msgid "启用登录最大尝试次数限制"
+msgstr "Maksimum Giriş Deneme Sınırını Etkinleştir"
+
+#: inc/setting/options/OptionAuth.php:36
+msgid "超过此次数后，对应的IP将会被禁止登录"
+msgstr "Bu sayıyı aştıktan sonra, ilgili IP adresi giriş yapmaktan yasaklanacak"
+
+#: inc/setting/options/OptionAuth.php:42
+msgid "登录最大尝试次数"
+msgstr "Maksimum Giriş Deneme Sayısı"
+
+#: inc/setting/options/OptionAuth.php:48
+msgid "登录尝试次数达到后禁止时间（分）"
+msgstr "Giriş deneme sayısına ulaştıktan sonra yasaklama süresi (dakika)"
+
+#: inc/setting/options/OptionAuth.php:54
+msgid "启用忘记密码找回"
+msgstr "Şifre Sıfırlamayı Etkinleştir"
+
+#: inc/setting/options/OptionAuth.php:63
+msgid "后台登录保护"
+msgstr "Yönetici Paneli Giriş Koruması"
+
+#: inc/setting/options/OptionAuth.php:68
+msgid "启用后台登录保护"
+msgstr "Yönetici Paneli Giriş Korumasını Etkinleştir"
+
+#: inc/setting/options/OptionAuth.php:78
+msgid "后台登录保护参数"
+msgstr "Yönetici Paneli Giriş Koruma Parametreleri"
+
+#: inc/setting/options/OptionAuth.php:84
+msgid "后台登录保护密码"
+msgstr "Yönetici Paneli Giriş Koruma Şifresi"
+
+#: inc/setting/options/OptionAuth.php:92
+msgid "第三方登录回调地址提示"
+msgstr "Üçüncü Taraf Giriş Geri Çağırma Adresi İpucu"
+
+#: inc/setting/options/OptionAuth.php:99
+msgid "关闭第三方登录直接注册"
+msgstr "Üçüncü Taraf Giriş Doğrudan Kaydını Kapat"
+
+#: inc/setting/options/OptionAuth.php:101
+msgid "开启后，若用户未绑定过账户进行第三方登录时则不会自动创建新的账户"
+msgstr "Etkinleştirildiğinde, kullanıcı daha önce hesap bağlamamışsa üçüncü taraf girişinde otomatik olarak yeni hesap oluşturulmaz"
+
+#: inc/setting/options/OptionBasic.php:12
+msgid "基础设置"
+msgstr "Temel Ayarlar"
+
+#: inc/setting/options/OptionBasic.php:17
+msgid "图片懒加载"
+msgstr "Resim Tembel Yükleme"
+
+#: inc/setting/options/OptionBasic.php:23
+msgid "正文图片懒加载"
+msgstr "İçerik Resimlerinde Tembel Yükleme"
+
+#: inc/setting/options/OptionBasic.php:29
+msgid "留言头像懒加载"
+msgstr "Yorum Avatarlarında Tembel Yükleme"
+
+#: inc/setting/options/OptionBasic.php:35
+msgid "正文内容首行缩进"
+msgstr "İçerik İlk Satır Girintisi"
+
+#: inc/setting/options/OptionBasic.php:41
+msgid "正文内容链接新标签页打开"
+msgstr "İçerik Bağlantılarını Yeni Sekmede Aç"
+
+#: inc/setting/options/OptionBasic.php:47
+msgid "正文内容侧边目录菜单生成"
+msgstr "İçerik Yan İçindekiler Menüsü Oluşturma"
+
+#: inc/setting/options/OptionBasic.php:50
+msgid "勾选此项会在正文目录显示文章目录"
+msgstr "Bu seçeneği işaretlerseniz içerik dizininde makale dizini görüntülenir"
+
+#: inc/setting/options/OptionBasic.php:54
+msgid "评论ajax翻页"
+msgstr "Yorum AJAX Sayfalama"
+
+#: inc/setting/options/OptionBasic.php:60
+msgid "页面无刷新加载"
+msgstr "Sayfa Yenilenmeden Yükleme"
+
+#: inc/setting/options/OptionBasic.php:67
+msgid "异步浏览量统计"
+msgstr "Asenkron Görüntüleme Sayısı İstatistikleri"
+
+#: inc/setting/options/OptionBasic.php:70
+msgid "此选项为开启缓存后浏览量不自增问题解决方案"
+msgstr "Bu seçenek, önbellek etkinleştirildikten sonra görüntüleme sayısının otomatik artmaması sorununun çözümüdür"
+
+#: inc/setting/options/OptionBasic.php:74
+msgid "页面模块载入动画"
+msgstr "Sayfa Modülü Yükleme Animasyonu"
+
+#: inc/setting/options/OptionBasic.php:80
+msgid "页面内容链接前显示图标"
+msgstr "Sayfa İçeriği Bağlantıları Öncesinde Simge Göster"
+
+#: inc/setting/options/OptionBasic.php:88
+msgid "评论相关"
+msgstr "Yorum İlgili"
+
+#: inc/setting/options/OptionBasic.php:92
+msgid "评论等级"
+msgstr "Yorum Seviyesi"
+
+#: inc/setting/options/OptionBasic.php:98
+msgid "评论回复邮件通知"
+msgstr "Yorum Yanıt E-posta Bildirimi"
+
+#: inc/setting/options/OptionBasic.php:104
+msgid "评论@功能"
+msgstr "Yorum @ Özelliği"
+
+#: inc/setting/options/OptionBasic.php:110
+msgid "评论显示用户UA"
+msgstr "Yorumlarda Kullanıcı UA Göster"
+
+#: inc/setting/options/OptionBasic.php:116
+msgid "评论显示IP归属地及运营商"
+msgstr "Yorumlarda IP Konumu ve Operatörü Göster"
+
+#: inc/setting/options/OptionBasic.php:122
+msgid "不显示站长IP归属地及运营商"
+msgstr "Site Sahibi IP Konumu ve Operatörünü Gösterme"
+
+#: inc/setting/options/OptionBasic.php:130
+msgid "文章海报生成"
+msgstr "Makale Poster Oluşturma"
+
+#: inc/setting/options/OptionBasic.php:131
+msgid "使用此功能如果出现图片无法生成，请检查图片是否符合跨域要求"
+msgstr "Bu özelliği kullanırken resim oluşturulamazsa, resmin çapraz etki alanı gereksinimlerini karşılayıp karşılamadığını kontrol edin"
+
+#: inc/setting/options/OptionBasic.php:137
+msgid "显示正文版权说明"
+msgstr "İçerik Telif Hakkı Açıklamasını Göster"
+
+#: inc/setting/options/OptionBasic.php:143
+msgid "显示正文底部相关推荐"
+msgstr "İçerik Altında İlgili Önerileri Göster"
+
+#: inc/setting/options/OptionBasic.php:149
+msgid "正文底部相关推荐文章数量"
+msgstr "İçerik Altı İlgili Öneri Makale Sayısı"
+
+#: inc/setting/options/OptionBasic.php:150
+msgid "建议是4的倍数，不然会出现空缺位置"
+msgstr "4'ün katı olması önerilir, aksi takdirde boş pozisyonlar oluşur"
+
+#: inc/setting/options/OptionBasic.php:156
+msgid "友情链接页面"
+msgstr "Arkadaş Bağlantıları Sayfası"
+
+#: inc/setting/options/OptionBasic.php:162
+msgid "首页友情链接目录ID"
+msgstr "Ana Sayfa Arkadaş Bağlantıları Dizin ID"
+
+#: inc/setting/options/OptionBasic.php:168
+msgid "Gravatar头像源"
+msgstr "Gravatar Avatar Kaynağı"
+
+#: inc/setting/options/OptionBasic.php:175
+msgid "WordPress默认"
+msgstr "WordPress Varsayılan"
+
+#: inc/setting/options/OptionBasic.php:179
+msgid "WordPress国内默认"
+msgstr "WordPress Yerel Varsayılan"
+
+#: inc/setting/options/OptionBasic.php:183
+msgid "WordPress国内默认SSL"
+msgstr "WordPress Yerel Varsayılan SSL"
+
+#: inc/setting/options/OptionBasic.php:201
+msgid "文章赞赏"
+msgstr "Makale Takdir"
+
+#: inc/setting/options/OptionBasic.php:207
+msgid "文章赞赏支付宝二维码"
+msgstr "Makale Takdir Ödeme QR Kodu"
+
+#: inc/setting/options/OptionBasic.php:210
+#: inc/setting/options/OptionBasic.php:217
+#: inc/setting/options/OptionBasic.php:224
+msgid "请选择宽高比例为1:1的图片"
+msgstr "Lütfen 1:1 en boy oranında bir resim seçin"
+
+#: inc/setting/options/OptionBasic.php:214
+msgid "文章赞赏微信二维码"
+msgstr "Makale Takdir QR Kodu"
+
+#: inc/setting/options/OptionBasic.php:221
+#: inc/setting/options/OptionBasic.php:234
+msgid "文章正文底部二维码"
+msgstr "Makale İçeriği Alt QR Kodu"
+
+#: inc/setting/options/OptionBasic.php:228
+msgid "文章正文底部二维码标题"
+msgstr "Makale İçeriği Alt QR Kodu Başlığı"
+
+#: inc/setting/options/OptionBasic.php:240
+msgid "文章转载说明"
+msgstr "Makale Yeniden Yayın Açıklaması"
+
+#: inc/setting/options/OptionBasic.php:242
+msgid "除特殊说明外本站文章皆由CC-4.0协议发布，转载请注明出处。"
+msgstr "Özel açıklama olmadıkça bu sitedeki tüm makaleler CC-4.0 protokolü ile yayınlanmıştır, yeniden yayınlarken lütfen kaynağı belirtin."
+
+#: inc/setting/options/OptionCache.php:11
+msgid "缓存与性能"
+msgstr "Önbellek ve Performans"
+
+#: inc/setting/options/OptionCache.php:16
+msgid "缓存过期秒数"
+msgstr "Önbellek Sona Erme Saniyesi"
+
+#: inc/setting/options/OptionCache.php:19
+msgid "0为不过期"
+msgstr "0 sona ermez anlamına gelir"
+
+#. Theme Name of the plugin/theme
+msgid "Puock"
+msgstr "Publicus"
+
+#. Theme URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://www.licoy.cn"
+msgstr "https://www.publicus.agency"
+
+#. Description of the plugin/theme
+msgid "支持暗黑与白天模式的自适应多风格主题！"
+msgstr "Karanlık ve aydınlık modu destekli uyarlanabilir çok stillli tema!"
+
+#. Author of the plugin/theme
+msgid "Licoy"
+msgstr "Publicus Agency"

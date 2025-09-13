@@ -26,13 +26,13 @@
                             <?php if (!pk_is_checked('hide_post_views')): ?>
                                 <span class="mr-2"><i
                                             class="fa-regular fa-eye mr-1"></i><?php pk_get_post_views() ?><span
-                                            class="t-sm d-none d-sm-inline-block"><?php _e('次阅读', PUOCK) ?></span></span>
+                                            class="t-sm d-none d-sm-inline-block"><?php _e('次阅读', PUBLICUS) ?></span></span>
                             <?php endif; ?>
                         <?php if (!pk_post_comment_is_closed()): ?>
                             <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
                                 <i class="fa-regular fa-comment mr-1"></i>
                                 <?php echo get_comments_number() ?><span
-                                        class="t-sm d-none d-sm-inline-block"><?php _e('个评论', PUOCK) ?></span></a>
+                                        class="t-sm d-none d-sm-inline-block"><?php _e('个评论', PUBLICUS) ?></span></a>
                         <?php endif; ?>
                     </span>
                 </div>
@@ -61,7 +61,7 @@
             <div class="post-info">
                 <h2 class="info-title">
                     <?php echo get_post_category_link('badge d-none d-md-inline-block bg-' . pk_get_color_tag(['danger', 'warning', 'dark']) . ' ahfff') ?>
-                    <a class="a-link puock-text" title="<?php the_title() ?>" <?php pk_link_target() ?>
+                    <a class="a-link publicus-text" title="<?php the_title() ?>" <?php pk_link_target() ?>
                        href="<?php the_permalink() ?>"><?php the_title() ?></a>
                 </h2>
                 <div class="info-meta c-sub">
@@ -75,13 +75,13 @@
                             <?php if (!pk_is_checked('hide_post_views')): ?>
                                 <span class="mr-2">
                                 <i class="fa-regular fa-eye mr-1"></i><?php pk_get_post_views() ?><span
-                                            class="t-sm d-none d-sm-inline-block"><?php _e('次阅读', PUOCK) ?></span></span>
+                                            class="t-sm d-none d-sm-inline-block"><?php _e('次阅读', PUBLICUS) ?></span></span>
                             <?php endif; ?>
                        <?php if (!pk_post_comment_is_closed()): ?>
                            <a class="c-sub-a" <?php pk_link_target() ?> href="<?php the_permalink() ?>#comments">
                                 <i class="fa-regular fa-comment mr-1"></i>
                                 <?php echo get_comments_number() ?><span
-                                       class="t-sm d-none d-sm-inline-block"><?php _e('个评论', PUOCK) ?></span></a>
+                                       class="t-sm d-none d-sm-inline-block"><?php _e('个评论', PUBLICUS) ?></span></a>
                        <?php endif; ?>
                     </span>
                     </div>

@@ -12,7 +12,7 @@ if (!function_exists('pk_global_notice_html')){
                     $final_list[] = $item;
                 }
                 if (count($final_list) > 0) { ?>
-                    <div class="puock-text p-block t-md global-top-notice">
+                    <div class="publicus-text p-block t-md global-top-notice">
                         <div data-swiper="init" data-swiper-class="global-top-notice-swiper"
                              data-swiper-args='<?php echo json_encode([
                                  'direction' => 'vertical',
