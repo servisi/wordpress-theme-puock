@@ -17,7 +17,10 @@ function publicus_front_form_validate_code_check($type = '', $code = '')
 function publicus_front_login_exec()
 {
     if (is_string($data = publicus_get_req_data([
-            'remember' => ['name' => '记住我', 'required' => false],
+            'username' => ['name' => 'Kullanıcı Adı', 'required' => true],
+            'password' => ['name' => 'Şifre', 'required' => true],
+            'vd' => ['name' => 'Doğrulama Kodu', 'required' => false],
+            'remember' => ['name' => 'Beni Hatırla', 'required' => false],
         ])) === true) {
         echo publicus_ajax_resp_error($data);
         wp_die();
@@ -68,7 +71,10 @@ function publicus_front_login_exec()
 function publicus_front_register_exec()
 {
     if (is_string($data = publicus_get_req_data([
+            'username' => ['name' => 'Kullanıcı Adı', 'required' => true],
+            'password' => ['name' => 'Şifre', 'required' => true],
             'email' => ['email' => 'E-posta', 'required' => true],
+            'vd' => ['name' => 'Doğrulama Kodu', 'required' => false],
         ])) === true) {
         echo publicus_ajax_resp_error($data);
         wp_die();
