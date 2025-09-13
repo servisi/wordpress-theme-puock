@@ -104,6 +104,7 @@ function publicus_front_register_exec()
         wp_set_auth_cookie($user_id, true, is_ssl());
         echo publicus_ajax_resp([
             'action' => 'reload',
+        ]);
     }
     wp_die();
 }
@@ -134,6 +135,7 @@ function publicus_front_forget_password_exec()
     }
     $user = get_user_by('email', $data['email']);
     if (empty($user)) {
+        echo publicus_ajax_resp_error(__('Bu e-posta adresi ile kayıtlı kullanıcı bulunamadı.', PUBLICUS));
         wp_die();
     }
     $code = md5($data['email'] . wp_generate_password(20, false));
@@ -141,8 +143,7 @@ function publicus_front_forget_password_exec()
     $url = publicus_ajax_url('publicus_front_forget_password_reset_exec', [
         'code' => $code,
     ]);
-    } else {
-    }
+    echo publicus_ajax_resp(['message' => __('Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.', PUBLICUS)]);
     wp_die();
 }
 
